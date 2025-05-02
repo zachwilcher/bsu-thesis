@@ -1,0 +1,76 @@
+\documentclass[12pt]{report}
+
+\usepackage[letterpaper, margin=1truein, footskip=.25in, twoside]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{setspace}
+\doublespacing
+
+% Header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[RE]{\it\leftmark}
+\fancyhead[LO]{\it\rightmark}
+\fancyfoot{}
+
+% Figures and images
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{color}
+\usepackage[font={small,it}]{caption}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{array}
+
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{conv}{Convention}
+
+% Custom commands
+\newcommand{\Conf}{\text{Conf}\,}
+\newcommand{\UConf}{\text{UConf}\,}
+
+\begin{document}
+
+\input{chapters/0-title.tex}
+\clearpage\shipout\null
+\pagenumbering{roman}
+\input{chapters/0-abstract.tex}
+\input{chapters/0-acknowledgements.tex}
+\tableofcontents
+\clearpage\shipout\null
+\pagenumbering{arabic}
+
+\input{chapters/1-graphs.tex}
+
+% used in 0-abstract.tex to get the length of the thesis
+\label{LastPage}
+
+% TODO: Remove this once some citations are actually included.
+\nocite{*}
+
+% Bibliography
+{
+    \singlespacing
+    \bibliographystyle{abbrv}
+    \bibliography{bibliography}
+}
+\end{document}
