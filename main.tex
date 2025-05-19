@@ -45,11 +45,13 @@
 \newtheorem*{conv}{Convention}
 
 % Custom commands
+\newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\Conf}{\text{Conf}\,}
 \newcommand{\UConf}{\text{UConf}\,}
 
 \begin{document}
 
+% Title, Abstract, and Acknowledgements
 \input{chapters/0-title.tex}
 \clearpage\shipout\null
 \pagenumbering{roman}
@@ -59,13 +61,11 @@
 \clearpage\shipout\null
 \pagenumbering{arabic}
 
-\input{chapters/1-graphs.tex}
+% Content Chapters
+\input{chapters/1-surfaces.tex}
 
-% used in 0-abstract.tex to get the length of the thesis
+% Used in 0-abstract.tex to get the length of the thesis.
 \label{LastPage}
-
-% TODO: Remove this once some citations are actually included.
-\nocite{*}
 
 % Bibliography
 {

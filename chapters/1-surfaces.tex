@@ -1,0 +1,111 @@
+\chapter{Surfaces}
+
+\begin{lem}\label{lem:is_surface_1}
+    Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\) and \(\{v_2, \cdots, v_n\}\) be \(n-1\) distinct vertices
+    in \(\Gamma - v_1 w_1\).
+    If \(\Conf_n(\Gamma)\) is locally a surface at \((v_1, \cdots, v_n)\) then,
+    there exists two distinct edges \(e_1, e_2\) in \(\Gamma - v_1 w_1\) 
+    each with one endpoint in \(\{v_2,\cdots, v_n\}\)
+    such that exactly one of the following is true 
+    \begin{enumerate}
+        \item \(e_1\) and \(e_2\) share an endpoint \(v_i\) in \(\{v_2, \cdots, v_n\}\)
+        \item \(e_1\) and \(e_2\) share an endpoint \(w_2\) outside of \(\{v_2, \cdots, v_n\}\).
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Suppose \(\Conf_n(\Gamma)\) is locally a surface at \((v_1, \cdots, v_n)\)
+    and place \(n\) particles at each vertex in \(\{v_1, \cdots, v_n\}\).
+    Since \(w_1\) is adjacent to \(v_1\) and no particle already occupies
+    \(w_1\), the particle at \(v_1\) is free to move along the edge \(v_1 w_1\)
+    to \(w_1\).
+    
+    In the configuration space, this particle's movement corresponds to an edge
+    connected to the point \((v_1, \cdots v_n)\).  Since the configuration space
+    is locally a surface at \((v_1, \cdots, v_n)\), this edge must border exactly
+    two separate \(2\)-cells.  %TODO figure for book if > 2, boundary if = 1, and 1-cell if = 0
+    These two \(2\)-cells have one other border other
+    than the one corresponding to the movement of the particle from \(v_1\) to
+    \(w_1\).  Consider just one of these \(2\)-cells' borders. This other border
+    must correspond to the a movement of a particle from some \(v_i \neq v_1\)
+    to a vertex \(w_2 \neq w_1\). Notice that \(v_i\) and \(w_2\) belong to
+    \(\Gamma - v_1 w_1\).
+    
+    Now consider the other \(2\)-cells border. Again this corresponds to the
+    movement of a particle at some \(v_j \neq v_1\) to a vertex \(w_3 \neq
+    w_1\).  However, it cannot be that \(v_j \neq v_i\) and \(w_3 \neq w_2\)
+    otherwise, the particles at \(v_1\), \(v_i\), and \(v_j\) could move
+    simultaneously to \(w_1\), \(w_2\), and \(w_3\). This would imply that
+    \((v_1, \cdots, v_n)\) is the corner of a \(3\)-cell in the configuration
+    space. So, \(v_j = v_i\) or \(w_3 = w_2\).
+    
+    If \(v_j = v_i\) then \(w_3 \neq w_2\) otherwise there would be only one
+    \(2\)-cell whose border corresponds to the movement of the particle at
+    \(v_1\) to \(w_1\).  This gives the first possibility with \(e_1 = v_i w_2\) and \(e_2 = v_i w_3\).
+    If \(v_j \neq v_i\) then \(w_3 = w_2\). This gives the second possibility with \(e_1 = v_i w_2\) and \(e_2 = v_j w_2\).
+\end{proof}
+
+\begin{lem}
+    \label{lem:is_surface_2}
+    Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
+    Let \(\{v_2, \cdots, v_n\}\) be \(n-1\) distinct vertices in \(\Gamma - v_1 w_1\).
+    If \(\Conf_n(\Gamma)\) is locally a surface at \((v_1, \cdots, v_n)\) then the edges \(e_1\) and \(e_2\)
+    guaranteed by applying \ref{lem:is_surface_1} to \((v_1,\cdots, v_n)\) in \(\Gamma - v_1 w_1\) 
+    are the only edges in \(\Gamma - v_1 w_1\) that are incident to both a vertex in and outside \(\{v_2, \cdots, v_n\}\).
+\end{lem}
+\begin{proof}
+    Suppose \(\Conf_n(\Gamma)\) is locally a surface at \((v_1, \cdots, v_n)\) and \(e_1\), \(e_2\) be the edges guaranteed
+    by applying \ref{lem:is_surface_1} to \((v_1,\cdots, v_n)\) in \(\Gamma - v_1 w_1\).
+
+    Place \(n\) particles at each vertex in \(\{v_1, \cdots, v_n\}\).
+    Suppose there exists an edge \(e_3\) in \(\Gamma - v_1 w_1\) distinct from
+    \(e_1\) and \(e_2\) with endpoints \(v_k\) and \(w_3\) both in and out of
+    \(\{v_2,\cdots, v_n\}\) respectively. 
+    We proceed by cases on the two possibilities for the edges \(e_1\) and \(e_2\).
+
+    First suppose that \(e_1\) and \(e_2\) share an endpoint \(v_i \in \{v_2,\cdots,v_n\}\).
+    If \(v_i = v_k\) then as the particle at \(v_1\) travels to \(w_1\), the particle
+    at \(v_i\) can travel along any of the three edges \(e_1\), \(e_2\) or \(e_3\).
+    % TODO reference the book figure
+    This results in \((v_1,\cdots,v_n)\) becoming the end of a ``book's'' spine in the configuration space.
+    Otherwise, if \(v_i \neq v_k\) then the particles at \(v_1\), \(v_i\), and \(v_k\) can simultaneously travel along 
+    three edges: \(v_1 w_1\), \(e_1\) or \(e_2\), and \(e_3\).
+    These particles' movements result in \((v_1, \cdots, v_n)\) becoming the corner of a \(3\)-cell in the configuration space.
+
+    Next suppose that \(e_1\) and \(e_2\) share an endpoint \(w_2 \not \in \{v_2,\cdots, v_n\}\).
+    Let \(v_i\) and \(v_j\) be the other endpoints of \(e_1\) and \(e_2\) respectively.
+    If \(v_k\) is \(v_i\) or \(v_k\) then the particles at \(v_1\), \(v_i\), and \(v_j\) can move simultaneously to
+    \(w_1\), \(w_2\), and \(w_3\) resulting in \((v_1, \cdots, v_n)\) becoming the corner of a \(3\)-cell in the configuration space.
+    So, suppose \(v_k\) is neither \(v_i\) nor \(v_j\).
+    If \(w_2 \neq w_3\) then the particles at \(v_1\), \(v_i\), and \(v_k\) can move simultaneously to \(w_1\), \(w_2\), \(w_3\)
+    resulting in a \(3\)-cell in the configuration space.
+    However, if \(w_2 = w_3\) then as the particle at \(v_1\) travels to \(w_1\) then, any of the particles at
+    \(v_i\), \(v_j\), or \(v_k\) can each move to \(w_2\). These movements result again in \((v_1, \cdots, v_n)\) becoming the 
+    end of a book's spine in the configuration space.
+\end{proof}
+
+\begin{lem}
+If \(\Conf_n(\Gamma)\) is a surface then,
+for any adjacent vertices \(v_1\) and \(w_1\), \(\Gamma - v_1 w_1\) is an \(n\)-cycle or the \(Y\)-graph.
+\end{lem}
+\begin{proof}
+    Suppose \(\Conf_n(\Gamma)\) is a surface.
+    Let \(\{v_2, \cdots, v_n\}\) be \(n-1\) distinct vertices in \(\Gamma - v_1 w_1\)
+    and \(e_1\) and \(e_2\) be the two edges guaranteed by \ref{lem:is_surface_1} applied to \((v_1, \cdots, v_n)\) in \(\Gamma - v_1 w_1\).
+    We proceed by the cases on the two possibilities for the edges \(e_1\) and \(e_2\).
+
+    %TODO
+\end{proof}
+
+
+Abrams showed in \cite{abrams2000configurationspaces} that \(\Conf_2(\Gamma)\) is a surface if and only if \(\Gamma\) is \(K_5\) or \(K_{3,3}\).
+He also showed that \(\Conf_3(K_5)\) and \(\Conf_4{K_{3,3}}\) are surfaces.
+In \cite{appiah2024algebraicstructurehyperbolicgraph} it was demonstrated that \(\Conf_3(\Theta_4)\) is a closed, orientable surface.
+These are the only examples.
+
+\begin{thm}
+    If \(\Conf_3(\Gamma)\) is a surface then \(\Gamma\) is either \(K_5\) or the \(\Theta_4\) graph.
+\end{thm}
+
+\begin{thm}
+    If \(\Conf_n(\Gamma)\) is a surface and \(n > 3\) then \(n = 4\) and \(\Gamma = K_{3,3}\).
+\end{thm}
