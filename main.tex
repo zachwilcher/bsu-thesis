@@ -36,20 +36,24 @@
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem*{cor}{Corollary}
+\newtheorem{subclaim}{Claim}[subsubsection]
+
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{conj}{Conjecture}[section]
 \newtheorem{exmp}{Example}[section]
+
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{conv}{Convention}
 
 \usepackage{tikz}
+\usetikzlibrary{calc}
 
 % Custom commands
 \newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\Conf}{\text{Conf}\,}
-\newcommand{\UConf}{\text{UConf}\,}
+\newcommand{\Conf}{\mathrm{Conf}^{\,\square}}
+\newcommand{\UConf}{\mathrm{UConf}}
 
 \begin{document}
 
@@ -64,7 +68,8 @@
 \pagenumbering{arabic}
 
 % Content Chapters
-\input{chapters/1-surfaces.tex}
+\input{chapters/1-configuration-spaces.tex}
+\input{chapters/2-surfaces.tex}
 
 % Used in 0-abstract.tex to get the length of the thesis.
 \label{LastPage}
