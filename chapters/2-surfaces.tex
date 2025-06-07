@@ -1,19 +1,19 @@
 \chapter{Surfaces}
 \(\Gamma\) is assumed to be a simple connected graph.
-Abrams showed in \cite{abrams2000configurationspaces} that \(\Conf_2(\Gamma)\) is a surface if and only if \(\Gamma\) is \(K_5\) or \(K_{3,3}\).
-He also showed that \(\Conf_3(K_5)\) and \(\Conf_4{K_{3,3}}\) are surfaces.
-In \cite{appiah2024algebraicstructurehyperbolicgraph} it was demonstrated that \(\Conf_3(\Theta_4)\) is a closed, orientable surface.
+Abrams showed in \cite{abrams2000configurationspaces} that \(\DConf_2(\Gamma)\) is a surface if and only if \(\Gamma\) is \(K_5\) or \(K_{3,3}\).
+He also showed that \(\DConf_3(K_5)\) and \(\DConf_4{K_{3,3}}\) are surfaces.
+In \cite{appiah2024algebraicstructurehyperbolicgraph} it was demonstrated that \(\DConf_3(\Theta_4)\) is a closed, orientable surface.
 These are the only examples.
 
 \begin{lem}
 \label{lem:is_surface_0}
-If \(\Conf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertices.
+If \(\DConf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertices.
 \end{lem}
 \begin{proof}
     We proceed by cases on the number of vertices in \(\Gamma\):
     \begin{enumerate}
-    \item If \(\Gamma\) has less than \(n\) vertices then, \(\Conf_n(\Gamma)\) is empty.
-    \item If \(\Gamma\) has \(n\) vertices, then \(\Conf_n(\Gamma)\) is just a single point.
+    \item If \(\Gamma\) has less than \(n\) vertices then, \(\DConf_n(\Gamma)\) is empty.
+    \item If \(\Gamma\) has \(n\) vertices, then \(\DConf_n(\Gamma)\) is just a single point.
     \item If \(\Gamma\) has \(n + 1\) vertices, then in any configuration of \(n\) particles on \(\Gamma\), there is 
     exactly one empty vertex. Since \(\Gamma\) is connected, at least one of these particles will be able to move to the empty vertex.
     However, at most one particle will be able to move into this empty vertex. Therefore, the configuration space
@@ -50,7 +50,7 @@ If \(\Conf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertic
 
 \begin{lem}
     \label{lem:is_surface_1}
-    Suppose \(\Conf_n(\Gamma)\) is a surface and let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
+    Suppose \(\DConf_n(\Gamma)\) is a surface and let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
     For any collection of \(n-1\) vertices \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\) there exists exactly two edges \(e_1 = v_i w_2\) and \(v_j w_3\)
     such that \(v_i, v_j \in \{v_2, \cdots, v_n\}\), \(w_2, w_3 \not \in \{v_2, \cdots, v_n\}\) where exactly one of the following hold:
     \begin{enumerate}
@@ -63,7 +63,7 @@ If \(\Conf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertic
     Now, put a particle at each of the vertices \(v_1, \cdots, v_n\).
     Since no particle exists at \(w_1\) and \(v_1\) is adjacent to \(w_1\), 
     the particle at \(v_1\) can travel from \(v_1\) to \(w_1\).
-    This particles movement corresponds to a \(1\)-cube in \(\Conf_n(\Gamma)\).
+    This particles movement corresponds to a \(1\)-cube in \(\DConf_n(\Gamma)\).
     % TODO cite something showing every 1-cell in the (discretized) configuration space is in one-to-one correspondence with edges in \Gamma
     Since the configuration space is a surface, this \(1\)-cube must border exactly two distinct \(2\)-cubes.
     For this \(1\)-cube to border any other \(2\)-cube,
@@ -74,14 +74,14 @@ If \(\Conf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertic
     
     Notice that if \(v_i \neq v_j\) and \(w_2 \neq w_3\), then as the particle at \(v_1\) travels to \(w_1\), the particles
     at \(v_i\) and \(v_j\) can simultaneously travel to \(w_2\) and \(w_3\) respectively. These three simultaneous movements correspond
-    to a \(3\)-cube in \(\Conf_n(\Gamma)\) with the point \((v_1, \cdots, v_n)\) as a corner.
-    Since \(\Conf_n(\Gamma)\) is assumed to be a surface and \(e_1\) and \(e_2\) are distinct, 
+    to a \(3\)-cube in \(\DConf_n(\Gamma)\) with the point \((v_1, \cdots, v_n)\) as a corner.
+    Since \(\DConf_n(\Gamma)\) is assumed to be a surface and \(e_1\) and \(e_2\) are distinct, 
     the result follows.
 \end{proof}
 
 \begin{lem}
     \label{lem:is_surface_2}
-    Suppose \(\Conf_n(\Gamma)\) is a surface and let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
+    Suppose \(\DConf_n(\Gamma)\) is a surface and let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
     Let \(\{v_2, \cdots, v_n\}\) be a collection of \(n-1\) vertices in \(\Gamma - \{v_1, w_1\}\) 
     and \(e_1 = v_i w_2\), \(e_2 = v_j w_3\) be the edges guaranteed
     from applying \ref{lem:is_surface_1} to \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\).
@@ -241,11 +241,11 @@ If \(\Conf_n(\Gamma)\) is a surface, then \(\Gamma\) has at least \(n+2\) vertic
 \begin{lem}
 \label{lem:is_surface_C}
 Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\) and suppose \(n \ge 3\).
-If \(\Conf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) contains a cycle \(C\),
+If \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) contains a cycle \(C\),
 then \(C\) is an \(n\)-cycle and \(\Gamma - \{v_1, w_1\} = C\). 
 \end{lem}
 \begin{proof}
-Suppose \(\Conf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) has a cycle \(C\).
+Suppose \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) has a cycle \(C\).
 Since \(\Gamma\) has at least \(n + 2\) vertices and is simple, 
 \(\Gamma - \{v_1, w_1\}\) has at least \(n\) vertices and \(C\) is at least a \(3\)-cycle.
 Suppose that \(C\) has \(m > n\) vertices and let \(v_2, \cdots, v_n\) be \(n-1\) vertices in a path on \(C\).
@@ -296,7 +296,7 @@ space. Hence \(\Gamma - \{v_1, w_1\}\) must be an \(n\)-cycle.
 \begin{lem}
 \label{lem:is_surface_Y}
 Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\) and suppose \(n \ge 3\).
-If \(\Conf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) does not contain a cycle, then \(\Gamma - \{v_1, w_1\}\) is the \(Y\)-graph.
+If \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) does not contain a cycle, then \(\Gamma - \{v_1, w_1\}\) is the \(Y\)-graph.
 \end{lem}
 \begin{proof}
 Suppose that \(\Gamma - \{v_1, w_1\}\) does not contain a cycle.
@@ -342,7 +342,7 @@ Therefore, \(\Gamma - \{v_1, w_1\} = H\).
 \end{figure}
 
 \begin{thm}
-    If \(\Conf_3(\Gamma)\) is a surface then \(\Gamma\) is either \(K_5\) or the \(\Theta_4\) graph.
+    If \(\DConf_3(\Gamma)\) is a surface then \(\Gamma\) is either \(K_5\) or the \(\Theta_4\) graph.
 \end{thm}
 \begin{proof}
     Let \(v_1\) and \(v_2\) be adjacent vertices in \(\Gamma\).
@@ -419,7 +419,7 @@ Therefore, \(\Gamma - \{v_1, w_1\} = H\).
     Putting particles at the vertices \(v_2\), \(u_2\), and \(u_4\), each of these particles can move
     simultaneously to \(u_1\), \(v_1\), and \(u_3\) respectively.
     This results in \((v_2, u_2, u_4)\) forming the corner of a \(3\)-cube in the configuration space
-    contradicting that \(\Conf_3(\Gamma)\) is a surface.
+    contradicting that \(\DConf_3(\Gamma)\) is a surface.
 
     So, suppose that \(v_2\) is not the center of the \(Y\)-graph. Let \(u_i\) be the center of the \(Y\)-graph.
     Then, there must be an edge connecting \(v_2\) to \(u_i\).
@@ -452,7 +452,7 @@ Therefore, \(\Gamma - \{v_1, w_1\} = H\).
 \end{proof}
 
 \begin{thm}
-    If \(\Conf_n(\Gamma)\) is a surface and \(n > 3\), then \(n = 4\) and \(\Gamma = K_{3,3}\).
+    If \(\DConf_n(\Gamma)\) is a surface and \(n > 3\), then \(n = 4\) and \(\Gamma = K_{3,3}\).
 \end{thm}
 \begin{proof}
     Let \(v_1\) and \(v_2\) be adjacent vertices in \(\Gamma\).
