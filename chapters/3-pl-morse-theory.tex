@@ -1,0 +1,62 @@
+\chapter{PL Morse Theory}
+In \cite{appiah2024algebraicstructurehyperbolicgraph} it was determined that the 3-strand braid group of the ``pulsar graph''
+is the free product of the 3-strand braid group on the generalized theta graph and some finite free group \(\mathbb{F}\).
+We show that \(\mathbb{F}\) is %TODO actually get the number.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    %TODO
+\end{tikzpicture}
+\label{fig:pulsargraph}
+\caption{The pulsar graph}
+\end{figure}
+
+To compute this free group we analyze the descending links of vertices in \(\DConf_3(\mathcal{P}_{m,n_1,0})\).
+Consider a vertex of the form \(\{c_i', v, w\}\).
+If neither \(v\) nor \(w\) is \(c_i\)
+then a particle at \(c_i'\) can move down to \(c_i\).
+The downward movement of particles at \(v\) and \(w\) then correspond to a cone for the descending link.
+
+Consider instead vertices of the form \(\{c_i', c_i, w\}\).
+If \(w \neq a_1\) and \(w \neq c_j\) for any \(c_j\),
+again the downward movement of \(w\) results in the descending link being either a cone or a point (if \(w = a_2\)).
+If \(w = a_1\) then the descending link of each of these \(n_1\) vertices consists of \(m\) points
+meaning, there are \(n_1 \cdot (m - 1)\) generators in \(\mathbb{F}\) corresponding to these vertices.
+Otherwise, if \(w = c_j\) then the descending link consists of \(2\) points which puts \(n_1\) additional generators in \(\mathbb{F}\).
+So, vertices of the form \(\{c_i', c_i, w\}\) put \(n_1 \cdot m\) generators in \(\mathbb{F}\).
+
+Finally, we consider vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\) (We already considered having a \(c_j'\)).
+Suppose \(h(v) \ge h(w)\).
+Notice that if \(h(v) \le 1\) then a particle at \(c_i\) can move down to \(a_1\) without issue meaning the descending link is just a cone.
+So, suppose \(h(v) > 1\).
+We now proceed by cases on \(h(v)\).
+
+\begin{enumerate}
+    \item If \(h(v) = 2\) and \(w = a_2\), then \(v = a_1\). There are \(n_1\) vertices of this form here.
+    Since a particle at \(a_1\) can then move down one in \(m\) ways, the descending link is \(m\) points.
+    So, there are \(n_1 \cdot (m - 1)\) generators in \(\mathbb{F}\) from these vertices.
+
+    \item If \(h(v) = 2\) and \(w = b_j\) for some \(b_j\), then \(v = a_1\). 
+    There are \(n_1 \cdot m\) vertices of this form in this case. Since a particle at \(b_j\) can then move down simultaneously 
+    as one at \(a_1\), the descending link for each of these vertices is just a cone which contributes no generators to \(\mathbb{F}\).
+
+    \item If \(h(v) = 5\) and \(w = a_2\), then \(v = c_j\) for some \(c_j\neq c_i\). 
+        There are \(n_1 \cdot(n_1 - 1)\) vertices in this case.
+    Since only one particle at either \(c_i\) or \(c_j\) can move down, the descending link for each of these vertices is just two points.
+    So, there are \(n_1 \cdot(n_1 - 1)\) generators added to \(\mathbb{F}\) in this case.
+
+    \item If \(h(v) = 5\) and \(w = b_j\) for some \(b_j\), then \(v = c_j\) for some \(c_j \neq c_i\) and the descending link is just a cone for each of these vertices.
+
+    \item If \(v = c_j\) and \(w = a_1\) then the descending link for each of these \(n_1 (n_1 - 1)\) vertices is \(m\) points.
+    So, there are \(n_1 \cdot (n_1 - 1) \cdot (m - 1)\) generators added to \(\mathbb{F}\) here.
+
+    \item If \(v = c_j\) and \(w = c_k\) then the descending link for each of these \(n_1\cdot(n_1 - 1)\cdot (n_1 - 2)\) vertices is \(3\) points.
+        So, there are \(n_1\cdot(n_1 - 1)\cdot (n_1 - 2) \cdot 2\) generators added to \(\mathbb{F}\) here.
+\end{enumerate}
+Adding together these expressions we find that vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\)
+contribute \(2n_1^3 + (m - 6)n_1^2 + 3n_1\) generators to \(\mathbb{F}\).
+
+Including the other possible vertices from before we find that \(\mathbb{F}\) has
+\(2n_1^3 + (m - 6)n_1^2 + (m + 3)n_1\) generators.
+

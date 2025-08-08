@@ -6,3 +6,4 @@ build
 *.pdf
 *.gz
 *.toc
+*.DS_Store

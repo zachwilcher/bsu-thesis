@@ -50,11 +50,15 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
+\usepackage{hyperref}
+
 % Custom commands
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\Conf}{\mathrm{Conf}}
 \newcommand{\DConf}{\mathrm{Conf}^{\,\square}}
 \newcommand{\UConf}{\mathrm{UConf}}
+\newcommand{\Bd}{\mathrm{Bd}}
+\newcommand{\closure}[1]{\overline{#1}}
 
 \begin{document}
 
@@ -71,6 +75,7 @@
 % Content Chapters
 \input{chapters/1-configuration-spaces.tex}
 \input{chapters/2-surfaces.tex}
+\input{chapters/3-pl-morse-theory.tex}
 
 % Used in 0-abstract.tex to get the length of the thesis.
 \label{LastPage}

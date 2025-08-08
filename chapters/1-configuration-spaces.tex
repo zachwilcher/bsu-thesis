@@ -9,7 +9,7 @@ Treating a graph \(\Gamma\) as a topological space we can construct the
 removing a larger diagonal \(\Delta^{\square} = \{(e_1, \ldots, e_n) \mid x_i \cap x_j \neq \emptyset \text{ for some } i \neq j\}\)
 from the cubical complex \(\Gamma^n\). Here \((e_1, \cdots, e_n)\) is any \(n\)-tuple of cells in \(\Gamma\).
 
-Abrams in \cite{abrams2000configurationspaces} showed that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\).
+Abrams in \cite{abrams2000configurationspaces} showed that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\) is a cubical complex.
 \begin{figure}
 \centering
 \begin{tikzpicture}
@@ -26,8 +26,8 @@ Abrams in \cite{abrams2000configurationspaces} showed that \(\Conf_n(\Gamma)\) d
 \end{figure}
 In \cite{abrams2000configurationspaces} Abrams notes that any point in the
 \(n\)-point configuration space is in one-to-one correspondence with a
-collection of ``tokens'' placed on the graph. In this project, we will a
-slightly ``particles'' placed on the graph instead.  Let \(\Gamma\) be the graph
+collection of ``tokens'' placed on the graph. In this project, we will use a slightly different terminology and
+and say ``particles'' placed on the graph instead.  Let \(\Gamma\) be the graph
 in \ref{fig:ygraph} and consider \(2\) particles placed on \(\Gamma\) at \(u_1\)
 and \(u_2\).  As the particle at \(u_1\) moves to \(u_3\), in the topological
 configuration space the particle at \(u_2\) is free to simultaneously move to
@@ -54,61 +54,132 @@ with coordinates belonging to both edges are thereby removed.
 \caption{An edge and a \(Y\)-graph}
 \label{fig:edgeygraph}
 \end{figure}
-Consider the graph in figure \ref{fig:edgeygraph} and put particles at \(v_1\) and \(u_2\).
-As the particle at \(v_1\) moves to \(v_2\) there are three ways that the particle at \(u_2\) can move.
-Since each way that the particle at \(u_2\) can move can be done simultaneously as the movement of the particle at \(v_1\),
+Consider the graph in figure \ref{fig:edgeygraph} and put particles at \(v_1\) and \(u_3\).
+As the particle at \(v_1\) moves to \(v_2\) there are three ways that the particle at \(u_3\) can move.
+Since each way that the particle at \(u_3\) can move can be done simultaneously as the movement of the particle at \(v_1\),
 the \(1\)-cell corresponding to the movement of the particle at \(v_1\) to \(v_2\)
-borders three distinct \(2\)-cells (see figure \ref{fig:threepagebook}).
+borders three distinct \(2\)-cubes (see figure \ref{fig:threepagebook}).
 \begin{figure}
 \centering
 \begin{tikzpicture}
-       % Define the spine (the 1-cell in Conf_n(Gamma))
-    \coordinate (S1) at (0,0); % Start of spine (e.g., (v1, u2))
-    \coordinate (S2) at (2,0); % End of spine (e.g., (v2, u2))
+    scale=1.2,
+    % Define a 3D-like perspective by setting the coordinate vectors.
+    % x goes to the right, y goes up, and z gives a sense of depth.
+    z={(-0.6cm,-0.4cm)}, 
+    x={(1cm,0cm)},      
+    y={(0cm,1cm)}       
+]
+    % --- Define Coordinates for the vertices of the book ---
+    
+    % The spine is a 1-cell from O to A
+    \coordinate (O) at (0,0,0);
+    \coordinate (A) at (4,0,0);
 
-    % Draw the spine (making it thicker or distinct if desired)
-    \draw[line width=1.5pt] (S1) -- (S2) node[midway, below] {Spine (1-cell)};
+    \coordinate (B_Back) at (4,0,-2.5);
+    \coordinate (C_Back) at (0,0,-2.5);
 
-    % Define points for the "pages"
-    % Page 1 (e.g., u2 -> u1 movement)
-    \coordinate (P1_corner) at (2,1); % (v2, u1)
-    \coordinate (P1_start_adj) at (0,1); % (v1, u1) -- optional, depending on how literal you want to be
-    \draw (S2) -- (P1_corner);
-    \draw[dashed] (S1) -- (P1_start_adj) -- (P1_corner); % Illustrate the 2-cell
+    \coordinate (B_Front) at (4,0,2.5);
+    \coordinate (C_Front) at (0,0,2.5);
 
-    % Page 2 (e.g., u2 -> u3 movement)
-    \coordinate (P2_corner) at (2, -1); % (v2, u3)
-    \coordinate (P2_start_adj) at (0, -1); % (v1, u3)
-    \draw (S2) -- (P2_corner);
-    \draw[dashed] (S1) -- (P2_start_adj) -- (P2_corner); % Illustrate the 2-cell
+    \coordinate (B_Up) at (4,2.5,0);
+    \coordinate (C_Up) at (0,2.5,0);
 
-    % Page 3 (e.g., u2 -> u4 movement)
-    % This page will be "behind" or "in front" to show 3D effect
-    \coordinate (P3_corner) at (2.5, 0.5); % (v2, u4)
-    \coordinate (P3_start_adj) at (0.5, 0.5); % (v1, u4)
-    \draw (S2) -- (P3_corner);
-    \draw[dashed] (S1) -- (P3_start_adj) -- (P3_corner); % Illustrate the 2-cell
+    % Draw book pages
+    \fill[gray!30, opacity=0.75] (O) -- (A) -- (B_Back) -- (C_Back) -- cycle;
+    \draw (O) -- (C_Back) -- (B_Back) -- (A);
 
-    % Add labels for conceptual understanding (optional, can be refined)
-    \node[left] at (S1) {Start Config};
-    \node[right] at (S2) {End Config};
+    \fill[blue!20, opacity=0.75] (O) -- (A) -- (B_Front) -- (C_Front) -- cycle;
+    \draw (O) -- (C_Front) -- (B_Front) -- (A);
 
-    \node[above right] at (P1_corner) {Page 1 (2-cell)};
-    \node[below right] at (P2_corner) {Page 2 (2-cell)};
-    \node[above right, xshift=5mm, yshift=-3mm] at (P3_corner) {Page 3 (2-cell)};
+    \fill[green!20, opacity=0.9] (O) -- (A) -- (B_Up) -- (C_Up) -- cycle;
+    \draw (O) -- (C_Up) -- (B_Up) -- (A);
 
-    % Add some light shading to imply surfaces (optional)
-    % This requires 'fill' and 'opacity', adjust as desired
-    % \fill[blue!10, opacity=0.7] (S1) -- (S2) -- (P1_corner) -- (P1_start_adj) -- cycle;
-    % \fill[green!10, opacity=0.7] (S1) -- (S2) -- (P2_corner) -- (P2_start_adj) -- cycle;
-    % \fill[red!10, opacity=0.7] (S1) -- (S2) -- (P3_corner) -- (P3_start_adj) -- cycle;
+
+    % --- Draw the Spine on top so it stands out ---
+    \draw[line width=1.5pt, red] (O) -- (A);
+
  
 \end{tikzpicture}
-\caption{A three page book}
+\caption{A 3-page book}
 \label{fig:threepagebook}
 \end{figure}
-Pick any point on the spine of the book and take a small neighborhood \(U\).
-% TODO, never say clearly
-Clearly \(U\) is not homeomorphic to a surface.
+
 Books are common structures found in configuration spaces.
+
+% It would make so much more sense if we excluded the covers of the book when counting the pages.
+% Then, a book with more than 0 pages is not homeomorphic to a surface. 
+% However, this would be an annoying substitution in later proofs.
+\begin{defn}
+    An \(n\)-page book is a collection of \(n\) \(2\)-cubes each glued along a common edge.
+    This edge is called the spine of the book.
+\end{defn}
+\begin{thm}
+A book with more than \(2\) pages is not homeomorphic to a surface.
+\end{thm}
+\begin{proof}
+Suppose there exists an \(n\)-page book which is homeomorphic to a surface but \(n > 2\).
+Let \(S\) be the spine of the book and \(p\) be a point in the interior of \(S\).
+Since the book is homeomorphic to a surface, there exists an open neighborhood \(U\) of \(p\)
+which is homeomorphic to the disk \(D^2\). Let \(\phi\) be the homeomorphism from \(U\) to \(D^2\).
+Notice that \(U \setminus S\) consists of \(n\) path components--one from each page of the book.
+However,
+\[
+U\setminus S \cong \phi(U\setminus S) = D^2 \setminus \phi(S \cap U).
+\]
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        % Define the main circle (the disk D^2) and fill it lightly
+        \fill[gray!10] (0,0) circle (2cm);
+        \draw (0,0) circle (2cm);
+        \node at (0, 2.3) {\(D^2\)};
+
+        % Define the start and end points of the arc on the boundary of the disk
+        \coordinate (P1) at (150:2cm);
+        \coordinate (P2) at (-30:2cm);
+
+        % Draw the separating arc phi(S \cap U) with a distinct color
+        \draw[thick, red] (P1) to[bend left=15] node[above, pos=0.5, sloped] {\(\phi(S \cap U)\)} (P2);
+
+        % Draw the boundary path alpha
+        \draw[thick, blue] (P2) arc (-30:150:2cm);
+        \node[blue, above, xshift=18pt, yshift=-5pt] at (60:2cm) {\(\alpha\)};
+        
+        % Draw the boundary path beta
+        \draw[thick, green!50!black] (P1) arc (150:330:2cm);
+        \node[green!50!black, below, xshift=-18pt, yshift=5pt] at (240:2cm) {\(\beta\)};
+        
+        % Label the two regions separated by the arc
+        \node at (-0.5, 1) {\(I_{\alpha}\)};
+        \node at (0.5, -1) {\(I_{\beta}\)};
+        
+        % Mark the endpoints on the boundary
+        \fill (P1) circle (1.5pt);
+        \fill (P2) circle (1.5pt);
+
+    \end{tikzpicture}
+    \caption{The arc \(\phi(S \cap U)\) separates the disk \(D^2\) into two path components, \(I_\alpha\) and \(I_\beta\).}
+    \label{fig:thm:book_1_1}
+\end{figure}
+
+We claim that \(\phi(S \cap U)\) must separate \(D^2\) into two path components.
+To see this, first note that \(\phi(S\cap U)\) is a properly imbedded arc in \(D^2\) with \(\Bd(\phi(S \cap U))\) consisting of two
+points on \(\Bd(D^2)\).
+Since \(\Bd(D^2)\) is homeomorphic to a circle, there exists two different paths \(\alpha\) and \(\beta\) 
+connecting these two points together (See Figure \ref{fig:thm:book_1_1}).
+After including \(D^2\) into the plane, the Jordan curve theorem guarantees that the simple closed curve \(\alpha \cup \phi(S\cap U)\) (resp. \(\beta \cup \phi(S \cap U)\))
+separate \(D^2 \setminus (\alpha \cup \phi(S\cap U))\) (resp. \(D^2 \setminus (\beta \cup \phi(S\cap U))\)) into a bounded component
+\(I_{\alpha}\) and an unbounded component \(O_{\alpha}\) (resp. \(I_{\beta}\) and \(O_{\beta}\)).
+
+Since \(I_{\alpha}\) and \(I_{\beta}\) are both disjoint from \(\phi(S \cap U)\), we have that \(D^2 \setminus \phi(S \cap U) = I_{\alpha} \cup I_{\beta}\).
+Now, if \(I_{\alpha}\) and \(I_{\beta}\) were not disjoint then because both sets are connected, we would have that \(I_{\alpha} = I_{\beta}\).
+However, \(\alpha\) and \(\beta\) are on the boundaries of \(I_{\alpha}\) and \(I_{\beta}\) respectively and 
+\(\alpha\) and \(\beta\) are distinct. 
+Hence \(I_{\alpha}\) and \(I_{\beta}\) form a separation of \(D^2 \setminus \phi(S \cap U)\).
+\end{proof}
+
+
+
+
+
 
