@@ -7,10 +7,19 @@ Treating a graph \(\Gamma\) as a topological space we can construct the
 \(n\) point discretized or combinatorial configuration space \(\DConf_n(\Gamma)\) by 
 % this diagonal needs elaboration.
 removing a larger diagonal \(\Delta^{\square} = \{(e_1, \ldots, e_n) \mid x_i \cap x_j \neq \emptyset \text{ for some } i \neq j\}\)
-from the cubical complex \(\Gamma^n\). Here \((e_1, \cdots, e_n)\) is any \(n\)-tuple of cells in \(\Gamma\).
+from \(\Gamma^n\). Here \((e_1, \cdots, e_n)\) is any \(n\)-tuple of cells in \(\Gamma\).
 
-Abrams in \cite{abrams2000configurationspaces} showed that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\) is a cubical complex.
-\begin{figure}
+Abrams showed in \cite{abrams2000configurationspaces} that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\) and
+that \(\DConf_n(\Gamma)\) is a cubical complex.
+He also notes that any point in the
+\(n\)-point configuration space is in one-to-one correspondence with a
+collection of ``tokens'' placed on the graph. In this project, we will use a slightly different terminology and
+and say ``particles'' instead of ``tokens.''
+
+% TODO what is a cubical complex?
+% make sure to define n-cubes and the gluing map
+
+\begin{figure}[h!]
 \centering
 \begin{tikzpicture}
     \node (u1) at (2, 2) {\(u_1\)};
@@ -24,20 +33,16 @@ Abrams in \cite{abrams2000configurationspaces} showed that \(\Conf_n(\Gamma)\) d
 \caption{The \(Y\)-graph}
 \label{fig:ygraph}
 \end{figure}
-In \cite{abrams2000configurationspaces} Abrams notes that any point in the
-\(n\)-point configuration space is in one-to-one correspondence with a
-collection of ``tokens'' placed on the graph. In this project, we will use a slightly different terminology and
-and say ``particles'' placed on the graph instead.  Let \(\Gamma\) be the graph
-in \ref{fig:ygraph} and consider \(2\) particles placed on \(\Gamma\) at \(u_1\)
-and \(u_2\).  As the particle at \(u_1\) moves to \(u_3\), in the topological
-configuration space the particle at \(u_2\) is free to simultaneously move to
-\(u_3\) as well. However, both particles would not be able to occupy the vertex
-\(u_3\) simultaneously.  In the combinatorial configuration space, as the
+Imagine \(2\) particles placed on the graph in \ref{fig:ygraph} at \(u_1\) and \(u_2\).  
+In the topological configuration space, as the particle at \(u_1\) moves to \(u_3\)
+the particle at \(u_2\) is free to simultaneously move to \(u_3\) as well. 
+However, both particles would not be able to occupy the vertex \(u_3\) simultaneously.  
+Compare this with the combinatorial configuration space, as the
 particle at \(u_1\) moves to \(u_3\), the particle at \(u_2\) can not move at
 all since the edges \(u_1 u_3\) and \(u_2 u_3\) intersect at \(u_3\) and points
-with coordinates belonging to both edges are thereby removed.
+with coordinates belonging to both edges are removed.
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \begin{tikzpicture}
     \node (v1) at (0, 2) {\(v_1\)};
@@ -54,14 +59,16 @@ with coordinates belonging to both edges are thereby removed.
 \caption{An edge and a \(Y\)-graph}
 \label{fig:edgeygraph}
 \end{figure}
-Consider the graph in figure \ref{fig:edgeygraph} and put particles at \(v_1\) and \(u_3\).
+Now consider the graph in figure \ref{fig:edgeygraph} and put particles at \(v_1\) and \(u_3\).
 As the particle at \(v_1\) moves to \(v_2\) there are three ways that the particle at \(u_3\) can move.
 Since each way that the particle at \(u_3\) can move can be done simultaneously as the movement of the particle at \(v_1\),
 the \(1\)-cell corresponding to the movement of the particle at \(v_1\) to \(v_2\)
 borders three distinct \(2\)-cubes (see figure \ref{fig:threepagebook}).
-\begin{figure}
+We call this structure a \(3\)-page book.
+
+\begin{figure}[h!]
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[
     scale=1.2,
     % Define a 3D-like perspective by setting the coordinate vectors.
     % x goes to the right, y goes up, and z gives a sense of depth.
@@ -94,17 +101,12 @@ borders three distinct \(2\)-cubes (see figure \ref{fig:threepagebook}).
     \fill[green!20, opacity=0.9] (O) -- (A) -- (B_Up) -- (C_Up) -- cycle;
     \draw (O) -- (C_Up) -- (B_Up) -- (A);
 
-
     % --- Draw the Spine on top so it stands out ---
     \draw[line width=1.5pt, red] (O) -- (A);
-
- 
 \end{tikzpicture}
 \caption{A 3-page book}
 \label{fig:threepagebook}
 \end{figure}
-
-Books are common structures found in configuration spaces.
 
 % It would make so much more sense if we excluded the covers of the book when counting the pages.
 % Then, a book with more than 0 pages is not homeomorphic to a surface. 
@@ -113,33 +115,53 @@ Books are common structures found in configuration spaces.
     An \(n\)-page book is a collection of \(n\) \(2\)-cubes each glued along a common edge.
     This edge is called the spine of the book.
 \end{defn}
+
+Books are common structures found in configuration spaces.
+One goal for this project is to determine which configuration spaces are surfaces.
+
 \begin{thm}
-A book with more than \(2\) pages is not homeomorphic to a surface.
+A book with more than \(2\) pages is not a surface.
 \end{thm}
 \begin{proof}
-Suppose there exists an \(n\)-page book which is homeomorphic to a surface but \(n > 2\).
-Let \(S\) be the spine of the book and \(p\) be a point in the interior of \(S\).
+Suppose there exists an \(n\)-page book that is a surface but \(n > 2\).
+Let \(p\) be some point in the interior of the book's spine.
+% pg. 225 Munkres states that an m-manifold X is a Hausdorff space such that for each point x in 
+% X there exists a nehiborhood of x that is homeomorphic to an open subset of R^m.
+% Let U be the neihborhood of p in X, V be the open subset of R^2, and \phi
+% be the homeomorphism from U to V.
+% Take some open disk B centered at \phi(p) in V such that \closure{B} \subseteq V
+% restrict \phi to this open disk (this is okay to do in the codomain as \phi is a bijection).
 Since the book is homeomorphic to a surface, there exists an open neighborhood \(U\) of \(p\)
-which is homeomorphic to the disk \(D^2\). Let \(\phi\) be the homeomorphism from \(U\) to \(D^2\).
+which is homeomorphic to an open disk \(B\) in \(\mathbb{R}^2\).
+Let \(\phi\) be a homeomorphism from \(\closure{U}\) to \(\closure{B}\) and \(S\) be the portion of book's spine inside of \(U\).
 Notice that \(U \setminus S\) consists of \(n\) path components--one from each page of the book.
 However,
 \[
-U\setminus S \cong \phi(U\setminus S) = D^2 \setminus \phi(S \cap U).
+U\setminus S \cong \phi(U\setminus S) = B \setminus \phi(S).
 \]
+
+We claim that \(\phi(S)\) must separate \(B\) into two components.
+To see this, first note that \(\phi(S)\) is a properly imbedded arc in \(B\) with \(\Bd(\phi(S))\) consisting of two
+points on \(\Bd(B)\).
+% homemorphisms map boundary points to boundary points, interior points to interior points, and exterior points to exterior points.
+% This is common knowledge but a proof might be necessary TODO.
+Since \(\Bd(B)\) is homeomorphic to a circle, there exists two different paths \(\alpha\) and \(\beta\) 
+connecting these two points together (See Figure \ref{fig:thm:book_1_1}).
+
 \begin{figure}[h!]
     \centering
     \begin{tikzpicture}[scale=1.5]
         % Define the main circle (the disk D^2) and fill it lightly
         \fill[gray!10] (0,0) circle (2cm);
         \draw (0,0) circle (2cm);
-        \node at (0, 2.3) {\(D^2\)};
+        \node at (0, 2.3) {\(B\)};
 
         % Define the start and end points of the arc on the boundary of the disk
         \coordinate (P1) at (150:2cm);
         \coordinate (P2) at (-30:2cm);
 
         % Draw the separating arc phi(S \cap U) with a distinct color
-        \draw[thick, red] (P1) to[bend left=15] node[above, pos=0.5, sloped] {\(\phi(S \cap U)\)} (P2);
+        \draw[thick, red] (P1) to[bend left=15] node[above, pos=0.5, sloped] {\(\phi(S)\)} (P2);
 
         % Draw the boundary path alpha
         \draw[thick, blue] (P2) arc (-30:150:2cm);
@@ -158,28 +180,134 @@ U\setminus S \cong \phi(U\setminus S) = D^2 \setminus \phi(S \cap U).
         \fill (P2) circle (1.5pt);
 
     \end{tikzpicture}
-    \caption{The arc \(\phi(S \cap U)\) separates the disk \(D^2\) into two path components, \(I_\alpha\) and \(I_\beta\).}
+    \caption{The arc \(\phi(S)\) separates the open disk \(B\) into two components, \(I_{\alpha}\) and \(I_{\beta}\).}
     \label{fig:thm:book_1_1}
 \end{figure}
 
-We claim that \(\phi(S \cap U)\) must separate \(D^2\) into two path components.
-To see this, first note that \(\phi(S\cap U)\) is a properly imbedded arc in \(D^2\) with \(\Bd(\phi(S \cap U))\) consisting of two
-points on \(\Bd(D^2)\).
-Since \(\Bd(D^2)\) is homeomorphic to a circle, there exists two different paths \(\alpha\) and \(\beta\) 
-connecting these two points together (See Figure \ref{fig:thm:book_1_1}).
-After including \(D^2\) into the plane, the Jordan curve theorem guarantees that the simple closed curve \(\alpha \cup \phi(S\cap U)\) (resp. \(\beta \cup \phi(S \cap U)\))
-separate \(D^2 \setminus (\alpha \cup \phi(S\cap U))\) (resp. \(D^2 \setminus (\beta \cup \phi(S\cap U))\)) into a bounded component
-\(I_{\alpha}\) and an unbounded component \(O_{\alpha}\) (resp. \(I_{\beta}\) and \(O_{\beta}\)).
-
-Since \(I_{\alpha}\) and \(I_{\beta}\) are both disjoint from \(\phi(S \cap U)\), we have that \(D^2 \setminus \phi(S \cap U) = I_{\alpha} \cup I_{\beta}\).
-Now, if \(I_{\alpha}\) and \(I_{\beta}\) were not disjoint then because both sets are connected, we would have that \(I_{\alpha} = I_{\beta}\).
-However, \(\alpha\) and \(\beta\) are on the boundaries of \(I_{\alpha}\) and \(I_{\beta}\) respectively and 
-\(\alpha\) and \(\beta\) are distinct. 
-Hence \(I_{\alpha}\) and \(I_{\beta}\) form a separation of \(D^2 \setminus \phi(S \cap U)\).
+The Jordan curve theorem guarantees that the simple closed curve \(\alpha \cup \phi(S)\) (resp. \(\beta \cup \phi(S)\))
+separate \(B \setminus (\alpha \cup \phi(S))\) (resp. \(B \setminus (\beta \cup \phi(S))\)) into a bounded connected component
+\(I_{\alpha}\) and an unbounded connected component \(O_{\alpha}\) (resp. \(I_{\beta}\) and \(O_{\beta}\)) when imbedded in \(\mathbb{R}^2\).
+Notice \(B\setminus \phi(S) = I_{\alpha} \cup I_{\beta}\).
+Since \(I_{\alpha} \subseteq O_{\beta}\) and \(I_{\beta} \cap O_{\beta} = \emptyset\),
+we have that \(I_{\alpha} \cap I_{\beta} = \emptyset\).
+So, \(I_{\alpha}\) and \(I_{\beta}\) form a separation of \(B\setminus \phi(S)\).
 \end{proof}
 
+Another common structure found found in graph configuration spaces are \(n\)-cubes.
+Consider the graph in Figure \ref{fig:3edges} and imagine \(3\) particles placed at \(u_1\), \(v_1\), and \(w_1\).
+Each particle can simultaneously move to \(u_2\), \(v_2\), and \(w_2\) resulting in \(3\)-cube in the configuration space (see Figure \ref{fig:3cube}).
 
+\begin{figure}[h!]
+    \centering
+\begin{tikzpicture}
+    \node (u1) at (0, 2) {\(u_1\)};
+    \node (u2) at (0, 0) {\(u_2\)};
+    \draw (u1) -- (u2);
+    \node (v1) at (2, 2) {\(v_1\)};
+    \node (v2) at (2, 0) {\(v_2\)};
+    \draw (v1) -- (v2);
+    \node (w1) at (4, 2) {\(w_1\)};
+    \node (w2) at (4, 0) {\(w_2\)};
+    \draw (w1) -- (w2);
+\end{tikzpicture}
+    \caption{Three edges}
+    \label{fig:3edges}
+\end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[
+    scale=1.5,
+    % Define a 3D-like perspective by setting the coordinate vectors.
+    % x goes to the right, y goes up, and z gives a sense of depth.
+    x={(1cm,0cm)},
+    y={(0cm,1cm)},
+    z={(-0.6cm,-0.4cm)}
+]
+    % --- Style Definitions ---
+    % Define styles for the cube's edges to make the code cleaner.
+    % 'visible' edges are solid and thick.
+    % 'hidden' edges are dashed and thick.
+    \tikzstyle{visible} = [draw, thick, black]
+    \tikzstyle{hidden} = [draw, thick, dashed, black]
 
+    % --- Vertex Coordinates ---
+    % Define the 8 vertices of the cube using (x,y,z) coordinates.
+    % The side length of the cube is 3 units.
+    \def\s{3}
+    \coordinate (A) at (0,0,0);
+    \coordinate (B) at (\s,0,0);
+    \coordinate (C) at (\s,\s,0);
+    \coordinate (D) at (0,\s,0);
+    \coordinate (E) at (0,0,\s);
+    \coordinate (F) at (\s,0,\s);
+    \coordinate (G) at (\s,\s,\s);
+    \coordinate (H) at (0,\s,\s);
 
+    % --- Draw Hidden Edges ---
+    % Draw the edges that would be obscured from view first. These are the
+    % edges connected to the rearmost vertex (A).
+    \draw[hidden] (A) -- (B);
+    \draw[hidden] (A) -- (D);
+    \draw[hidden] (A) -- (E);
 
+    % --- Draw Visible Edges ---
+    % Draw the visible edges on top of the hidden ones.
+    \draw[visible] (B) -- (C) -- (D);
+    \draw[visible] (E) -- (F) -- (G) -- (H) -- cycle;
+    \draw[visible] (B) -- (F);
+    \draw[visible] (C) -- (G);
+    \draw[visible] (D) -- (H);
+
+    % --- Optional: Label Vertices ---
+    % Uncomment the following lines to add labels to each vertex.
+    \node at (A) [above left] {\((u_2, v_2, w_1)\)};
+    \node at (B) [right] {\((u_2, v_1, w_1)\)};
+    \node at (C) [right] {\((u_2, v_1, w_2)\)};
+    \node at (D) [above left] {\((u_2, v_2, w_2)\)};
+    \node at (E) [left] {\((u_1, v_2, w_1)\)};
+    \node at (F) [below right] {\((u_1, v_1, w_1)\)};
+    \node at (G) [below right] {\((u_1, v_1, w_2)\)};
+    \node at (H) [left] {\((u_1, v_2, w_2)\)};    
+\end{tikzpicture}
+\caption{3-cube}
+\label{fig:3cube}
+\end{figure}
+
+Visually \(n\)-cubes are clearly not surfaces when \(n > 2\).
+However, we can show this formally with an argument using the fundamental group.
+\begin{thm}
+\(n\)-cubes are not surfaces when \(n > 2\).
+\end{thm}
+\begin{proof}
+    Suppose an \(n\)-cube \(C\) is a surface for some \(n > 2\).
+    % imbed C in R^n
+    Pick some point \(p\) in the interior of \(C\).
+    Since \(C\) is a surface there exists some open ball \(B^n(p, \epsilon)\) in the interior of \(C\) such that 
+    it is centered at \(p\) and is homeomorphic to some open neighborhood \(V\) of \(\mathbb{R}^2\).
+    Let \(q\) be the point in \(V\) corresponding to \(p\).
+    
+    
+
+    % Why is simple connectedness topological?
+    Since \(B^2\) is simply connected and \(B^2\) is homeomorphic to \(U\), there must be some homotopy \(G\) that
+    contracts every point in \(U\) to a point.
+    We now define a homotopy \(F\) from \(U\setminus\{p\}\) to the boundary of \(B^n\) as follows.
+    \[
+        F(x,t) = \begin{cases}
+        G(x,t) & \text{if } \norm{x-p}_2 > \epsilon \\
+        \left(\frac{x-p}{\norm{x-p}_2}\epsilon\right)t + x(1 - t) & \text{if } \norm{x-p}_2 \le \epsilon \\
+        \end{cases}
+    \]
+    % Probably should ensure F is continuous ...
+    % Pasting lemma theorem 18.3 pg. 108 of Munkres is surely satisfied.
+    % Also, it seems clear that F(U,1) is actually S^{n-1} by construction but further elaboration might be nice.
+
+    Since the boundary of a ball in \(B^n\) is simply connected (see theorem 59.3 in \cite{Munkres2000}) but \(B_2 \setminus \{q\}\) is not, this \(n\)-cube is not a surface.
+    % We use here that the fundemental group is preserved under homotopy
+    % Lemma 55.1 page 348 of Munkres?
+
+    % Also, might be nice to say why B_2 \ {q} is not simply connected since it retracts to S^1
+\end{proof}
+
+Books and cubes are the meat and potatos of the coming proofs.

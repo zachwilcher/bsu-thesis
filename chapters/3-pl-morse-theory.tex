@@ -1,62 +1,139 @@
 \chapter{PL Morse Theory}
 In \cite{appiah2024algebraicstructurehyperbolicgraph} it was determined that the 3-strand braid group of the ``pulsar graph''
 is the free product of the 3-strand braid group on the generalized theta graph and some finite free group \(\mathbb{F}\).
-We show that \(\mathbb{F}\) is %TODO actually get the number.
 
-\begin{figure}
-\centering
+\section{Computing the Euler characteristic of a graph configuration space}
+To compute the euler characteristic of an unorderd \(n\) point graph configuration space we need to count
+for each \(0 \le k \le n\) the number of \(k\)-cubes present.
+Without further mention \(E = E(\Gamma)\) and \(V = V(\Gamma)\).
+
+A \(k\) cube exists if and only if \(k\) particles are free to move simultaneously while \(n - k\)
+particles remain fixed.
+Hence the general formula for the number of \(k\) cubes in \(\DUConf_n(\Gamma)\) is
+\[
+    \phi(k) \cdot \begin{pmatrix}\abs{V} - 2k \\ n - k\end{pmatrix}
+\]
+where \(\phi(k)\) is the number of ways to choose \(k\) disjoint edges in \(\Gamma\).
+\(\phi(k)\) is also known as the number of ``matchings'' of size \(k\) in \(\Gamma\).
+Note that \(\phi(0) = 1\) and \(\phi(1) = \abs{E}\).
+
+To compute \(\phi(k)\) for \(k > 1\) it is useful to consider the following set.
+\begin{defn}
+\(\delta(e)\) is the set of edges incident to an endpoint of an edge \(e\) in \(\Gamma\) not including \(e\) itself.
+\end{defn}
+
+\begin{figure}[h!]
+    \centering
 \begin{tikzpicture}
-    %TODO
+    \node (v1) at (-1, 1) {\(v_1\)};
+    \node (v2) at (0, 1) {\(v_2\)};
+    \node (v3) at (1, 1) {\(v_3\)};
+    
+    \node (v4) at (0, 0) {\(v_4\)};
+    \node (v5) at (0, -1) {\(v_5\)};
+    \draw (v1) -- (v2);
+    \draw (v2) -- (v3);
+    \draw (v2) -- (v4);
+    \draw (v4) -- (v5);
+\end{tikzpicture}
+\caption{\(T\)-graph}
+\label{fig:tgraph}
+\end{figure}
+In Figure \ref{fig:tgraph} observe that \(\delta(v_1 v_2) = \{v_2 v_4, v_2 v_3\}\) and \(\delta(v_4 v_5) = \{v_2 v_4\}\).
+
+\begin{lem}
+\(\displaystyle \phi(2)\cdot 2! = \abs{E}^2 - \abs{E} - \sum_{e \in E} \abs{\delta(e)}\)
+\end{lem}
+\begin{proof}
+    For any edge \(e\) in \(\Gamma\) there exists \(\abs{E} - \abs{\delta(e)} - 1\)
+    edges in \(\Gamma\) disjoint from \(e\).
+    So by rule of sum
+    \[
+    \phi(2)\cdot 2! = \sum_{e \in E} \left(\abs{E} - \abs{\delta(e)} - 1\right) = \abs{E}^2 - \abs{E} - \sum_{e \in E} \abs{\delta(e)}.
+    \]
+\end{proof}
+
+\begin{lem}
+    \[
+\phi(3)\cdot 3! = \abs{E}^3 - \abs{E}^2 + 2\abs{E} + (-3\abs{E} + 4)\sum_{e \in E}\abs{\delta(e)} + \sum_{e \in E}\abs{\delta(e)}^2 - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')}
+    \]
+\end{lem}
+\begin{proof}
+    \begin{align*}
+     & \sum_{e \in E}\left(\sum_{e' \in E \setminus (\delta(e) \cup \{e\})} \abs{E} - \abs{\delta(e)} - \abs{\delta(e')} - 2\right) \\
+    =& \sum_{e \in E}\left(\sum_{e' \in E} (\cdots) - \sum_{e' \in \delta(e)} (\cdots) - (\cdots)\right) \\ 
+    =& \sum_{e \in E}\abs{E}(\abs{E} - \abs{\delta(e)} - 2) - \sum_{e' \in E} \abs{\delta(e')} - \abs{\delta(e)}(\abs{E} - \abs{\delta(e)} - 2) - \sum_{e' \in \delta(e')}\abs{\delta(e')} - \abs{E} + 2\abs{\delta(e)} + 2 \\
+    =& \sum_{e \in E}\abs{E}^2 - \abs{E} + 2 - \sum_{e' \in E} \abs{\delta(e')} + (-2\abs{E} + 4) \abs{\delta(e)} + \abs{\delta(e)}^2 - \sum_{e' \in \delta(e)} \abs{\delta(e')} \\
+    =& \abs{E}(\abs{E}^2 - \abs{E} + 2) - \abs{E} \sum_{e \in E}\abs{\delta(e)} +(-2\abs{E} + 4) \sum_{e \in E}\abs{\delta(e)} - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')} \\
+    =& \abs{E}^3 - \abs{E}^2 + 2\abs{E} + (-3\abs{E} + 4)\sum_{e \in E}\abs{\delta(e)} + \sum_{e \in E}\abs{\delta(e)}^2 - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')}
+    \end{align*}
+
+\end{proof}
+
+\begin{lem}
+\[
+\phi(k)\cdot k! = \sum_{e_0 \in E} \sum_{e_1 \in E_1} \cdots \sum_{e_{k-1} \in E_{k-1}} \left(\abs{E} - k + 1 - \sum_{j=0}^{k} \abs{\delta(e_j)}\right) 
+\]
+where \(E_j = E \setminus (\{e_0, \cdots, e_{j-1}\} \cup \delta(e_0) \cup \cdots \cup \delta(e_{j-1}))\)
+\end{lem}
+
+\begin{figure}[h!]
+    \centering
+\begin{tikzpicture}[scale=1]
+    % Define the two main suspension vertices, positioned closer together
+    \node (a1) at (0, 1) {\(a_1\)};
+    \node (a2) at (0, -1) {\(a_2\)};
+
+    % Define the intermediate vertices for the 'm' paths
+    \node (b1) at (-1, 0) {\(b_1\)};
+    \node (bm) at (1, 0) {\(b_m\)};
+    \node at (0,0) {\(\dots\)};
+
+    % Draw the edges for the 'm' paths, passing through the b_i nodes
+    \draw (a1) to[out=180, in=90] (b1);
+    \draw (b1) to[out=270, in=180] (a2);
+
+    \draw (a1) to[out=0, in=90] (bm);
+    \draw (bm) to[out=270, in=0] (a2);
+
+    % Define vertices for the 'n1' rays attached to a1, spread out as in the drawing
+    \node (c1) at (-1, 2) {\(c_1\)};
+    \node (c1p) at (-2, 3) {\(c'_1\)};
+    \node (cn1) at (1, 2) {\(c_{n_1}\)};
+    \node (cn1p) at (2, 3) {\(c'_{n_1}\)};
+    \node at (0, 2.5) {\(\dots\)};
+
+    % Draw edges for the 'n1' rays
+    \draw (a1) -- (c1);
+    \draw (c1) -- (c1p);
+    \draw (a1) -- (cn1);
+    \draw (cn1) -- (cn1p);
+
+    % Define vertices for the 'n2' rays attached to a2, also spread out
+    \node (d1) at (-1, -2) {\(d_1\)};
+    \node (d1p) at (-2, -3) {\(d'_1\)};
+    \node (dn2) at (1, -2) {\(d_{n_2}\)};
+    \node (dn2p) at (2, -3) {\(d'_{n_2}\)};
+    \node at (0, -2.5) {\(\dots\)};
+
+    % Draw edges for the 'n2' rays
+    \draw (a2) -- (d1);
+    \draw (d1) -- (d1p);
+    \draw (a2) -- (dn2);
+    \draw (dn2) -- (dn2p);
 \end{tikzpicture}
 \label{fig:pulsargraph}
-\caption{The pulsar graph}
+\caption{The Pulsar graph \(\mathcal{P}_{m,n_1,n_2}\)}
 \end{figure}
 
-To compute this free group we analyze the descending links of vertices in \(\DConf_3(\mathcal{P}_{m,n_1,0})\).
-Consider a vertex of the form \(\{c_i', v, w\}\).
-If neither \(v\) nor \(w\) is \(c_i\)
-then a particle at \(c_i'\) can move down to \(c_i\).
-The downward movement of particles at \(v\) and \(w\) then correspond to a cone for the descending link.
+Here is the euler characteristic of \(\DUConf_3(\mathcal{P}_{m,n_1,n_2})\).
+\begin{align*}
+    \frac{19 m^{3}}{6} + 6 m^{2} n_{1} + 6 m^{2} n_{2} - \frac{9 m^{2}}{2} + 6 m n_{1}^{2} + 8 m n_{1} n_{2} - 5 m n_{1} + 6 m n_{2}^{2} - 5 m n_{2}\\
+     - \frac{5 m}{3} + \frac{7 n_{1}^{3}}{3} + 5 n_{1}^{2} n_{2} - 3 n_{1}^{2} + 5 n_{1} n_{2}^{2} - 2 n_{1} n_{2} - \frac{10 n_{1}}{3} + \frac{7 n_{2}^{3}}{3} - 3 n_{2}^{2} - \frac{10 n_{2}}{3}
+\end{align*}
 
-Consider instead vertices of the form \(\{c_i', c_i, w\}\).
-If \(w \neq a_1\) and \(w \neq c_j\) for any \(c_j\),
-again the downward movement of \(w\) results in the descending link being either a cone or a point (if \(w = a_2\)).
-If \(w = a_1\) then the descending link of each of these \(n_1\) vertices consists of \(m\) points
-meaning, there are \(n_1 \cdot (m - 1)\) generators in \(\mathbb{F}\) corresponding to these vertices.
-Otherwise, if \(w = c_j\) then the descending link consists of \(2\) points which puts \(n_1\) additional generators in \(\mathbb{F}\).
-So, vertices of the form \(\{c_i', c_i, w\}\) put \(n_1 \cdot m\) generators in \(\mathbb{F}\).
-
-Finally, we consider vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\) (We already considered having a \(c_j'\)).
-Suppose \(h(v) \ge h(w)\).
-Notice that if \(h(v) \le 1\) then a particle at \(c_i\) can move down to \(a_1\) without issue meaning the descending link is just a cone.
-So, suppose \(h(v) > 1\).
-We now proceed by cases on \(h(v)\).
-
-\begin{enumerate}
-    \item If \(h(v) = 2\) and \(w = a_2\), then \(v = a_1\). There are \(n_1\) vertices of this form here.
-    Since a particle at \(a_1\) can then move down one in \(m\) ways, the descending link is \(m\) points.
-    So, there are \(n_1 \cdot (m - 1)\) generators in \(\mathbb{F}\) from these vertices.
-
-    \item If \(h(v) = 2\) and \(w = b_j\) for some \(b_j\), then \(v = a_1\). 
-    There are \(n_1 \cdot m\) vertices of this form in this case. Since a particle at \(b_j\) can then move down simultaneously 
-    as one at \(a_1\), the descending link for each of these vertices is just a cone which contributes no generators to \(\mathbb{F}\).
-
-    \item If \(h(v) = 5\) and \(w = a_2\), then \(v = c_j\) for some \(c_j\neq c_i\). 
-        There are \(n_1 \cdot(n_1 - 1)\) vertices in this case.
-    Since only one particle at either \(c_i\) or \(c_j\) can move down, the descending link for each of these vertices is just two points.
-    So, there are \(n_1 \cdot(n_1 - 1)\) generators added to \(\mathbb{F}\) in this case.
-
-    \item If \(h(v) = 5\) and \(w = b_j\) for some \(b_j\), then \(v = c_j\) for some \(c_j \neq c_i\) and the descending link is just a cone for each of these vertices.
-
-    \item If \(v = c_j\) and \(w = a_1\) then the descending link for each of these \(n_1 (n_1 - 1)\) vertices is \(m\) points.
-    So, there are \(n_1 \cdot (n_1 - 1) \cdot (m - 1)\) generators added to \(\mathbb{F}\) here.
-
-    \item If \(v = c_j\) and \(w = c_k\) then the descending link for each of these \(n_1\cdot(n_1 - 1)\cdot (n_1 - 2)\) vertices is \(3\) points.
-        So, there are \(n_1\cdot(n_1 - 1)\cdot (n_1 - 2) \cdot 2\) generators added to \(\mathbb{F}\) here.
-\end{enumerate}
-Adding together these expressions we find that vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\)
-contribute \(2n_1^3 + (m - 6)n_1^2 + 3n_1\) generators to \(\mathbb{F}\).
-
-Including the other possible vertices from before we find that \(\mathbb{F}\) has
-\(2n_1^3 + (m - 6)n_1^2 + (m + 3)n_1\) generators.
-
+Here is the difference of it and \(\DUConf_3(\Theta_m)\).
+\begin{align*}
+3 m^{3} + 6 m^{2} n_{1} + 6 m^{2} n_{2} - 3 m^{2} + 6 m n_{1}^{2} + 8 m n_{1} n_{2} - 5 m n_{1} + 6 m n_{2}^{2} - 5 m n_{2} - 4 m + \frac{7 n_{1}^{3}}{3} \\
++ 5 n_{1}^{2} n_{2} - 3 n_{1}^{2} + 5 n_{1} n_{2}^{2} - 2 n_{1} n_{2} - \frac{10 n_{1}}{3} + \frac{7 n_{2}^{3}}{3} - 3 n_{2}^{2} - \frac{10 n_{2}}{3}
+\end{align*}
