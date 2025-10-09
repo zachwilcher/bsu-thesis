@@ -1,44 +1,3 @@
-\chapter{Surfaces}
-In his thesis \cite{abrams2000configurationspaces}, Abrams asked:
-For which \(n\) and \(\Gamma\) is \(\DConf_n(\Gamma)\) homeomorphic to a closed manifold?
-He establishes a partial answer to this question in Corollary 5.8: 
-if \(\Gamma\) is a connected graph
-without loops and \(\DConf_n(\Gamma)\) is homeomorphic to a closed
-\(n\)-dimensional manifold, then either \(n = 1\) and \(\Gamma\) is a cycle, or
-\(n = 2\) and \(\Gamma\) is \(K_5\) or \(K_{3,3}\).
-
-Advised by Peter Haskell, Praphat Fernandes in his undergraduate thesis
-demonstrates that if \(\Gamma\) is a simple graph and \(\DConf_2(\Gamma)\)
-is a \(2\)-psuedomanifold without boundary the following are true.
-\begin{enumerate}
-    \item If \(\Gamma\) contains a valence 4 vertex, then \(\Gamma\) is \(K_5\).
-    \item If every vertex in \(\Gamma\) has valence 3, then \(\Gamma\) is \(K_{3,3}\).
-\end{enumerate}
-This recovers Abrams' result about when \(\DConf_2(\Gamma)\) 
-is a \(2\)-manifold, as Praphat also shows that
-if \(\Gamma\) is simple and \(\DConf_2(\Gamma)\) is a 2-psuedomanifold without boundary,
-then the valence of every vertex in \(\Gamma\) is between 3 and 4,
-and \(\DConf_2(\Gamma)\) is a 2-manifold. Also advised by Peter Haskell, Molly Ison in \cite{ison2005two} 
-extends Fernandes' work in her masters thesis to 2-psuedomanifolds with boundary.
-
-% TODO: is it though?
-The question for when \(\DConf_n(\Gamma)\) is an \(m\)-manifold 
-when \(n \neq m\) remains open.
-
-In Example 4.3 in \cite{ko2012characteristics}, it is shown that \(\DConf_3(\Theta_4)\)
-is a closed orientable surface of genus 3 by computing its fundamental group and using the
-fact that discretized configuration spaces are \(K(\pi, 1)\) spaces.
-This result is recovered in \cite{appiah2024algebraicstructurehyperbolicgraph}
-with a strictly combinatorial argument.
-
-The goal of this chapter is to
-answer for what \(\Gamma\) and what \(n\) is
-\(\DConf_n(\Gamma)\) is a \(2\)-manifold without boundary.
-
-\section{Proofs of surfacedom}
-
-% TODO prove explicitly that these graphs are surfaces.
-
 \section{Ruling out other graphs}
 The example graphs in the previous section are in fact the only connected graphs
 whose discretized configuration spaces are surfaces.
@@ -173,8 +132,8 @@ for it to be homeomorphic to a \(2\)-manifold without boundary can be generalize
     Then, exactly one of the following is true.
     \begin{enumerate}
         \item \(n = 3\) and these edges belong to a \(Y\)-graph in \(\Gamma - \{v_1, w_1\}\) with two vertices not in \(\{v_2, \cdots, v_n\}\).
-        \item \(e_1\) and \(e_2\) belong to a \(3\)-cycle in \(\Gamma - \{v_1, w_1\}\) with two vertices not in \(\{v_2, \cdots, v_n\}\).
-        \item \(e_1\) and \(e_2\) belong to an \(m\)-cycle in \(\Gamma - \{v_1, w_1\}\) with one vertex not in \(\{v_2, \cdots, v_n\}\) and \(4 \le m \le n\).
+        \item \(e_1\) and \(e_2\) belong to a \(3\)-cycle in \(\Gamma - \{v_1, w_1\}\) with exactly two vertices not in \(\{v_2, \cdots, v_n\}\).
+        \item \(e_1\) and \(e_2\) belong to an \(m\)-cycle in \(\Gamma - \{v_1, w_1\}\) with exactly one vertex not in \(\{v_2, \cdots, v_n\}\) and \(4 \le m \le n\).
     \end{enumerate}
 \end{lem}
 \begin{proof}
@@ -801,4 +760,3 @@ Therefore, \(\Gamma - \{v_1, w_1\} = H\).
     \end{figure}
 
 \end{proof}
-

@@ -1,0 +1,50 @@
+\section{Background}
+
+This is a modified proof of a statement in \cite{appiah2024algebraicstructurehyperbolicgraph}.
+\begin{thm}
+\label{thm:descendinglinks}
+Let \(X\) be a finite cubical complex,
+\(f: X \rightarrow \mathbb{R}\) be a PL Morse function,
+and \([a,b]\) be contained in the image of \(f\). 
+For any \(c\) in the open interval \((a,b)\), if
+\begin{enumerate}
+    \item \(f^{-1}([a,c])\) is connected.
+    \item \(f^{-1}((c,b))\) contains no vertices.
+    \item \(f^{-1}(\{b\})\) is a set of vertices.
+    \item The descending links of each vertex \(v\) in \(f^{-1}(\{b\})\) 
+        is homotopically equivalent to \(n_v\) distinct points.
+\end{enumerate}
+then, \(f^{-1}[[a,b]]\) is homotopy equivalent to a wedge of \(f^{-1}[[a,c]]\)
+with exactly \(\displaystyle r = \sum_{v \in f^{-1}(\{b\})} (n_v - 1)\) circles and consequently
+\(\pi_1(f^{-1}[[a,b]]) = \pi_1(f^{-1}[a,c])\,*\,\mathbb{F}_r\)
+where \(\mathbb{F}_r\) is a free group on \(r\) generators.
+\end{thm}
+
+\begin{proof}
+We first consider the case when there is only one vertex \(v\) in \(f^{-1}(\{b\})\).
+Let the descending link of \(v\) be the disjoint spaces \(\{A_1, ..., A_{n_v}\}\). 
+
+By Proposition 2.7 in \cite{Bestvina2008PL}, \(f^{-1}([c,b])\) is homotopically equivalent
+rel \(f^{-1}(\{a\})\) to the cone on the descending links of \(v\) attached to \(v\). 
+
+Since \(f^{-1}([a,c])\) is path connected, 
+we can find paths from a point in each \(A_i\) to some \(p\) in \(f^{-1}(\{c\}) \cap A_1\).
+Let \(Q\) be the union of the cone and these paths.
+
+% Visually this next line is clear but I should say more.
+Notice \(Q\) homotopically equivalent to a wedge of \(n_v - 1\) circles.
+
+Since each added path in \(Q\) contracts to \(p\), we can retract \(Q \cap f^{-1}([a,c])\) to \(p\).
+
+% I should be more explicit about how the fundamental group of the intersection is null homotopic
+% and how \pi_1 of a wedge of circles is just a free group on how many circles there are.
+The Seifert-Van Kampen theorem guarantees that \(\pi_1(f^{-1}([a,b]))\) is just \(\pi_1(f^{-1})([a,c]) * \mathbb{F}_{n_v - 1}\).
+
+When there are multiple points in \(f^{-1}(\{b\})\), as mentioned in \cite{Bestvina2008PL}
+the cones on each point \(v \in f^{-1}(\{b\})\) get attached to each \(v\) in a pairwise disjoint fashion.
+Similar to before, by finding paths through \(f^{-1}([a,c])\) we can connect together each cone
+resulting in a wedge of \(r = \sum_{v} (n_v - 1)\) circles.
+The Seifert-Van Kampen theorem then guarantees that
+\(\pi_1(f^{-1}([a,b])) = \pi_1(f^{-1}([a,c])) * \mathbb{F}_r\).
+
+\end{proof}

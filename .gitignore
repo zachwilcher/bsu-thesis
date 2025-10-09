@@ -1,4 +1,3 @@
-build
 *.aux
 *.fdb_latexmk
 *.fls
@@ -7,3 +6,6 @@ build
 *.gz
 *.toc
 *.DS_Store
+*.bbl
+*.blg
+*.out
