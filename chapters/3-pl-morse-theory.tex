@@ -1,139 +1,213 @@
 \chapter{PL Morse Theory}
+
+\section{Background}
+
+This is a modified proof of a statement in \cite{appiah2024algebraicstructurehyperbolicgraph}.
+\begin{thm}
+\label{thm:descendinglinks}
+Let \(X\) be a finite cubical complex,
+\(f: X \rightarrow \mathbb{R}\) be a PL Morse function,
+and \([a,b]\) be contained in the image of \(f\). 
+For any \(c\) in the open interval \((a,b)\), if
+\begin{enumerate}
+    \item \(f^{-1}([a,c])\) is connected.
+    \item \(f^{-1}((c,b))\) contains no vertices.
+    \item \(f^{-1}(\{b\})\) is a set of vertices.
+    \item The descending links of each vertex \(v\) in \(f^{-1}(\{b\})\) 
+        is homotopically equivalent to \(n_v\) distinct points.
+\end{enumerate}
+then, \(f^{-1}[[a,b]]\) is homotopy equivalent to a wedge of \(f^{-1}[[a,c]]\)
+with exactly \(\displaystyle r = \sum_{v \in f^{-1}(\{b\})} (n_v - 1)\) circles and consequently
+\(\pi_1(f^{-1}[[a,b]]) = \pi_1(f^{-1}[a,c])\,*\,\mathbb{F}_r\)
+where \(\mathbb{F}_r\) is a free group on \(r\) generators.
+\end{thm}
+
+\begin{proof}
+We first consider the case when there is only one vertex \(v\) in \(f^{-1}(\{b\})\).
+Let the descending link of \(v\) be the disjoint spaces \(\{A_1, ..., A_{n_v}\}\). 
+
+By Proposition 2.7 in \cite{Bestvina2008PL}, \(f^{-1}([c,b])\) is homotopically equivalent
+rel \(f^{-1}(\{a\})\) to the cone on the descending links of \(v\) attached to \(v\). 
+
+Since \(f^{-1}([a,c])\) is path connected, 
+we can find paths from a point in each \(A_i\) to some \(p\) in \(f^{-1}(\{c\}) \cap A_1\).
+Let \(Q\) be the union of the cone and these paths.
+
+% Visually this next line is clear but I should say more.
+Notice \(Q\) homotopically equivalent to a wedge of \(n_v - 1\) circles.
+
+Since each added path in \(Q\) contracts to \(p\), we can retract \(Q \cap f^{-1}([a,c])\) to \(p\).
+
+% I should be more explicit about how the fundamental group of the intersection is null homotopic
+% and how \pi_1 of a wedge of circles is just a free group on how many circles there are.
+The Seifert-Van Kampen theorem guarantees that \(\pi_1(f^{-1}([a,b]))\) is just \(\pi_1(f^{-1})([a,c]) * \mathbb{F}_{n_v - 1}\).
+
+When there are multiple points in \(f^{-1}(\{b\})\), as mentioned in \cite{Bestvina2008PL}
+the cones on each point \(v \in f^{-1}(\{b\})\) get attached to each \(v\) in a pairwise disjoint fashion.
+Similar to before, by finding paths through \(f^{-1}([a,c])\) we can connect together each cone
+resulting in a wedge of \(r = \sum_{v} (n_v - 1)\) circles.
+The Seifert-Van Kampen theorem then guarantees that
+\(\pi_1(f^{-1}([a,b])) = \pi_1(f^{-1}([a,c])) * \mathbb{F}_r\).
+
+\end{proof}
+
+\section{Free group factor of Pulsar Graph}
+
 In \cite{appiah2024algebraicstructurehyperbolicgraph} it was determined that the 3-strand braid group of the ``pulsar graph''
 is the free product of the 3-strand braid group on the generalized theta graph and some finite free group \(\mathbb{F}\).
+However, in their analysis they did not keep track of the number of generators.
+Determining the exact number of generators of this free group would be a useful result for applying
+results from geometric group theory to graph configuration spaces.
 
-\section{Computing the Euler characteristic of a graph configuration space}
-To compute the euler characteristic of an unorderd \(n\) point graph configuration space we need to count
-for each \(0 \le k \le n\) the number of \(k\)-cubes present.
-Without further mention \(E = E(\Gamma)\) and \(V = V(\Gamma)\).
+To compute this free group we analyze the descending links of vertices in \(\DConf_3(\mathcal{P}_{m,n_1,0})\).
+Consider a vertex of the form \(\{c_i', v, w\}\).
+If neither \(v\) nor \(w\) is \(c_i\)
+then a particle at \(c_i'\) can move down to \(c_i\).
+The downward movement of particles at \(v\) and \(w\) then correspond to a cone for the descending link.
 
-A \(k\) cube exists if and only if \(k\) particles are free to move simultaneously while \(n - k\)
-particles remain fixed.
-Hence the general formula for the number of \(k\) cubes in \(\DUConf_n(\Gamma)\) is
+Consider instead vertices of the form \(\{c_i', c_i, w\}\).
+If \(w \neq a_1\) and \(w \neq c_j\) for any \(c_j\),
+again the downward movement of \(w\) results in the descending link being either a cone or a point (if \(w = a_2\)).
+If \(w = a_1\) then the descending link of each of these \(n_1\) vertices consists of \(m\) points,
+meaning there are \(n_1 (m - 1)\) generators in \(\mathbb{F}\) corresponding to these vertices.
+Otherwise, if \(w = c_j\) for some \(j \neq i\) then the descending link consists of \(2\) points which puts \(n_1 (n_1 - 1)\) additional generators in \(\mathbb{F}\).
+So, vertices of the form \(\{c_i', c_i, w\}\) put \(n_1 (m-1) + n_1 (n_1 - 1)\) generators in \(\mathbb{F}\).
+
+Finally, we consider vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\) for any \(j\).
+Without a loss of generality, suppose \(h(v) \ge h(w)\).
+Notice that if \(h(v) \le 1\) then a particle at \(c_i\) can move down to \(a_1\) without issue meaning the descending link is just a cone.
+So, suppose \(h(v) > 1\).
+We now proceed by cases on where \(v\) can be.
+
+\begin{enumerate}
+    \item If \(v = a_1\) and \(w = a_2\), there are \(n_1\) vertices of this form.
+    Since a particle at \(a_1\) can then move down one in \(m\) ways, the descending link is \(m\) points.
+    So, there are \(n_1 \cdot (m - 1)\) generators in \(\mathbb{F}\) from these vertices.
+
+    \item If \(v = a_1\) and \(w = b_j\) for some \(j \in \{1, \cdots, m\}\), 
+    there are \(n_1 \cdot m\) vertices of this form. 
+    Since a particle at \(b_j\) can move down simultaneously as one at \(a_1\), 
+    the descending link for each of these vertices is just a cone which contributes no generators to \(\mathbb{F}\).
+
+    \item If \(v = c_j\) for some \(i \neq j\) and \(w = a_2\), 
+    there are \(\binom{n_1}{2}\) vertices of this form.
+    Since only one particle at either \(c_i\) or \(c_j\) can move down, the descending link for each of these vertices is just two points.
+    So, there are \(\binom{n_1}{2}\) generators added to \(\mathbb{F}\) in this case.
+
+    \item If \(v = c_j\) for some \(i \neq j\) and \(w = b_j\) for some \(j \in \{1,\cdots, m\}\), 
+        there are \(\binom{n_1}{2} \cdot m\) vertices of this form.
+        Since a particle at \(b_j\) can move down simultaneously as one at \(a_1\), the descending link
+        for each vertex is just a cone contributing no generators to \(\mathbb{F}\).
+
+    \item If \(v = c_j\) for some \(i \neq j\) and \(w = a_1\), 
+        there are \(\binom{n_1}{2}\) vertices of this form.
+        Since only one particle at \(w = a_1\) can move down to one of \(m\) positions, 
+        there are \(\binom{n_1}{2}(m - 1)\) generators added to \(\mathbb{F}\) in this case.
+
+    \item If \(v = c_j\) for some \(i \neq j\) and \(w = c_k\) for some \(k \neq i\) and \(k \neq j\),
+        there are \(\binom{n_1}{3}\) vertices of this form.
+        Since only one particle at \(c_i\), \(c_j\), or \(c_k\) can move down to \(a_1\),
+        there are \(\binom{n_1}{3}(2)\) generators added to \(\mathbb{F}\) here.
+\end{enumerate}
+Adding together these expressions we find that vertices of the form \(\{c_i, v, w\}\) where \(v\) nor \(w\) is \(c_j'\)
+contribute 
+\(\frac{m n_{1}^{2}}{2} + \frac{m n_{1}}{2} + \frac{n_{1}^{3}}{3} - n_{1}^{2} - \frac{n_{1}}{3}\)
+generators to \(\mathbb{F}\).
+
+Including the other possible vertices from before we find that \(\mathbb{F}\) has
+\(\frac{m n_{1}^{2}}{2} + \frac{3 m n_{1}}{2} + \frac{n_{1}^{3}}{3} - \frac{7 n_{1}}{3}\)
+generators.
+
+% TODO Explain the flipping to get the other generators
+
+So, the number of generators total is
 \[
-    \phi(k) \cdot \begin{pmatrix}\abs{V} - 2k \\ n - k\end{pmatrix}
+\frac{m n_{1}^{2}}{2} + \frac{3 m n_{1}}{2} + \frac{m n_{2}^{2}}{2} + \frac{3 m n_{2}}{2} + \frac{n_{1}^{3}}{3} - \frac{7 n_{1}}{3} + \frac{n_{2}^{3}}{3} - \frac{7 n_{2}}{3}
 \]
-where \(\phi(k)\) is the number of ways to choose \(k\) disjoint edges in \(\Gamma\).
-\(\phi(k)\) is also known as the number of ``matchings'' of size \(k\) in \(\Gamma\).
-Note that \(\phi(0) = 1\) and \(\phi(1) = \abs{E}\).
+Referring to Theorem \ref{thm:pulsargrapheuler}, 
+notice that the above expression is the same as \(\chi(\DUConf_3(\Theta_m)) - \chi(\DUConf_3(\mathcal{P}_{m,n_1,n_2}))\).
 
-To compute \(\phi(k)\) for \(k > 1\) it is useful to consider the following set.
-\begin{defn}
-\(\delta(e)\) is the set of edges incident to an endpoint of an edge \(e\) in \(\Gamma\) not including \(e\) itself.
-\end{defn}
 
-\begin{figure}[h!]
-    \centering
-\begin{tikzpicture}
-    \node (v1) at (-1, 1) {\(v_1\)};
-    \node (v2) at (0, 1) {\(v_2\)};
-    \node (v3) at (1, 1) {\(v_3\)};
+\begin{cor}
+    \label{cor:eulerfreegroup}
+    Let \(X\) be a finite cube complex,
+    \([a,b]\) be the image of a PL Morse function \(f: X \rightarrow \mathbb{R}\),
+    and \(A \subseteq X\).
+    If
+    \begin{enumerate}[label=(\roman*)]
+        \item \(X\) and \(A\) are connected.
+        \item \(f^{-1}([a,c]) = A\) for some \(c \in (a,b)\).
+        \item The descending link of every vertex in \(X \setminus A\) is homotopically equivalent to a finite set of points. 
+    \end{enumerate}
+    then,
+    \(\pi_1(X) = \pi_1(A)\,*\, \mathbb{F}_r\) where \(\mathbb{F}_r\) is a free group on \(r = \chi(A) - \chi(X)\) generators.
+\end{cor}
+\begin{proof}
+    % This first sentence might want some elaboration. My logic is that if you pick some point in this non-empty
+    % set and go up from it you have to hit a vertex.
+    Note that \(X \setminus A\) must contain vertices since \(f^{-1}((c, b])\) is non-empty.
+    Let \(c_0, c_1, ..., c_k\) be the ``heights'' of each vertex in \(X \setminus A\).
+    Specifically, let \(c_0 = c\) and 
+    inductively define \(c_i = \min\left(\{f(v) \mid v \in X \setminus A\}\setminus\{c_j \mid j < i\}\right)\).
     
-    \node (v4) at (0, 0) {\(v_4\)};
-    \node (v5) at (0, -1) {\(v_5\)};
-    \draw (v1) -- (v2);
-    \draw (v2) -- (v3);
-    \draw (v2) -- (v4);
-    \draw (v4) -- (v5);
-\end{tikzpicture}
-\caption{\(T\)-graph}
-\label{fig:tgraph}
-\end{figure}
-In Figure \ref{fig:tgraph} observe that \(\delta(v_1 v_2) = \{v_2 v_4, v_2 v_3\}\) and \(\delta(v_4 v_5) = \{v_2 v_4\}\).
+    Note that when we write \(\chi(f^{-1}[c_{i-1}, c_i])\) or \(\chi(f^{-1}(c_i))\), 
+    its understood we are making the computation in an appropriately subdivided \(X\) 
+    which agrees with the original complex since subdivision does not change the Euler characteristic.
 
-\begin{lem}
-\(\displaystyle \phi(2)\cdot 2! = \abs{E}^2 - \abs{E} - \sum_{e \in E} \abs{\delta(e)}\)
-\end{lem}
-\begin{proof}
-    For any edge \(e\) in \(\Gamma\) there exists \(\abs{E} - \abs{\delta(e)} - 1\)
-    edges in \(\Gamma\) disjoint from \(e\).
-    So by rule of sum
+    For each \(i \ge 1\) define \(\Delta \chi_i = \chi(f^{-1}([c_{i-1}, c_i])) - \chi(f^{-1}(\{c_{i-1}\}))\).
+    We claim that 
+    \begin{equation}
+     \label{eq:eulerfreegroup1}   
+        \chi(X) = \chi(A) + \sum_{i=1}^k \Delta \chi_i
+    \end{equation}
+    After applying the inclusion exclusion principle we have
     \[
-    \phi(2)\cdot 2! = \sum_{e \in E} \left(\abs{E} - \abs{\delta(e)} - 1\right) = \abs{E}^2 - \abs{E} - \sum_{e \in E} \abs{\delta(e)}.
+    \chi(X) = \chi(A) + \chi(f^{-1}([c, c_k])) - \chi(f^{-1}(\{c\})).
     \]
-\end{proof}
-
-\begin{lem}
+    Now we show \(\chi(f^{-1}([c, c_k])) - \chi(f^{-1}(\{c\})) = \sum_{i=1}^k \Delta \chi_i\) inductively.
+    If \(k = 1\) the formula holds immediately. So suppose the formula holds for some \(k - 1 \ge 1\).
+    After applying the inclusion-exclusion principle,
     \[
-\phi(3)\cdot 3! = \abs{E}^3 - \abs{E}^2 + 2\abs{E} + (-3\abs{E} + 4)\sum_{e \in E}\abs{\delta(e)} + \sum_{e \in E}\abs{\delta(e)}^2 - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')}
+    \chi(f^{-1}([c, c_k])) = \underbrace{\chi(f^{-1}([c, c_{k-1}]))}_{\sum_{i=1}^{k-1}\Delta \chi_i} + \underbrace{\chi(f^{-1}([c_{k-1}, c_k])) - \chi(f^{-1}(\{c_{k-1}\}))}_{\Delta \chi_k}.
     \]
-\end{lem}
-\begin{proof}
-    \begin{align*}
-     & \sum_{e \in E}\left(\sum_{e' \in E \setminus (\delta(e) \cup \{e\})} \abs{E} - \abs{\delta(e)} - \abs{\delta(e')} - 2\right) \\
-    =& \sum_{e \in E}\left(\sum_{e' \in E} (\cdots) - \sum_{e' \in \delta(e)} (\cdots) - (\cdots)\right) \\ 
-    =& \sum_{e \in E}\abs{E}(\abs{E} - \abs{\delta(e)} - 2) - \sum_{e' \in E} \abs{\delta(e')} - \abs{\delta(e)}(\abs{E} - \abs{\delta(e)} - 2) - \sum_{e' \in \delta(e')}\abs{\delta(e')} - \abs{E} + 2\abs{\delta(e)} + 2 \\
-    =& \sum_{e \in E}\abs{E}^2 - \abs{E} + 2 - \sum_{e' \in E} \abs{\delta(e')} + (-2\abs{E} + 4) \abs{\delta(e)} + \abs{\delta(e)}^2 - \sum_{e' \in \delta(e)} \abs{\delta(e')} \\
-    =& \abs{E}(\abs{E}^2 - \abs{E} + 2) - \abs{E} \sum_{e \in E}\abs{\delta(e)} +(-2\abs{E} + 4) \sum_{e \in E}\abs{\delta(e)} - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')} \\
-    =& \abs{E}^3 - \abs{E}^2 + 2\abs{E} + (-3\abs{E} + 4)\sum_{e \in E}\abs{\delta(e)} + \sum_{e \in E}\abs{\delta(e)}^2 - \sum_{e \in E}\sum_{e' \in \delta(e)} \abs{\delta(e')}
-    \end{align*}
-
+    Therefore, Equation \ref{eq:eulerfreegroup1} holds. Next, we claim that
+    \begin{equation}
+     \label{eq:eulerfreegroup2}   
+        \Delta \chi_i = \sum_{v \in f^{-1}(\{c_i\})} (1 - n_v)
+    \end{equation}
+    where \(n_v\) is the number of retractable spaces in the descending link of \(v\).
+    
+    Suppose that there is only one \(v\) vertex in \(f^{-1}(\{c_i\})\). 
+    Proposition 2.7 in \cite{Bestvina2008PL} guarantees that 
+    \(f^{-1}[c_{i-1}, c_i]\) is homotopically equivalent rel \(f^{-1}(\{c_{i-1}\})\) to \(f^{-1}(\{c_{i-1}\})\)
+    with the cone on \(\DLk(v)\) attached. 
+    Let \(\epsilon > 0\) such that \(f^{-1}([c_{i-1}, c_i - \epsilon])\cup \cone(\DLk(v)) \simeq f^{-1}([c_{i-1}, c_i])\).
+    Appropriately subdividing, we can then write \(\chi(f^{-1}([c_{i-1}, c_i]))\) as
+    \[
+        \chi(f^{-1}([c_{i-1}, c_i - \epsilon])) + \chi(\cone(\DLk(v))) - \chi(f^{-1}([c_{i-1}, c_i - \epsilon]) \cap \cone(\DLk(v))).
+    \]
+    Proposition 2.4 in \cite{Bestvina2008PL} gurantees \(f^{-1}([c_{i-1}, c_i - \epsilon])\) is homotopic to \(f^{-1}(\{c_{i-1}\})\).
+    Since a cone is homotopically equivalent to a single point and \(f^{-1}([c_{i-1}, c_i - \epsilon]) \cap \cone(\DLk(v))\) has \(n_v\) contractible components,
+    we have
+    \[
+    \chi(f^{-1}([c_{i-1}, c_i])) = \chi(f^{-1}(\{c_{i-1}\})) + 1 - n_v.
+    \]
+    So, \(\Delta\chi_i = \chi(f^{-1}([c_{i-1}, c_i])) - \chi(f^{-1}(\{c_{i-1}\})) = 1 - n_v\).
+    If there is more than one vertex in \(f^{-1}(\{c_i\})\), then as remarked in \cite{Bestvina2008PL}
+    the cones on the descending links are attached in a pairwise disjoint fashion.
+    So, for sufficiently small \(\epsilon\) we have 
+    \[
+        f^{-1}([c_{i-1}, c_i]) \simeq f^{-1}([c_{i-1}, c_i - \epsilon]) \cup \underbrace{\left(\bigsqcup_{v \in f^{-1}(\{c_{i-1}\})}\cone(\DLk(v))\right)}_{C}.
+    \]
+    Hence,
+    \(\chi(f^{-1}([c_{i-1}, c_i])) = \chi(f^{-1}([c_{i-1}, c_i - \epsilon])) + \chi(C) - \chi(f^{-1}([c_{i-1}, c_i - \epsilon]) \cap C).\)
+    Since \(C\) is homotopically equivalent to the number of vertices in \(f^{-1}(\{c_{i-1}\})\)
+    and \(f^{-1}([c_{i-1}, c_i - \epsilon]) \cap C\) has \(\sum_{v \in f^{-1}(\{c_{i-1}\})} n_v\) contractible components,
+    Equation \ref{eq:eulerfreegroup2} holds.
+    Substituting Equation \ref{eq:eulerfreegroup2} into Equation \ref{eq:eulerfreegroup1}, we have
+    \[
+        \chi(A) - \chi(X) = \sum_{i=1}^k \sum_{v \in f^{-1}[c_{i-1}, c_i]} (n_v - 1).
+    \]
+    Finally, applying Theorem \ref{thm:descendinglinks} for each closed interval \([c_{i-1}, c_i]\), 
+    we obtain the exact same expression for \(\mathbb{F}_r\).
 \end{proof}
-
-\begin{lem}
-\[
-\phi(k)\cdot k! = \sum_{e_0 \in E} \sum_{e_1 \in E_1} \cdots \sum_{e_{k-1} \in E_{k-1}} \left(\abs{E} - k + 1 - \sum_{j=0}^{k} \abs{\delta(e_j)}\right) 
-\]
-where \(E_j = E \setminus (\{e_0, \cdots, e_{j-1}\} \cup \delta(e_0) \cup \cdots \cup \delta(e_{j-1}))\)
-\end{lem}
-
-\begin{figure}[h!]
-    \centering
-\begin{tikzpicture}[scale=1]
-    % Define the two main suspension vertices, positioned closer together
-    \node (a1) at (0, 1) {\(a_1\)};
-    \node (a2) at (0, -1) {\(a_2\)};
-
-    % Define the intermediate vertices for the 'm' paths
-    \node (b1) at (-1, 0) {\(b_1\)};
-    \node (bm) at (1, 0) {\(b_m\)};
-    \node at (0,0) {\(\dots\)};
-
-    % Draw the edges for the 'm' paths, passing through the b_i nodes
-    \draw (a1) to[out=180, in=90] (b1);
-    \draw (b1) to[out=270, in=180] (a2);
-
-    \draw (a1) to[out=0, in=90] (bm);
-    \draw (bm) to[out=270, in=0] (a2);
-
-    % Define vertices for the 'n1' rays attached to a1, spread out as in the drawing
-    \node (c1) at (-1, 2) {\(c_1\)};
-    \node (c1p) at (-2, 3) {\(c'_1\)};
-    \node (cn1) at (1, 2) {\(c_{n_1}\)};
-    \node (cn1p) at (2, 3) {\(c'_{n_1}\)};
-    \node at (0, 2.5) {\(\dots\)};
-
-    % Draw edges for the 'n1' rays
-    \draw (a1) -- (c1);
-    \draw (c1) -- (c1p);
-    \draw (a1) -- (cn1);
-    \draw (cn1) -- (cn1p);
-
-    % Define vertices for the 'n2' rays attached to a2, also spread out
-    \node (d1) at (-1, -2) {\(d_1\)};
-    \node (d1p) at (-2, -3) {\(d'_1\)};
-    \node (dn2) at (1, -2) {\(d_{n_2}\)};
-    \node (dn2p) at (2, -3) {\(d'_{n_2}\)};
-    \node at (0, -2.5) {\(\dots\)};
-
-    % Draw edges for the 'n2' rays
-    \draw (a2) -- (d1);
-    \draw (d1) -- (d1p);
-    \draw (a2) -- (dn2);
-    \draw (dn2) -- (dn2p);
-\end{tikzpicture}
-\label{fig:pulsargraph}
-\caption{The Pulsar graph \(\mathcal{P}_{m,n_1,n_2}\)}
-\end{figure}
-
-Here is the euler characteristic of \(\DUConf_3(\mathcal{P}_{m,n_1,n_2})\).
-\begin{align*}
-    \frac{19 m^{3}}{6} + 6 m^{2} n_{1} + 6 m^{2} n_{2} - \frac{9 m^{2}}{2} + 6 m n_{1}^{2} + 8 m n_{1} n_{2} - 5 m n_{1} + 6 m n_{2}^{2} - 5 m n_{2}\\
-     - \frac{5 m}{3} + \frac{7 n_{1}^{3}}{3} + 5 n_{1}^{2} n_{2} - 3 n_{1}^{2} + 5 n_{1} n_{2}^{2} - 2 n_{1} n_{2} - \frac{10 n_{1}}{3} + \frac{7 n_{2}^{3}}{3} - 3 n_{2}^{2} - \frac{10 n_{2}}{3}
-\end{align*}
-
-Here is the difference of it and \(\DUConf_3(\Theta_m)\).
-\begin{align*}
-3 m^{3} + 6 m^{2} n_{1} + 6 m^{2} n_{2} - 3 m^{2} + 6 m n_{1}^{2} + 8 m n_{1} n_{2} - 5 m n_{1} + 6 m n_{2}^{2} - 5 m n_{2} - 4 m + \frac{7 n_{1}^{3}}{3} \\
-+ 5 n_{1}^{2} n_{2} - 3 n_{1}^{2} + 5 n_{1} n_{2}^{2} - 2 n_{1} n_{2} - \frac{10 n_{1}}{3} + \frac{7 n_{2}^{3}}{3} - 3 n_{2}^{2} - \frac{10 n_{2}}{3}
-\end{align*}

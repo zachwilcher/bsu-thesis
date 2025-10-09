@@ -30,12 +30,14 @@
 \usepackage{url}
 \usepackage{array}
 
+\usepackage[inline]{enumitem}
+
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem*{cor}{Corollary}
+\newtheorem{cor}{Corollary}[section]
 \newtheorem{subclaim}{Claim}[subsubsection]
 
 \theoremstyle{definition}
@@ -61,10 +63,13 @@
 \newcommand{\Bd}{\mathrm{Bd}}
 \newcommand{\closure}[1]{\overline{#1}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\Lk}{\mathrm{Lk}}
+\newcommand{\DLk}{\mathrm{Lk}_{\downarrow}}
+\newcommand{\cone}{\mathrm{cone}}
 
 \begin{document}
 
-% Title, Abstract, and Acknowledgements
+% --- Title, Abstract, and Acknowledgements ---
 \input{chapters/0-title.tex}
 \clearpage\shipout\null
 \pagenumbering{roman}
@@ -74,12 +79,12 @@
 \clearpage\shipout\null
 \pagenumbering{arabic}
 
-% Content Chapters
+% --- Content Chapters ---
 \input{chapters/1-configuration-spaces.tex}
 \input{chapters/2-surfaces.tex}
 \input{chapters/3-pl-morse-theory.tex}
 
-% Used in 0-abstract.tex to get the length of the thesis.
+% --- Used in 0-abstract.tex to get the length of the thesis ---
 \label{LastPage}
 
 % Bibliography
