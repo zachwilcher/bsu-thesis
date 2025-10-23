@@ -10,3 +10,7 @@
 *.bbl
 *.blg
 *.out
+*.bcf
+*.nav
+*.run.xml
+*.snm

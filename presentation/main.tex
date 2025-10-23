@@ -1,0 +1,60 @@
+% Beamer presentation template
+\documentclass{beamer}
+
+% Theme and appearance
+\usetheme{Madrid}
+%\usecolortheme{seahorse} % optional
+
+% Math and graphics
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{caption}
+
+% Bibliography: biblatex + biber (adjust path to your .bib)
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{../bibliography.bib} % path relative to this file
+
+% Metadata
+\title{Graph Configuration Spaces}
+\author{Zach Wilcher}
+\institute{Ball State University}
+\date{8-Nov-2025}
+
+\begin{document}
+\input{slides/1.tex}
+\input{slides/2.tex}
+
+\section{Introduction}
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item Short, bulleted item
+    \item Another item with math \(43\).
+  \end{itemize}
+\end{frame}
+
+\section{Main Results}
+\begin{frame}{A theorem}
+  \begin{theorem}[Sample theorem]
+    This is an example theorem statement.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Math example}
+  An equation:
+  \[ E = mc^2. \]
+\end{frame}
+
+\begin{frame}{Figures}
+  \centering
+  % Replace with a figure path relative to this file or an example image
+  \includegraphics[width=0.6\textwidth]{example-image}
+  \captionof{figure}{Example image (replace with your own).}
+\end{frame}
+
+\section{References}
+\begin{frame}[allowframebreaks]{References}
+  \printbibliography
+\end{frame}
+
+\end{document}

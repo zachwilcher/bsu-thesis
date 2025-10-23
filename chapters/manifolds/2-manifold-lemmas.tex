@@ -4,7 +4,7 @@ whose discretized configuration spaces are surfaces.
 
 \begin{lem}
 \label{lem:is_surface_0}
-If \(\DConf_n(\Gamma)\) is an \(m\)-manifold with or without boundary, then \(\Gamma\) has at least \(n+m\) vertices.
+If \(\DConf_n(\Gamma)\) is an \(m\)-manifold with or without boundary, then \(\Gamma\) has at least \(n+m\) vertices and \(n \ge m\).
 \end{lem}
 \begin{proof}
     If \(\Gamma\) has less than \(n\) vertices, then \(\DConf_n(\Gamma)\) is empty;
@@ -15,6 +15,9 @@ If \(\DConf_n(\Gamma)\) is an \(m\)-manifold with or without boundary, then \(\G
     Since exactly \(m\) particles need to be able to simultaneously move for an \(m\)-cube 
     to exist in \(\DConf_n(\Gamma)\), no configuration in \(\DConf_n(\Gamma)\)
     can have a neighborhood homeomorphic to an open set in \(\mathbb{R}^m\).
+
+    Similarly, if \(n < m\), then there are not enough particles that can simultaneously move
+    for an \(m\)-cube to exist in \(\DConf_n(\Gamma)\). So, \(n \ge m\). 
 \end{proof}
 
 \begin{lem}
@@ -133,7 +136,7 @@ for it to be homeomorphic to a \(2\)-manifold without boundary can be generalize
     \begin{enumerate}
         \item \(n = 3\) and these edges belong to a \(Y\)-graph in \(\Gamma - \{v_1, w_1\}\) with two vertices not in \(\{v_2, \cdots, v_n\}\).
         \item \(e_1\) and \(e_2\) belong to a \(3\)-cycle in \(\Gamma - \{v_1, w_1\}\) with exactly two vertices not in \(\{v_2, \cdots, v_n\}\).
-        \item \(e_1\) and \(e_2\) belong to an \(m\)-cycle in \(\Gamma - \{v_1, w_1\}\) with exactly one vertex not in \(\{v_2, \cdots, v_n\}\) and \(4 \le m \le n\).
+        \item \(e_1\) and \(e_2\) belong to an \(r\)-cycle in \(\Gamma - \{v_1, w_1\}\) with exactly one vertex not in \(\{v_2, \cdots, v_n\}\) and \(3 \le r \le n\).
     \end{enumerate}
 \end{lem}
 \begin{proof}
@@ -350,7 +353,10 @@ for it to be homeomorphic to a \(2\)-manifold without boundary can be generalize
     (see the graph on the right in Figure \ref{fig:lem:is_surface_2_3}).
     
     We claim that the vertices in \(\{v_i, w_2, v_j, v_k\}\) belong to a cycle.
-    Relabel the vertices in \(\{v_i, w_2, v_j, v_k\}\) such that \(v_i = u_1, w_2 = u_2, v_j = u_3, v_k = u_4\) (see Figure \ref{fig:lem:is_surface_2_4}).
+    If \(n = 3\), the only possible choice for \(v_k\) is \(v_i\), 
+    meaning the vertices in \(\{w_2, v_2, v_3\}\) form a \(3\)-cycle in \(\Gamma - \{v_1, w_1\}\).
+    So suppose \(n > 3\) and relabel the vertices in \(\{v_i, w_2, v_j, v_k\}\) such that 
+    \(v_i = u_1, w_2 = u_2, v_j = u_3, v_k = u_4\) (see Figure \ref{fig:lem:is_surface_2_4}).
     \begin{figure}[h!]
         \centering
         \begin{tikzpicture}
@@ -442,10 +448,10 @@ for it to be homeomorphic to a \(2\)-manifold without boundary can be generalize
     and \(u_i\) is connected to \(u_{i-1}\) by the edge \(e_{i-1}\) for all \(i > 1\).
     We claim this path must eventually return to \(u_1\) forming a cycle.
 
-    Let \(m\) be the largest integer such that \(u_m \not \in \{u_1, \cdots, u_{m-1}\}\).
-    The edge \(e_m\) must connect \(u_m\) to some vertex \(u_k \in \{u_1, \cdots, u_{m-1}\}\)
-    otherwise we contradict that \(m\) is maximal.
-    Suppose \(k > 1\), then \(e_{k-1}\), \(e_k\), and \(e_m\) are three distinct
+    Let \(r\) be the largest integer such that \(u_r \not \in \{u_1, \cdots, u_{r-1}\}\).
+    The edge \(e_r\) must connect \(u_r\) to some vertex \(u_k \in \{u_1, \cdots, u_{r-1}\}\)
+    otherwise we contradict that \(r\) is maximal.
+    Suppose \(k > 1\), then \(e_{k-1}\), \(e_k\), and \(e_r\) are three distinct
     edges sharing \(u_k\) as a common endpoint (see Figure \ref{fig:lem:is_surface_2_6}).
 
     \begin{figure}[h!]
@@ -454,69 +460,84 @@ for it to be homeomorphic to a \(2\)-manifold without boundary can be generalize
             \node (ukm1) at (0,0) {\(u_{k-1}\)};
             \node (uk) at (2,0) {\(u_k\)};
             \node (ukp1) at (4,0) {\(u_{k+1}\)};
-            \node (um) at (2,2) {\(u_m\)};
+            \node (um) at (2,2) {\(u_r\)};
 
             \draw (ukm1) -- (uk) node[midway, below] {\(e_{k-1}\)};
             \draw (uk) -- (ukp1) node[midway, below] {\(e_k\)};
-            \draw (uk) -- (um) node[midway, left] {\(e_m\)};
+            \draw (uk) -- (um) node[midway, left] {\(e_r\)};
         \end{tikzpicture}
         \caption{Three edges sharing \(u_k\) as a common endpoint.}
         \label{fig:lem:is_surface_2_6}
     \end{figure}
 
-    Place particles at each vertex in the set \(\{v_1, v_2, \cdots, v_n\}\setminus\{u_k\}\).
+    Place particles at each vertex in the set \(\{w_2, v_1, v_2, \cdots, v_n\}\setminus\{u_k\}\).
     As the particle at \(v_1\) travels to \(w_1\),
-    each particle at \(u_{k-1}\), \(u_{k+1}\), and \(u_m\) can travel to \(u_k\).
+    each particle at \(u_{k-1}\), \(u_{k+1}\), and \(u_r\) can travel to \(u_k\).
     This results in a book in the configuration space whose spine corresponds to the movement of the particle at \(v_1\) to \(w_1\).
-    Therefore \(k = 1\), meaning \(\{u_1, u_2, \cdots, u_m\}\) forms an \(m\)-cycle for some \(4 \le m \le n\)
+    Therefore \(k = 1\), meaning \(\{u_1, u_2, \cdots, u_r\}\) forms an \(r\)-cycle for some \(4 \le r \le n\)
     containing one vertex \(w_2\) not in \(\{v_2, \cdots, v_n\}\).
 \end{proof}
 
 \begin{lem}
 \label{lem:is_surface_C}
-Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\) and suppose \(n \ge 3\).
-If \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) contains a cycle \(C\),
-then \(C\) is an \(n\)-cycle and \(\Gamma - \{v_1, w_1\} = C\). 
+Suppose \(\DConf_n(\Gamma)\) is a surface without boundary for some \(n \ge 3\)
+and let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\).
+If \(\Gamma - \{v_1, w_1\}\) contains a cycle \(C\), then \(C\) is an \(n\)-cycle and \(\Gamma - \{v_1, w_1\} = C\).
 \end{lem}
 \begin{proof}
-Suppose \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) has a cycle \(C\).
-Since \(\Gamma\) has at least \(n + 2\) vertices and is simple, 
-\(\Gamma - \{v_1, w_1\}\) has at least \(n\) vertices and \(C\) is at least a \(3\)-cycle.
-Suppose that \(C\) has \(m > n\) vertices and let \(v_2, \cdots, v_n\) be \(n-1\) vertices in a path on \(C\).
-Let \(w_2\) and \(w_3\) be the vertices adjacent to \(v_2\) and \(v_n\).
-Since \(m \ge n + 1\), we have that \(w_2 \neq w_3\) and \(v_2 \neq v_n\).
-The edges \(v_2 w_2\) and \(v_n w_3\) contradict the result of Lemma \ref{lem:is_surface_1}.
-So, \(C\) has at most \(n\) vertices.
+Suppose \(\Gamma - \{v_1, w_1\}\) contains a cycle \(C\).
+Suppose that \(C\) has \(r > n\) vertices and let \(w_2, v_2, \cdots, v_n, w_3\) be \(n+1\) distinct vertices in a path on \(C\).
+Then, the edges \(v_2 w_2\) and \(v_n w_3\) contradict the result of 
+Lemma \ref{lem:is_surface_1} applied to \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\).
+Therefore, \(C\) must have at most \(n\) vertices.
 
-Suppose instead that \(C\) has \(m < n\) vertices, then \(n > 3\) and there exists at least \(n - m\) vertices in \(\Gamma - \{v_1, w_1\}\) but not on \(C\).
-Let \(v_2, \cdots, v_n\) be \(n - 1\) vertices in \(\Gamma - \{v_1, w_1\}\) such that \(v_2, \cdots, v_{m + 1}\) are on \(C\) and
-\(v_{m + 2}, \cdots, v_n\) are not. i.e. fill up the cycle with the first \(m\) vertices.
-Applying Lemma \ref{lem:is_surface_1} to \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\), we obtain two edges \(e_1 = v_i w_2\) and \(e_2 = v_j w_3\).
-Suppose \(v_i\) or \(v_j\) are on \(C\). Without a loss of generality assume \(v_i\) is on \(C\) and
-put particles on the vertices in \(\{w_2, v_1, \cdots, v_n\}\setminus\{v_i\}\).
-As the particle at \(v_1\) travels to \(w_1\), there are three particles that can move to \(v_i\): the particle at \(w_2\) and the two
-particles at the vertices on \(C\) which are adjacent to \(v_i\).
+Suppose instead that \(C\) has \(r < n\) vertices.
+First note that since \(C\) must have at least \(3\) vertices to be a cycle, \(n\) must be strictly greater than \(3\).
+By Lemma \ref{lem:is_surface_0}, there must exist at least \(n - r\) vertices in \(\Gamma - \{v_1, w_1\} - C\).
+Let \(v_2, \cdots, v_n\) be \(n - 1\) vertices in \(\Gamma - \{v_1, w_1\}\) such that 
+\(\{v_2, \cdots, v_{r + 1}\}\) are the vertices of \(C\) and \(\{v_{r + 2}, \cdots, v_n\}\) are not on \(C\).
+Applying Lemma \ref{lem:is_surface_1} to \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\), 
+we obtain two edges \(e_1 = v_i w_2\) and \(e_2 = v_j w_3\) where \(w_2, w_3 \not \in \{w_1, v_1, v_2, \cdots, v_n\}\).
+
+First, suppose at least one of \(v_i\) or \(v_j\) is on \(C\). 
+Without a loss of generality assume \(v_i\) is on \(C\). 
+Now put particles on the vertices in \(\{w_2, v_1, \cdots, v_n\}\setminus\{v_i\}\).
+As the particle at \(v_1\) travels to \(w_1\), 
+there are three particles that can move to \(v_i\): 
+the particle at \(w_2\) and the two particles at the vertices on \(C\) which are adjacent to \(v_i\).
 These particles movements result in a book in the configuration space whose spine corresponds to the movement of the particle at \(v_1\) to \(w_1\).
-Since a surface cannot contain a book, \(v_i\) and \(v_j\) cannot be on \(C\).
-So, assume that \(v_i\) and \(v_j\) are both not on \(C\).
-Since \(w_2\) and \(w_3\) must not belong to the set \(\{v_2, \cdots, v_n\}\) and \(\{v_1, \cdots, v_m\}\) are on \(C\),
-\(w_2\) and \(w_3\) are not on \(C\).
-Since \(n > 3\), Lemma \ref{lem:is_surface_2} guarantees that \(e_1\) and \(e_2\) belong to a cycle \(C'\) that has one vertex \(u\) not in
-the set \(\{w_2, v_2, \cdots, v_n\}\).
+Therefore neither \(v_i\) nor \(v_j\) can be on \(C\).
 
-We claim that there cannot be any edge \(e = u_1 u_2\) such that \(u_1\) is on \(\Gamma - \{v_1, w_1\} - C'\) and \(u_2\) is on \(C'\).
+Suppose instead that neither \(v_i\) nor \(v_j\) are on \(C\).
+Note that \(w_2\) and \(w_3\) cannot be on \(C\) either since 
+\(\{v_2, \cdots, v_{m+1}\}\) are the vertices of \(C\),
+and \(w_2\) and \(w_3\) do not belong to \(\{w_1, v_1, v_2, \cdots, v_n\}\).
+Since \(n > 3\), Lemma \ref{lem:is_surface_2} guarantees that \(e_1\) and \(e_2\) belong to a cycle \(D\)
+with at least one vertex \(u\) in \(\Gamma - \{w_1, w_2, v_1, \cdots, v_n\}\).
+
+We claim that there cannot be any edge \(e = u_1 u_2\) such that \(u_1\) is on \(\Gamma - \{v_1, w_1\} - D\) and \(u_2\) is on \(D\).
 To see this suppose there did exist such an edge \(e\).
-Now put \(n\) particles on \(\Gamma\) so that one particle is on \(v_1\), \(1\) particle is on \(u_1\), \(2\) particles are on \(C' - u_2\), 
-and \(n - 3\) particles are on \(\Gamma - \{v_1, w_1\} - C' - u_1\).
-As the particle at \(v_1\) moves to \(w_1\), the particle at \(u_1\) can move to \(u_2\) or the one of the two particles on \(C'\) can move to \(u_2\).
+Now put \(n\) particles on \(\Gamma\) so that 
+one particle is on \(v_1\), one particle is on \(u_1\), two particles are on \(D - u_2\), 
+and \(n - 3\) particles are on \(\Gamma - \{v_1, w_1\} - D - u_1\).
+As the particle at \(v_1\) moves to \(w_1\), the particle at \(u_1\) can move to \(u_2\) or 
+the one of the two particles on \(D\) at the vertices adjacent to \(u_2\) can move to \(u_2\).
 These particles movements result in a book in the configuration space whose spine corresponds to the movement of the particle at \(v_1\) to \(w_1\).
-Since \(\Gamma\) is connected but \(C'\) is not connected to any vertex in \(\Gamma - \{v_1, w_1\} - C'\),
-there must exist at least one edge connecting an endpoint of \(v_1 w_1\) to \(C'\).
-Suppose \(e = u_1 u_2\) is such an edge where \(u_1\) is on \(v_1 w_1\) and \(u_2\) is on \(C'\).
-Put \(n\) particles on \(\Gamma\) so that \(2\) particles are on each endpoint of \(v_1 w_1\), \(2\) particles are on \(C' - u_2\), \(m - 1\) particles are on \(C\),
-and \(n - m - 3\) particles are on \(\Gamma - \{v_1, w_1\} - C'\).
-Since \(C\) is an \(m\)-cycle and there are only \(m - 1\) particles on it, there exists one particle on \(C\) that can move to another vertex on \(C\).
-As this particle moves, the particle at \(u_1\) or one of the two on \(C' - u_2\) can move to \(u_2\).
+
+% TODO we can reach a contradiction another way by
+% showing that \Gamma - \{v_1, w_1\} = C + D.
+% Then, put all n particles on C and D.
+% Some movement must be possible so we must then have edges sticking out of the cycles onto v_1 w_1
+% But no edge works.
+Since \(\Gamma\) is connected but \(D\) is not connected to any vertex in \(\Gamma - \{v_1, w_1\} - D\),
+there must exist at least one edge connecting an endpoint of \(v_1 w_1\) to \(D\).
+Suppose \(e = u_1 u_2\) is such an edge where \(u_1\) is on \(v_1 w_1\) and \(u_2\) is on \(D\).
+Put \(n\) particles on \(\Gamma\) so that \(2\) particles are on each endpoint of \(v_1 w_1\), 
+\(2\) particles are on \(D - u_2\), 
+\(r - 1\) particles are on \(C\), and \(n - r - 3\) particles are on \(\Gamma - \{v_1, w_1\} - D\).
+Since \(C\) is an \(r\)-cycle and there are only \(r - 1\) particles on it, 
+there exists one particle on \(C\) that can move to another vertex on \(C\).
+As this particle moves, the particle at \(u_1\) or one of the two on \(D - u_2\) can move to \(u_2\).
 These particles movements again result in a book whose spine corresponds to the movement of the particle on \(C\).
 Since surfaces do not contain books, \(C\) must be an \(n\)-cycle.
 
@@ -530,233 +551,33 @@ space. Hence \(\Gamma - \{v_1, w_1\}\) must be an \(n\)-cycle.
 \begin{lem}
 \label{lem:is_surface_Y}
 Let \(v_1\) and \(w_1\) be adjacent vertices in \(\Gamma\) and suppose \(n \ge 3\).
-If \(\DConf_n(\Gamma)\) is a surface and \(\Gamma - \{v_1, w_1\}\) does not contain a cycle, then \(\Gamma - \{v_1, w_1\}\) is the \(Y\)-graph.
+If \(\DConf_n(\Gamma)\) is a \(2\)-manifold without boundary and \(\Gamma - \{v_1, w_1\}\) does not contain a cycle, then \(\Gamma - \{v_1, w_1\}\) is the \(Y\)-graph.
 \end{lem}
 \begin{proof}
 Suppose that \(\Gamma - \{v_1, w_1\}\) does not contain a cycle.
-Since \(\Gamma - \{v_1, w_1\}\) contains at least \(n - 1\) vertices: \(v_2, \cdots, v_n\), 
-we can apply Lemma \ref{lem:is_surface_1} to \(v_2, \cdots, v_n\) in \(\Gamma - \{v_1, w_1\}\).
-Doing this, we obtain two edges \(e_1 = v_i w_2\) and \(e_2 = v_j w_3\).
+Lemma \ref{lem:is_surface_0} guarantees that \(\Gamma - \{v_1, w_1\}\) contains
+at least \(n\) vertices.
+Let \(\{v_2, \cdots, v_n\}\) be \(n-1\) vertices in \(\Gamma - \{v_1, w_1\}\)
+and apply Lemma \ref{lem:is_surface_1} to \(\{v_2, \cdots, v_n\}\) in \(\Gamma - \{v_1, w_1\}\).
+We then obtain two edges we obtain two edges \(e_1 = v_i w_2\) and \(e_2 = v_j w_3\).
 Since \(\Gamma - \{v_1, w_1\}\) does not contain a cycle, Lemma \ref{lem:is_surface_2} guarantees that
-\(e_1\) and \(e_2\) belong to a \(Y\)-graph \(H\).
+\(e_1\) and \(e_2\) belong to some \(Y\)-graph \(Y\) and \(n = 3\).
 
-It remains to show that there can not exist any other vertices in \(\Gamma - \{v_1, w_1\}\) other than those in \(H\).
-Suppose there exists some vertex \(v_k\) in \(\Gamma - \{v_1, w_1\} - H\) and let \(u\) be some vertex in \(H\) but not in \(\{v_2, \cdots, v_n\}\).
-Let \(x\) be the vertex in \(H\) that is incident to \(3\) edges.
-Now, put 1 particle at \(v_1\), \(3\) particles at vertices in \(H \setminus \{x\}\),
-and \(n-4\) particles at vertices in the set \(\{v_2, \cdots, v_n\}\setminus H\).
-As the particle at \(v_1\) moves to \(w_1\),
-three particles in \(H\) can move to \(x\).
-These particles movements result in a book in the configuration space whose spine
-corresponds to the movement of the particle at \(v_1\) to \(w_1\).
-Therefore, \(\Gamma - \{v_1, w_1\} = H\).
-\end{proof}
+First we show that there can not exist any other vertices in \(\Gamma - \{v_1, w_1\}\) other than those in \(Y\).
+Suppose there exists some vertex \(u\) in \(\Gamma - \{v_1, w_1\} - Y\). 
+Let \(x\) be the center vertex in \(Y\) that is incident to \(3\) edges.
+Now, put 1 particle at \(v_1\), \(1\) particle at \(x\) and \(1\) particle at \(u\).
+As the particle at \(v_1\) moves to \(w_1\), the particle at \(x\) can move
+to 3 distinct vertices while the particle at \(u\) remains fixed.
+These particles' movements result in a book in the configuration space
+whose spine corresponds the movement of the particle at \(v_1\) to \(w_1\).
+So, every vertex in \(\Gamma - \{v_1, w_1\}\) must belong to \(Y\).
 
-% t ~ at top of page, h! ~ try to put it here
-
-\begin{figure}[h!]
-    \centering
-\begin{tikzpicture}
-    \node (v1) at (0, 2) {\(v_1\)};
-    \node (v2) at (0, 0) {\(v_2\)};
-    \draw (v1) -- (v2);
-    \node (u1) at (2, 2) {\(u_1\)};
-    \node (u2) at (4, 2) {\(u_2\)};
-    \node (u3) at (3, 1) {\(u_3\)};
-    \node (u4) at (3, 0) {\(u_4\)};
-    \draw (u1) -- (u3);
-    \draw (u2) -- (u3);
-    \draw (u4) -- (u3);
-    \draw (v1) -- (u3);
-    \draw (v2) -- (u1);
-    \draw (v2) -- (u2);
-    \draw (v2) -- (u4);
-\end{tikzpicture}
-\caption{\(\Theta_4\)}
-\label{fig:Theta_4}
-\end{figure}
-
-\begin{thm}
-    If \(\DConf_3(\Gamma)\) is a surface then \(\Gamma\) is either \(K_5\) or the \(\Theta_4\) graph.
-\end{thm}
-\begin{proof}
-    Let \(v_1\) and \(v_2\) be adjacent vertices in \(\Gamma\).
-    First, suppose \(\Gamma - \{v_1, v_2\}\) is a \(3\)-cycle, then \(\Gamma\) has \(5\) vertices.
-    If \(\Gamma\) is not \(K_5\) then there are two vertices: \(v_i\), and \(u_1\) in \(\Gamma - \{v_1, v_2\}\)
-    such that they are not connected by an edge in \(\Gamma\).
-    Let \(u_2\) and \(u_3\) be the other two vertices in \(\Gamma - \{v_1, v_2\}\).
-    Notice that \(\Gamma - \{u_2, u_3\}\) cannot be either a \(3\)-cycle nor a \(Y\)-graph.
-
-    Suppose instead that \(\Gamma - v_1 v_2\) is a \(Y\)-graph, then \(\Gamma\) has \(6\) vertices.
-    Since \(\Gamma\) is connected there exists at least one edge in \(\Gamma\) connecting \(v_1 v_2\) to \(\Gamma - v_1 v_2\).
-    We then have one of the following in Figure \ref{fig:edgeygraphconnections}.
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0, 2) {\(v_1\)};
-            \node (v2) at (0, 0) {\(v_2\)};
-            \draw (v1) -- (v2);
-            \node (u1) at (2, 2) {\(u_1\)};
-            \node (u2) at (4, 2) {\(u_2\)};
-            \node (u3) at (3, 1) {\(u_3\)};
-            \node (u4) at (3, 0) {\(u_4\)};
-            \draw (u1) -- (u3);
-            \draw (u2) -- (u3);
-            \draw (u4) -- (u3);
-            \draw (v1) -- (u1);
-        \end{tikzpicture}
-        \quad
-        \begin{tikzpicture}
-            \node (v1) at (0, 2) {\(v_1\)};
-            \node (v2) at (0, 0) {\(v_2\)};
-            \draw (v1) -- (v2);
-            \node (u1) at (2, 2) {\(u_1\)};
-            \node (u2) at (4, 2) {\(u_2\)};
-            \node (u3) at (3, 1) {\(u_3\)};
-            \node (u4) at (3, 0) {\(u_4\)};
-            \draw (u1) -- (u3);
-            \draw (u2) -- (u3);
-            \draw (u4) -- (u3);
-            \draw (v1) -- (u3);
-        \end{tikzpicture}
-        \caption{Possible ways to connect an edge to a \(Y\)-graph}
-        \label{fig:edgeygraphconnections}
-    \end{figure}
-
-    Suppose that there is an edge in \(\Gamma\) between \(v_1\) and \(u_1\).
-    Applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{u_3, u_4\}\), we see there must be an edge
-    connecting \(v_1\) and \(u_2\) in \(\Gamma\).
-    Applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{u_1, u_3\}\), there must be an edge between
-    \(v_1\) and \(u_4\) in \(Gamma\).
-    Finally, applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{v_1, u_1\}\), there must must be
-    an edge between \(v_2\) and \(u_2\).
-    So in this case, \(\Gamma\) must have \(\Theta_4\) as a subgraph.
-
-    Suppose instead that there is an edge in \(\Gamma\) between \(v_1\) and \(u_3\).
-    Applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{u_3, u_4\}\),
-    we have two subcases.
-    \begin{enumerate}
-        \item There are edges \(v_1 u_1\) and \(v_1 u_2\) in \(\Gamma\).
-        \item There are edges \(v_2 u_1\) and \(v_2 u_2\) in \(\Gamma\).
-    \end{enumerate}
-    In the second subcase if we apply Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{u_1, u_3\}\),
-    we see there must be an edge between \(v_1\) and \(u_4\) in \(\Gamma\).
-    So, in this subcase, \(\Gamma\) must have \(\Theta_4\) as a subgraph.
-    Suppose the first subcase is true, then applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{u_2, u_3\}\),
-    it follows that there is an edge between \(v_1\) and \(u_4\) in \(\Gamma\).
-    Applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{v_1, u_3\}\),
-    we have two possibilities.
-    \begin{enumerate}
-        \item \(v_2\) is the center of the \(Y\)-graph \(\Gamma - \{v_1, u_3\}\).
-        \item \(v_2\) is not the center of the \(Y\)-graph \(\Gamma - \{v_1, u_3\}\).
-    \end{enumerate}
-    If \(v_2\) is the center, then there must be edges \(v_2 u_1\), \(v_2, u_2\), \(v_2 u_4\) in \(\Gamma\).
-    Putting particles at the vertices \(v_2\), \(u_2\), and \(u_4\), each of these particles can move
-    simultaneously to \(u_1\), \(v_1\), and \(u_3\) respectively.
-    This results in \((v_2, u_2, u_4)\) forming the corner of a \(3\)-cube in the configuration space
-    contradicting that \(\DConf_3(\Gamma)\) is a surface.
-
-    So, suppose that \(v_2\) is not the center of the \(Y\)-graph. Let \(u_i\) be the center of the \(Y\)-graph.
-    Then, there must be an edge connecting \(v_2\) to \(u_i\).
-    Putting particles at the vertices \(v_2\), \(u_j\), and \(u_k\) where \(j \neq i\) and \(k \neq i\),
-    each of these particles can move simultaneously to \(u_i\), \(v_1\), and \(u_3\) respectively.
-    Similarly this results in \((v_2, u_2, u_4)\) forming the corner of a \(3\)-cube in the configuration space.
-    Therefore, \(\Gamma\) must have \(\Theta_4\) as a subgraph.
-
-    It remains to show that \(\Gamma\) must equal \(\Theta_4\). Since \(\Gamma\) has \(\Theta_4\) as a subgraph
-    if \(\Gamma\) is not \(\Theta_4\) this is equivalent to assuming there is at least one additional edge in \(\Theta_4\).
-    So, if we just look at adding in one additional edge we have two possibilities (up to isomorphism).
-    \begin{enumerate}
-        \item There is an edge between \(v_2\) and \(u_3\).
-        \item There is an edge between \(u_1\) and \(u_2\).
-    \end{enumerate}
-    In the second case, since \(\Gamma - \{u_1, u_2\}\) contains a \(4\)-cycle, Lemma \ref{lem:is_surface_Y} immediately fails.
-    So suppose that there is an edge between \(v_2\) and \(u_4\).
-    Applying Lemma \ref{lem:is_surface_Y} to \(\Gamma - \{v_2, u_4\}\), we see there must be additional edges to make \(\Gamma - \{v_2, u_3\}\)
-    a \(Y\)-graph.
-    There are two possibilities.
-    \begin{enumerate}
-        \item \(v_1\) is the center of the \(Y\)-graph \(\Gamma - \{v_2, u_3\}\).
-        \item \(u_i\) is the center of the \(Y\)-graph \(\Gamma - \{v_2, u_3\}\) for some \(i \neq 3\).
-    \end{enumerate}
-    In either case there must be some edge connecting \(v_1\) to \(u_j\) for some \(j \neq 3\).
-    Without a loss of generality suppose \(j = 1\).
-    Then, immediately one can see that Lemma \ref{lem:is_surface_Y} fails for \(\Gamma - \{u_3, u_4\}\)
-    as what remains contains a \(3\)-cycle.
-    Therefore \(\Gamma\) must be \(\Theta_4\).
-\end{proof}
-
-\begin{thm}
-    If \(\DConf_n(\Gamma)\) is a surface and \(n > 3\), then \(n = 4\) and \(\Gamma = K_{3,3}\).
-\end{thm}
-\begin{proof}
-    Let \(v_1\) and \(v_2\) be adjacent vertices in \(\Gamma\).
-    Since \(n > 3\), Lemma \ref{lem:is_surface_2} guarantees that \(\Gamma - \{v_1, v_2\}\) cannot be a \(Y\)-graph.
-    So, \(\Gamma - \{v_1, v_2\}\) must be an \(n\)-cycle.
-    Let \(u_1, u_2, \cdots, u_n\) be the vertices on the \(n\) cycle.
-    Since \(\Gamma\) is connected there must be some edge connecting either \(v_1\) or \(v_2\) to some \(u_i\).
-    Without a loss of generality suppose that \(v_1\) is connected to \(u_1\).
-    If \(n > 4\) apply Lemma \ref{lem:is_surface_C} to \(\Gamma - \{v_1, u_1\}\) and see that
-    \(u_2\) and \(u_n\) must connect to \(v_2\) in \(\Gamma\).
-    Now put particles at each vertex in \(\{v_1, u_1, u_2, \cdots, u_n\}\setminus\{u_4\}\).
-    As the particle at \(u_3\) moves to \(u_4\), any one of the particles at \(v_1\), \(u_2\), or \(u_n\) 
-    can move to \(v_2\). These particles movements correspond to a book in the configuration space
-    whose spine corresponds to the movement of the particle at \(u_3\) to \(u_4\).
-    Therefore \(n\) must equal \(4\).
-    See Figure \ref{fig:edge4cycle} for the current situation.
-    Applying Lemma \ref{lem:is_surface_C} to \(\Gamma - \{v_1, u_1\}\), there must be an edges
-    \(v_2 u_2\) and \(v_2 u_4\) in \(\Gamma\).
-    Applying Lemma \ref{lem:is_surface_C} to \(\Gamma - \{v_2, u_2\}\), there must be an edge connecting \(v_1\)
-    and \(u_2\).
-    Therefore \(\Gamma\) must have \(K_{3,3}\) as a subgraph.
-
-    Suppose that \(\Gamma\) was not \(K_{3,3}\).
-    Then there is at least one additional edge.
-    Without a loss of generality suppose this edge is \(u_2, u_4\).
-    Then, \(\Gamma - \{v_1, u_3\}\) contains a \(3\)-cycle contradicting Lemma \ref{lem:is_surface_C}.
-    Hence \(\Gamma\) must be \(K_{3,3}\).
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0, 2) {\(v_1\)};
-            \node (v2) at (0, 0) {\(v_2\)};
-            \node (u1) at (3, 2) {\(u_1\)};
-            \node (u2) at (2, 1) {\(u_2\)};
-            \node (u4) at (4, 1) {\(u_4\)};
-            \node (u3) at (3, 0) {\(u_3\)};
-            \draw (v1) -- (v2);
-            \draw (u1) -- (u2);
-            \draw (u2) -- (u3);
-            \draw (u3) -- (u4);
-            \draw (u4) -- (u1);
-
-            \draw (v1) -- (u1);
-        \end{tikzpicture}
-        \caption{Edge connected to \(4\)-cycle}
-        \label{fig:edge4cycle}
-    \end{figure}
-
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0, 2) {\(v_1\)};
-            \node (v2) at (0, 0) {\(v_2\)};
-            \node (u1) at (3, 2) {\(u_1\)};
-            \node (u2) at (2, 1) {\(u_2\)};
-            \node (u4) at (4, 1) {\(u_4\)};
-            \node (u3) at (3, 0) {\(u_3\)};
-            \draw (v1) -- (v2);
-            \draw (u1) -- (u2);
-            \draw (u2) -- (u3);
-            \draw (u3) -- (u4);
-            \draw (u4) -- (u1);
-            \draw (v1) -- (u1);
-            \draw (v1) -- (u3);
-            \draw (v2) -- (u2);
-            \draw (v2) -- (u4);
-        \end{tikzpicture}
-        \label{fig:K3,3}
-        \caption{\(K_{3,3}\)}
-    \end{figure}
-
+Next we show there cannot be any other edges between vertices in \(\Gamma - \{v_1, w_1\}\)
+other than those in \(Y\). Again, let \(x\) be the center vertex in \(Y\).
+Since \(x\) is connected to every vertex in \(\Gamma - \{v_1, w_1\}\), if 
+there are any additional edges, they must be between vertices other than \(x\).
+So, suppose there exists some edge between two vertices \(u_1\) and \(u_2\) in \(\Gamma - \{x, v_1, w_1\}\).
+Immediately we reach a contradiction as the vertices in \(\{u_1, x, u_2\}\) now form a \(3\)-cycle.
+Therefore, \(\Gamma - \{v_1, w_1\} = Y\).
 \end{proof}
