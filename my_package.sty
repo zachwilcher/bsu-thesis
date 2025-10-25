@@ -1,0 +1,27 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{my_package}[2025/10/25 v0.1 Thesis package]
+
+% Packages
+
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{url}
+\RequirePackage{array}
+\RequirePackage[inline]{enumitem}
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+% Custom commands
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\Conf}{\mathrm{Conf}}
+\newcommand{\DConf}{\mathrm{Conf}^{\,\square}}
+\newcommand{\UConf}{\mathrm{UConf}}
+\newcommand{\DUConf}{\mathrm{UConf}^{\,\square}}
+\newcommand{\Bd}{\mathrm{Bd}}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\Lk}{\mathrm{Lk}}
+\newcommand{\DLk}{\mathrm{Lk}_{\downarrow}}
+\newcommand{\cone}{\mathrm{cone}}

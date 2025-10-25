@@ -24,14 +24,13 @@
 \usepackage{epsfig}
 \usepackage{epstopdf}
 
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{url}
-\usepackage{array}
+% Make references clickable
+\usepackage{hyperref}
 
-\usepackage[inline]{enumitem}
+% Custom Package with commands and common packages
+\usepackage{my_package}
 
+% Theorem environments
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
@@ -49,23 +48,6 @@
 \newtheorem*{rem}{Remark}
 \newtheorem*{conv}{Convention}
 
-\usepackage{tikz}
-\usetikzlibrary{calc}
-
-\usepackage{hyperref}
-
-% Custom commands
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\Conf}{\mathrm{Conf}}
-\newcommand{\DConf}{\mathrm{Conf}^{\,\square}}
-\newcommand{\UConf}{\mathrm{UConf}}
-\newcommand{\DUConf}{\mathrm{UConf}^{\,\square}}
-\newcommand{\Bd}{\mathrm{Bd}}
-\newcommand{\closure}[1]{\overline{#1}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\Lk}{\mathrm{Lk}}
-\newcommand{\DLk}{\mathrm{Lk}_{\downarrow}}
-\newcommand{\cone}{\mathrm{cone}}
 
 \begin{document}
 
