@@ -1,0 +1,55 @@
+% Beamer presentation template
+\documentclass{beamer}
+
+% Theme and appearance
+\usetheme{Madrid}
+
+\definecolor{BSUred}{RGB}{186,30,47}
+% Make frame titles contrast with the (colored) title bar by using white text on BSU red
+% This ensures the title is readable even if the slide background/palette uses BSUred.
+\setbeamercolor{frametitle}{fg=white,bg=BSUred}
+\setbeamercolor{structure}{fg=BSUred}
+\setbeamercolor*{palette secondary}{use=structure,fg=white, bg=BSUred}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white, bg=black}
+
+% Math and graphics
+\usepackage{../my_package}
+
+% Bibliography: biblatex + biber (adjust path to your .bib)
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{../bibliography.bib} % path relative to this file
+
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+
+% Metadata
+\title[An Intro to Graph Configuration Spaces]{An Introduction to Graph Configuration Spaces}
+\author{Zach Wilcher}
+\institute{Ball State University}
+\date{8-Nov-2025}
+
+
+\begin{document}
+\input{slides/title.tex}
+\input{slides/graphs.tex}
+\input{slides/definitions.tex}
+\input{slides/one-edge.tex}
+\input{slides/2-edges.tex}
+\input{slides/book.tex}
+\input{slides/dconf.tex}
+\input{slides/one-edge2.tex}
+\input{slides/n-cubes.tex}
+\input{slides/k5.tex}
+\input{slides/surfaces.tex}
+\input{slides/results.tex}
+\input{slides/questions.tex}
+\input{slides/applications.tex}
+
+\begin{frame}[allowframebreaks]{References}
+  \printbibliography
+\end{frame}
+
+\end{document}

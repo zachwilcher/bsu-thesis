@@ -22,70 +22,20 @@ then \(\Gamma\) has at least \(n+m\) vertices and \(n \ge m\).
 
 Suppose \(\Conf_n(\Gamma)\) is an \(m\)-manifold without boundary and \(n \ge 3\).
 By Lemma \ref{lem:manifolds_0}, \(\Gamma\) must have at least \(n + m \ge 2m\) vertices.
-Let \(\{v_i w_i\}_{i=1}^{m-1}\) be a collection of \(m-1\) disjoint edges in \(\Gamma\).
+Let \(\{v_{\alpha} w_{\alpha}\}_{\alpha=1}^{m-1}\) be a collection of \(m-1\) disjoint edges in \(\Gamma\).
+We write \(\Gamma - \{v_\alpha, w_\alpha\}_{\alpha=1}^{m-1}\) to mean the subgraph of \(\Gamma\)
+obtained after removing the vertices \(\{v_\alpha, w_\alpha\}_{\alpha=1}^{m-1}\) from \(\Gamma\).
+Notice that \(\Gamma - \{v_\alpha, w_\alpha\}_{\alpha=1}^{m-1}\) has at least \(n + m - 2(m-1) = n - m + 2\) vertices.
 
-\begin{lem}
-    \label{lem:manifolds_1}
-    For any collection of \(n - m + 1\) vertices \(\{v_i\}_{i=m}^n\)
-    in \(\Gamma - \{v_i w_i\}_{i=1}^{m-1}\), there exists exactly two edges
-    \(e_1 = v_j u_1\) and \(e_2 = v_k u_2\) such that
-    \begin{enumerate}[label=(\roman*)]
-    \item \(m \leq j, k \leq n\)
-    \item \(u_1, u_2 \not \in \{v_i\}_{i=1}^n\)
-    \item Exactly one of the following hold in Figure \ref{fig:lem:manifolds_1}
-    \end{enumerate}
-\begin{figure}[h!]
-    \centering
-        \begin{enumerate*}[label=(\arabic*)]
-            \item \label{fig:lem:manifolds_1_1}
-            \begin{minipage}{.3\textwidth}
-                \centering
-                \(v_i = v_j\) \textit{and} \(u_1 \neq u_2\) \\
-                \vspace{1em}
-                \begin{tikzpicture}
-                \node (vi) at (3, 2) {\(v_i\)};
-                \node (w2) at (2, 0) {\(u_1\)};
-                \node (w3) at (4, 0) {\(u_2\)};
-                \draw (vi) -- (w2) node[midway, left] {\(e_1\)};
-                \draw (vi) -- (w3) node[midway, right] {\(e_2\)};
-                \end{tikzpicture} 
-            \end{minipage}
-            \hspace{3em}
 
-            \item \label{fig:lem:is_surface_1_1:2}
-            \begin{minipage}{.3\textwidth}
-                \centering
-                \(u_1 = u_2\) \textit{and} \(v_i \neq v_j\) \\
-                \vspace{1em}
-                \begin{tikzpicture}
-                    \node (vi) at (2, 2) {\(v_i\)};
-                    \node (vj) at (4, 2) {\(v_j\)};
-                    \node (w2) at (3, 0) {\(u_1\)};
+\input{chapters/manifolds/lemma1.tex}
 
-                    \draw (vi) -- (w2) node[midway, left] {\(e_1\)};
-                    \draw (vj) -- (w2) node[midway, right] {\(e_2\)};
-                \end{tikzpicture}
-            \end{minipage}
-        \end{enumerate*}
-    \caption{Lemma \ref{lem:manifolds_1} possibilities.}
-    \label{fig:lem:manifolds_1}
-\end{figure}
-\end{lem}
+\begin{rem}
+If \(\Gamma - \{v_\alpha, w_\alpha\}_{\alpha=1}^{m-1}\) has exactly \(n - m + 2\) vertices,
+then only case \ref{fig:lem:manifolds_1_2} in can occur.
+\end{rem}
 
-\begin{lem}
-    \label{lem:manifolds_2}
-Let \(\{v_i w_i\}_{i=m}^{n}\) be a collection of \(n-m+1\) vertices in 
-\(\Gamma - \{v_i w_i\}_{i=1}^{m-1}\).
-The edges \(e_1\) and \(e_2\) guaranteed from applying Lemma \ref{lem:manifolds_1} 
-to \(\{v_i\}_{i=m}^{n}\) in the graph \(\Gamma - \{v_i w_i\}_{i=1}^{m-1}\) satisfy exactly one of the following:
-\begin{enumerate}[label=(\roman*)]
-        \item \(n = m+1\) and these edges belong to a \(Y\)-graph in \(\Gamma - \{v_i, w_i\}_{i=1}^{m-1}\) with two vertices not in \(\{v_i\}_{i=1}^n\).
-        \item \(e_1\) and \(e_2\) belong to a \(3\)-cycle in \(\Gamma - \{v_i, w_i\}_{i=1}^{m-1}\) with exactly two vertices not in \(\{v_i\}_{i=1}^n\).
-        \item \(e_1\) and \(e_2\) belong to an \(r\)-cycle in \(\Gamma - \{v_i, w_i\}_{i=1}^{m-1}\) with exactly one vertex not in \(\{v_i\}_{i=1}^n\) and \(3 \le r \le (n-m)+2\).
-\end{enumerate}
-
-\end{lem}
-
+\input{chapters/manifolds/longlemma.tex}
 
 \begin{lem}
 If \(\Gamma - (m-1)K_2\) contains a cycle \(C\), then \(C\) is at most a \(4\)-cycle.

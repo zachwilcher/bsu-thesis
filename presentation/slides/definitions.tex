@@ -1,3 +1,11 @@
-\begin{frame}{Definitions}
-    Given a graph \(\Gamma\), 
+\begin{frame}{Definition of \(\Conf_n(\Gamma)\)}
+    Graph configuration spaces were first studied by Aaron Abrams in his PhD thesis in 2000.
+
+    \begin{definition}
+        Given a graph \(\Gamma\), a point in the \(n\) point ordered configuration space of \(\Gamma\) denoted \(\Conf_n(\Gamma)\)
+    is the positions of \(n\) \textit{distinct} particles placed on \(\Gamma\) such that no two particles occupy the same spot.
+    \end{definition}
+
+    Equivalently, \(\Conf_n(\Gamma) = \Gamma^n - \Delta\) where 
+    \(\Delta\) is the pairwise diagonal \(\{(x_1, \cdots, x_n) \in \Gamma^n \mid x_i = x_j \text{ for some } i \neq j\}\).
 \end{frame}

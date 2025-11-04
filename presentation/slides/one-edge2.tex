@@ -1,0 +1,25 @@
+\begin{frame}{A single edge}
+\begin{columns}[T,onlytextwidth]
+	\begin{column}{0.5\textwidth}
+		\centering
+        \begin{tikzpicture}[scale=3]
+            \node[circle, fill, inner sep=1.5pt, label=left:\(v\)] (v) at (0,0) {};
+            \node[circle, fill, inner sep=1.5pt, label=left:\(w\)] (w) at (0,1) {};
+            \draw (v) -- (w);
+        \end{tikzpicture}
+        
+		\scriptsize \(\Gamma\) is a single edge.
+	\end{column}
+
+	\begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=3]
+            % Wrap label text in braces so commas and math-delimiters are handled safely by TikZ
+            \node[circle, fill, inner sep=1.5pt, label=right:{\((w,v)\)}] (v) at (1,0) {};
+            \node[circle, fill, inner sep=1.5pt, label=left:{\((v,w)\)}] (w) at (0,1) {};
+        \end{tikzpicture}
+
+		\scriptsize \(\DConf_2(\Gamma)\)
+    \end{column}
+\end{columns}
+\end{frame}
