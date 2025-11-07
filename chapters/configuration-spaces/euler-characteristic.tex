@@ -1,13 +1,12 @@
 \section{Computing the Euler characteristic of graph configuration spaces}
 To compute the euler characteristic of an unorderd \(n\) point graph configuration space we need to count
 for each \(0 \le k \le n\) the number of \(k\)-cubes present.
-Without further mention \(E = E(\Gamma)\) and \(V = V(\Gamma)\).
 
 A \(k\) cube exists if and only if \(k\) particles are free to move simultaneously while \(n - k\)
 particles remain fixed.
 Hence the general formula for the number of \(k\) cubes in \(\DUConf_n(\Gamma)\) is
 \[
-    \abs{\phi(k)} \cdot \begin{pmatrix}\abs{V} - 2k \\ n - k\end{pmatrix}
+    \abs{\phi(k)} \cdot\binom{\abs{V(\Gamma)} - 2k}{n - k}
 \]
 where \(\phi(k)\) defined as follows.
 
@@ -19,14 +18,17 @@ where \(\phi(0) = \{\emptyset\}\).
 Note that we define \(\phi(0) = \{\emptyset\}\) so that \(\abs{\phi(0)} = 1\).
 With this definition, \(\abs{\phi(k)}\) is also known as the number of ``\(k\)-matchings'' in \(\Gamma\).
 
+We now express the Euler characteristic of \(\DUConf_n(\Gamma)\) in the following lemma.
+\begin{lem}
+\label{lem:eulercharacteristic}
+\[
+\chi(\DUConf_n(\Gamma)) = \sum_{k=0}^{n} (-1)^k \abs{\phi(k)} \binom{\abs{V(\Gamma)} - 2k}{n - k}
+\]
+\end{lem}
+
 Counting the number of \(k\)-matchings for small graphs can be done efficiently 
 with a simple sweep over all \(k\) combinations of edges.
-However, for general larger graphs this computation quickly becomes unwieldly.
-
-% TODO read/cite Mark Jerrum's paper "Two-dimensional monomer-dimer systems are computationally intractable"
-% where he proves computing the matching polynomial for planar graphs is P# ?
-% TODO: reference program actually used to make computations? It's trivial especially now with AI hah
-
+We have done this for several small graphs (see Figure \ref{fig:euler_characteristics}) that are relevant in later chapters.
 \begin{figure}[h!]
 \centering
 \begin{tabular}{c | c | c}
@@ -38,13 +40,17 @@ However, for general larger graphs this computation quickly becomes unwieldly.
    \(\Theta_4\) & 3 & -4 \\
    \(K_{3,3}\) & 4 & -3
 \end{tabular}
-\label{fig:euler_characteristics}
 \caption{Euler characteristic of certain unordered graph configuration spaces.}
+\label{fig:euler_characteristics}
 \end{figure}
+% TODO add a link to the code that computes these values.
 
+% TODO read/cite Mark Jerrum's paper "Two-dimensional monomer-dimer systems are computationally intractable"
+% where he proves computing the matching polynomial for planar graphs is P# ?
+In general, for larger graphs this computation quickly becomes unwieldly.
 A workaround for this computational challenge is determining the Euler characteristic of certain classes of graphs.
-In \cite{appiah2024algebraicstructurehyperbolicgraph} the ``pulsar'' graph was defined.
-
+In \cite{appiah2024algebraicstructurehyperbolicgraph} the \textit{pulsar graph} was defined.
+See Figure \ref{fig:pulsargraph} for a depiction of the pulsar graph \(\mathcal{P}_{m,n_1,n_2}\).
 
 \begin{figure}[h!]
     \centering
@@ -91,8 +97,8 @@ In \cite{appiah2024algebraicstructurehyperbolicgraph} the ``pulsar'' graph was d
     \draw (a2) -- (dn2);
     \draw (dn2) -- (dn2p);
 \end{tikzpicture}
-\label{fig:pulsargraph}
 \caption{The Pulsar graph \(\mathcal{P}_{m,n_1,n_2}\)}
+\label{fig:pulsargraph}
 \end{figure}
 
 \begin{thm}
@@ -168,10 +174,51 @@ We elaborate on each of these cases below.
     there are \(m (m - 1) (n_1 + n_2)\) such matchings.
 \end{enumerate}
 
+\textbf{2-matchings:}
+The following table summarizes the computations for each case.
+\begin{center}
+\begin{tabular}{c | c | c | c | c }
+Subcase & Outer & Inner & Middle & Count \\
+\hline
+1 & 2 & 0 & 0 & \(\binom{n_1 + n_2}{2}\) \\
+2 & 1 & 1 & 0 & \( (n_1 + n_2) (n_1 + n_2 - 1) \) \\
+3 & 1 & 0 & 1 & \( 2m (n_1 + n_2) \) \\
+4 & 0 & 2 & 0 & \( n_1 n_2 \) \\
+5 & 0 & 1 & 1 & \( m n_2 + m n_1 \) \\
+6 & 0 & 0 & 2 & \( m (m - 1)\)
+\end{tabular}
+\end{center}
+Again, we elaborate on each of these cases below.
+\begin{enumerate}
+    \item Both edges are chosen from the outer emission edges. There are \(\binom{n_1 + n_2}{2}\) such matchings.
+    \item Choose one of the \((n_1 + n_2)\) inner emission edges, then there are \((n_1 + n_2 - 1)\) possible disjoint outer emission edges.
+    \item Choose one of the \(2m\) middle edges, then there are \((n_1 + n_2)\) possible disjoint outer emission edges.
+    \item Choose one of the \(n_1\) top inner emission edges, then there are \(n_2\) bottom possible disjoint inner emission edges.
+    \item If we choose one of the \(m\) top middle edges, then there are \(n_2\) possible bottom disjoint inner emission edges.
+    Similarly, if we choose one of the \(m\) bottom middle edges, then there are \(n_1\) possible top disjoint inner emission edges.
+    \item Choose one of the \(m\) top middle edges, then there are \((m-1)\) possible disjoint bottom middle edges.
+\end{enumerate}
+
+\textbf{1-matchings:}
+This case is much more straightforward. We simply add up the number of ways to select one edge from each of the three categories.
+Hence the total number of 1-matchings is
+\[
+(n_1 + n_2) + (n_1 + n_2) + 2m
+\]
+
+\textbf{0-matchings:}
+There is exactly one 0-matching, the empty set.
+
+
+\textbf{Final Count}
+Now that we know the number of \(k\)-matchings for \(k = 0, 1, 2, 3\), we can compute the Euler characteristic
+with the formula from Lemma \ref{lem:eulercharacteristic}.
+The simplification was not done by hand, but rather with the help of a computer algebra system namely SymPy.
+% TODO add a link to the code used.
 \end{proof}
 
 \begin{rem}
-Substituting in \(n_1 = 0\) and \(n_2 = 0\) the pular graph becomes \(\Theta_m\).
+Substituting in \(n_1 = 0\) and \(n_2 = 0\) the pular graph becomes \(\Theta_m\) aka. \(K_{2,m}\).
 So, 
 the euler characteristic of \(\DUConf_3(\Theta_m)\) is
 \[
