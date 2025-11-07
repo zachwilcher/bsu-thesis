@@ -1,214 +1,89 @@
 \section{Graphs}
-Suppose \(\Gamma\) contains \((m-1)K_2\) as a subgraph i.e. \(\Gamma\) contains \(m-1\) disjoint edges.
-Then, \(\Gamma\) has at least \((m-1)V(K_2) = 2m - 2\) vertices.
+Let \(m \ge 1\) and suppose \(\Gamma\) contains an \(m\)-matching i.e. \(\Gamma\) has at least \(m\) disjoint edges.
+
 
 \begin{lem}
-    If \(\Gamma - \Lambda\) is \(K_{1,3}\)
-    for any subgraph \(\Lambda\) isomorphic to \((m-1)K_2\),
-    then \(\Gamma\) is \(K_{m, m+2}\) for some \(m \ge 1\).
+Let \(n \ge 3\). If \(\Gamma - V(M) \cong K_n\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{2m+n}\).
 \end{lem}
 
 \begin{proof}
-    First notice that \(V(\Gamma) - V(\Lambda) = V(K_{1,3})\) implies that \(V(\Gamma) = 2m + 2\).
+    Suppose that \(\Gamma - V(M) \cong K_n\) for any \(m\)-matching \(M\).
+    Notice that \(\abs{V(\Gamma)} = \abs{V(M)} + \abs{V(K_n)} = 2m + n\).
+    Let \(v_1\) and \(v_2\) be any two distinct vertices in \(\Gamma\) and \(M\) be an \(m\)-matching.
+    If \(v_1\) and \(v_2\) belong to \(\Gamma - M\), then they're adjacent since they belong to a complete graph.
+    So, suppose that \(v_1\) or \(v_2\) belongs to \(M\).
+    Without loss of generality, suppose \(v_1\) belong to \(M\) and let \(w_1\) be the vertex adjacent to \(v_1\) in \(M\).
 
-    We claim that \(\Gamma\) cannot contain any odd cycles.
-    To see this, suppose the vertices \(\{u_i\}_{i=1}^n\) form an \(n\)-cycle in \(\Gamma\) for some odd \(n \ge 3\).
+    If \(v_2\) belongs to \(M\), then let \(w_2\) be the vertex adjacent to \(v_2\) in \(M\).
+    Let \(u_1, u_2\) be two adjacent vertices in \(\Gamma - M\) and define \(M' = (M \cup \{u_1, u_2\}) \setminus \{v_2, w_2\}\).
+    Then, \(M'\) is an \(m\)-matching containing \(v_1\) but does not contain \(v_2\).
+    So, we can assume without a loss of generality that \(v_1\) belongs to \(M\) but \(v_2\) does not.
 
-
-    If \(\Gamma - \{u_i\}_{i=1}^n\) contains \((m-1)K_2\) as a subgraph,
-    then \(V(\Gamma - \{u_i\}_{i=1}^n - (m-1)K_2) = V(K_{1,3})\).
-    However, this means \(2m + 2 - n - 2(m-1) = 4\) implying \(n = 0\), a contradiction.
-    So, suppose \(\Gamma - \{u_i\}_{i=1}^n\) does not contain \((m-1)K_2\) as a subgraph,
-    then \(\Lambda\) contains at least two of the vertices in \(\{u_i\}_{i=1}^n\).
-
-    % This is fine since if there are k edges in the cycle we can just choose the first 2k vertices
-    Without a loss of generality suppose \(\{u_i\}_{i=1}^{2k}\) belong to \(\Lambda\)
-    for some \(k \ge 1\). 
-    Since \(n\) is odd, at least one of the vertices in the cycle, say \(u_{2k+1}\) must belong to \(\Gamma - \Lambda\).
-
-    We proceed by cases on the valence of \(u_{2k+1}\) in \(\Gamma - \Lambda\).
-
-    %TODO fix these cases
-    % diagram could look like:
-    % | | ... |    | \ | \ | \ ... |     Y
-    %   m-1-k       k edges in cycle    K_1,3
-
-    \textbf{Case 1:} \(u_{2k+1}\) has valence \(1\) in \(\Gamma - \Lambda\).
-    Let \(u_4\) and \(u_5\) be the other valence \(1\) vertices in \(\Gamma - \Lambda\)
-    and \(u_6\) be the valence \(3\) vertex in \(\Gamma - (m-1)K_2\).
-
-    \begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}
-        \node (v1) at (0,1) {};
-        \node (w1) at (0,3) {};
-        \node (vmm1) at (1,1) {};
-        \node (wmm1) at (1,3) {};
-        \draw (v1) -- (w1);
-        \draw (vmm1) -- (wmm1);
-
-        \node (u1) at (2, 3) {\(u_1\)};
-        \node (u2) at (2, 1) {\(u_2\)};
-        \node (u3) at (3, 2) {\(u_3\)};
-
-        \draw (u1) -- (u2);
-        \draw (u2) -- (u3);
-        \draw (u3) -- (u1);
-
-        \node (u4) at (3, 1) {\(u_4\)};
-        \node (u5) at (3, 0) {\(u_5\)};
-
-        \node (u6) at (4, 1) {\(u_6\)};
-
-        \draw (u6) -- (u3);
-        \draw (u6) -- (u4);
-        \draw (u6) -- (u5);
-    \end{tikzpicture}
-    \end{figure}
-
-    Immediately we see a contradiction arise as \(\Gamma - \{u_1, u_2, u_3\}\) contains \((m-1)K_2\) as a subgraph.
-
-    \textbf{Case 2:} \(u_3\) has valence \(3\) in \(\Gamma - (m-1)K_2\).
-    Let \(u_4\), \(u_5\), and \(u_6\) be the other valence \(1\) vertices in \(\Gamma - (m-1)K_2\).
-
-    \begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}
-        \node (v1) at (0,0) {};
-        \node (w1) at (0,2) {};
-        \node (vmm1) at (1,0) {};
-        \node (wmm1) at (1,2) {};
-        \draw (v1) -- (w1);
-        \draw (vmm1) -- (wmm1);
-
-        \node (u1) at (2, 2) {\(u_1\)};
-        \node (u2) at (2, 0) {\(u_2\)};
-        \node (u3) at (3, 1) {\(u_3\)};
-
-        \draw (u1) -- (u2);
-        \draw (u2) -- (u3);
-        \draw (u3) -- (u1);
-
-        \node (u4) at (4, 2) {\(u_4\)};
-        \node (u5) at (4, 1) {\(u_5\)};
-        \node (u6) at (4, 0) {\(u_6\)};
-
-        \draw (u3) -- (u4);
-        \draw (u3) -- (u5);
-        \draw (u3) -- (u6);
-    \end{tikzpicture}
-    \end{figure}
-
-    Erasing the \(m-2\) edges to the left in the figure above along with the edge \(u_2 u_3\), we must have the following
-    edges for the resulting subgraph to be \(K_{1,3}\).
-
-    \begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}
-        \node (v1) at (0,0) {};
-        \node (w1) at (0,2) {};
-        \node (vmm1) at (1,0) {};
-        \node (wmm1) at (1,2) {};
-        \draw (v1) -- (w1);
-        \draw (vmm1) -- (wmm1);
-
-        \node (u1) at (2, 2) {\(u_1\)};
-        \node (u2) at (2, 0) {\(u_2\)};
-        \node (u3) at (3, 1) {\(u_3\)};
-
-        \draw (u1) -- (u2);
-        \draw (u2) -- (u3);
-        \draw (u3) -- (u1);
-
-        \node (u4) at (4, 2) {\(u_4\)};
-        \node (u5) at (4, 1) {\(u_5\)};
-        \node (u6) at (4, 0) {\(u_6\)};
-
-        \draw (u3) -- (u4);
-        \draw (u3) -- (u5);
-        \draw (u3) -- (u6);
-
-        \draw (u1) -- (u4);
-        \draw (u1) -- (u5);
-        \draw (u1) to [out=-60, in=180] (u6);
-    \end{tikzpicture}
-    \end{figure}
-
-    Similarly, by erasing the \(m-2\) edges to the left along with the edge \(u_1 u_3\), we must have the following.
-
-    \begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}
-        \node (v1) at (0,0) {};
-        \node (w1) at (0,2) {};
-        \node (vmm1) at (1,0) {};
-        \node (wmm1) at (1,2) {};
-        \draw (v1) -- (w1);
-        \draw (vmm1) -- (wmm1);
-
-        \node (u1) at (2, 2) {\(u_1\)};
-        \node (u2) at (2, 0) {\(u_2\)};
-        \node (u3) at (3, 1) {\(u_3\)};
-
-        \draw (u1) -- (u2);
-        \draw (u2) -- (u3);
-        \draw (u3) -- (u1);
-
-        \node (u4) at (4, 2) {\(u_4\)};
-        \node (u5) at (4, 1) {\(u_5\)};
-        \node (u6) at (4, 0) {\(u_6\)};
-
-        \draw (u3) -- (u4);
-        \draw (u3) -- (u5);
-        \draw (u3) -- (u6);
-
-        \draw (u1) -- (u4);
-        \draw (u1) -- (u5);
-        \draw (u1) to [out=-60, in=180] (u6);
-
-        \draw (u2) to [out=60, in=180] (u4);
-        \draw (u2) -- (u5);
-        \draw (u2) -- (u6);
-    \end{tikzpicture}
-    \end{figure}
-
-    Erasing the \(m-2\) edges to the left along with the edge \(u_1 u_4\) results in a subgraph with a \(3\)-cycle,
-    contradicting that \(\Gamma - (m-1)K_2\) is always \(K_{1,3}\).
-
-    Thus, \(\Gamma\) does not contain any \(3\)-cycles.
-    We claim that \(\Gamma\) does not contain any other odd cycles.
-    To see this, suppose \(\Gamma\) contains an odd cycle \(C\) with more than \(3\) vertices.
-
-
-
-    We claim that \(\Gamma\) is complete bipartite.
-    To see this, suppose there exist vertices \(x\) and \(y\) in different partite sets of \(\Gamma\)
-    such that there is no edge between \(x\) and \(y\).
-    Since \(\Gamma\) contains \((m-1)K_2\) as a subgraph,
-    \(x\) and \(y\) do not belong to this subgraph.
-    However, \(\Gamma - (m-1)K_2\) must contain \(x\) and \(y\)
-    yet \(K_{1,3}\) is connected.
-
-    Finally, to see that \(\Gamma\) is \(K_{m, m+2}\),
-    let \(A\) and \(B\) be the partite sets of \(\Gamma\).
-    Since the subgraph \((m-1)K_2\) contains \(m-1\) vertices from \(A\) and \(m-1\) vertices from \(B\),
-    it follows that \(A\) contains \(1\) vertex in \(\Gamma - (m-1)K_2\) and \(B\) contains \(3\) vertices.
-    Hence \(\abs{A} = m\) and \(\abs{B} = m + 2\).
-
+    Since \(v_2\) does not belong to \(M\) and \(n \ge 3\), there are at least two adjacent vertices \(u_1\) and \(u_2\) other than \(v_2\) in \(\Gamma - M\).
+    Let \(M' = (M \cup \{u_1, u_2\}) \setminus \{v_1, w_1\}\).
+    Since \(M'\) is an \(m\)-matching, \(v_1\) and \(v_2\) belong to the complete graph \(\Gamma - M'\) and must be adjacent.
+    Since \(v_1\) and \(v_2\) were arbitrary, it follows that \(\Gamma\) is complete.
 \end{proof}
 
 \begin{lem}
-If \(\Gamma - (m-1)K_2\) is always \(K_3\), then \(\Gamma\) is \(K_{2m+1}\).
+If \(\Gamma - V(M) \cong C_4\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{m+2, m+2}\).
 \end{lem}
 
 \begin{proof}
-
 \end{proof}
+
 
 \begin{lem}
-If \(\Gamma - (m-1)K_2\) is always the cycle graph \(C_4\), then \(\Gamma\) is \(K_{m+1, m+1}\).
+    If \(\Gamma - V(M) \cong K_{1,3}\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{m+1, m+3}\).
 \end{lem}
 
 \begin{proof}
+    Suppose that \(\Gamma - V(M) \cong K_{1,3}\) for any \(m\)-matching \(M\).
+    Notice that \(\abs{V(\Gamma)} = \abs{V(M)} + \abs{V(K_{1,3})} = 2m + 4\).
+    Let \(M_0\) be an \(m\)-matching, \(a_{m+1}, a_{m+2}, a_{m+3}\) be the valence \(1\) vertices in \(\Gamma - V(M_0)\)
+    and \(b_{m+1}\) be the valence \(3\) vertex in \(\Gamma - V(M_0)\).
 
+    Label the \(m\) disjoint edges in \(M_0\) as \(v_1 w_1, v_2 w_2, \cdots, v_m w_m\).
+    Let \(M_i = (M_0 \cup \{a_{m+1}b_{m+1}\}) \setminus \{ v_i w_i \}\) for \(1 \le i \le m\).
+    Then, \(v_i\) and \(w_i\) belong to \(\Gamma - V(M_i)\).
+    Since \(v_i\) and \(w_i\) are adjacent and \(\Gamma - V(M_i) \cong K_{1,3}\),
+    one of these two vertices has valence \(1\) and the other has valence \(3\) in \(\Gamma - V(M_i)\).
+    Let \(a_i\) be the valence \(1\) vertex and \(b_i\) be the valence \(3\) vertex.
+    Note that \(b_i\) must also be adjacent to \(a_{m+2}\) and \(a_{m+3}\).
+    Let \(A = \{a_i\}_{i=1}^{m+3}\) and \(B = \{b_j\}_{j=1}^{m+1}\).
+
+    \textbf{Claim 1:} Every vertex in \(A\) is adjacent to every vertex in \(B\) in \(\Gamma\).
+    To see this, let \(a_i \in A\) and \(b_j \in B\).
+    Define \(M^* = \left(\bigcup_{k=1}^{m+1}\{a_k b_k \} \setminus \{a_ib_i, a_jb_j\}\right)\cup\{a_{m+2}b_i\}\)
+    Notice that \(M^*\) has \(m-1\) disjoint edges for each \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
+    and has an \(m\)th disjoint edge \(a_{m+2}b_i\). Therefore, \(M^*\) is an \(m\)-matching, meaning \(\Gamma - V(M^*) \cong K_{1,3}\).
+    It remains to show that \(a_i\) and \(b_j\) are adjacent in \(\Gamma - V(M^*)\).
+    Since \(\Gamma - V(M^*) \cong K_{1,3}\), if \(a_i\) and \(b_j\) were not adjacent in \(\Gamma - V(M^*)\), 
+    then they would both have valence \(1\) in \(\Gamma - V(M^*)\).
+    However, \(b_j\) is adjacent to both \(a_j\) and \(a_{m+3}\) in \(\Gamma - V(M^*)\) (from our original construction of \(a_j\) and \(b_j\)), meaning \(b_j\) has valence at least \(2\) in \(\Gamma - V(M^*)\).
+    Therefore, \(b_j\) must be the central vertex in \(\Gamma - V(M^*)\), meaning \(a_i\) must be adjacent to \(b_j\).
+
+    \textbf{Claim 2:} No two vertices in \(A\) are adjacent in \(\Gamma\).
+    To see this, suppose \(a_i, a_j \in A\) are adjacent in \(\Gamma\) for some \(i \neq j\).
+    Then, \(\{a_i, a_j, b_i\}\) form a triangle in \(\Gamma\).
+    Let \(a_l \in A\) be distinct from \(a_i\) and \(a_j\). 
+    % TODO: This matching is invalid. We need to just find m edges disjoint from ai aj and bi.
+    Define \(M^{**} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{a_l b_j\}\).
+    Notice that \(M^{**}\) has \(m-1\) edges for each edge \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
+    and \(m\)th edge \(a_l b_j\).
+    Therefore \(M^{**}\) is an \(m\)-matching and  \(\Gamma - V(M^{**}) \cong K_{1,3}\).
+    However, \(\{a_i, a_j, b_i\}\) forms a triangle in \(\Gamma - V(M^{**})\), a contradiction.
+
+    \textbf{Claim 3:} No two vertices in \(B\) are adjacent in \(\Gamma\).
+    Suppose \(b_i, b_j \in B\) are adjacent in \(\Gamma\) for some \(i \neq j\).
+    Then, \(\{b_i, b_j, a_i\}\) form a triangle in \(\Gamma\).
+    Define \(M^{***} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{b_i b_j\}\).
+    Notice that \(M^{***}\) has \(m-1\) edges for each edge \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
+    and \(m\)th edge \(b_i b_j\). Therefore \(M^{***}\) is an \(m\)-matching and \(\Gamma - V(M^{***}) \cong K_{1,3}\).
+    However, \(\{a_i, a_j, a_{m+2}, a_{m+3}\}\) belong to \(\Gamma - V(M^{***})\).
+    Since \(\Gamma - V(M^{***}) \cong K_{1,3}\) is connected, we contradict claim 2.
+
+    So, \(A\) and \(B\) form two partite sets in \(\Gamma\) making \(\Gamma\) bipartite.
+    Since every vertex in \(A\) is adjacent to every vertex in \(B\), it follows that \(\Gamma \cong K_{m+1, m+3}\).
 \end{proof}
+

@@ -42,7 +42,7 @@ However, for general larger graphs this computation quickly becomes unwieldly.
 \caption{Euler characteristic of certain unordered graph configuration spaces.}
 \end{figure}
 
-A workaround for this computational challenge is determing the Euler characteristic of certain classes of graphs.
+A workaround for this computational challenge is determining the Euler characteristic of certain classes of graphs.
 In \cite{appiah2024algebraicstructurehyperbolicgraph} the ``pulsar'' graph was defined.
 
 
@@ -103,7 +103,71 @@ In \cite{appiah2024algebraicstructurehyperbolicgraph} the ``pulsar'' graph was d
     \]
 \end{thm}
 \begin{proof}
-%TODO: all we really have to do is explain the argument for the 2 and 3 matchings.
+Since there are no \(k\)-cubes when \(k > 3\), ``all'' we need to do is compute the number of \(k\)-matchings
+for \(k = 0, 1, 2, 3\).
+We introduce some terminology to make the counting easier.
+An ``outer emission edge'' is one of the edges \(c_i c_i'\) or \(d_i d_i'\).
+An ``inner emission edge'' is one of the edges \(a_1 c_i\) or \(a_2 d_i\).
+A ``middle edge'' is one of the edges \(a_1 b_i\) or \(a_2 b_i\).
+We then count the number of matching by considering edges taken from each of these three categories.
+
+
+\textbf{3-matchings}
+The following table summarizes the computations for each case.
+
+\begin{center}
+\begin{tabular}{c | c | c | c | c }
+Subcase & Outer & Inner & Middle & Count \\ 
+\hline
+1 & 3 & 0 & 0 & \(\binom{n_1 + n_2}{3}\) \\
+2 & 2 & 1 & 0 & \((n_1 + n_2)\binom{n_1 + n_2 - 1}{2}\) \\
+3 & 2 & 0 & 1 & \(2m\binom{n_1 + n_2}{2}\) \\
+4 & 1 & 2 & 0 & \(n_1n_2(n_1 + n_2 - 2)\) \\
+5 & 1 & 1 & 1 & \(m n_2 (n_1 + n_2 - 1) + m n_1 (n_1 + n_2 - 1)\) \\
+6 & 1 & 0 & 2 & \(m(m-1)(n_1 + n_2)\) \\
+7 & 0 & 3 & 0 & 0 \\
+8 & 0 & 2 & 1 & 0 \\
+9 & 0 & 1 & 2 & 0 \\
+10 & 0 & 0 & 3 & 0 
+\end{tabular}
+\end{center}
+
+We elaborate on each of these cases below.
+\begin{enumerate}
+    \item All three edges are chosen from the outer emission edges.
+    There are \(\binom{n_1 + n_2}{3}\) such matchings.
+
+    \item One edge is chosen from the \(n_1 + n_2\) inner emission edges,
+    and two edges are chosen from the outer emission edges. Since there are \(n_1 + n_2 - 1\)
+    outer emission edges disjoint from the chosen inner emission edge,
+    there are \((n_1 + n_2)\binom{n_1 + n_2 - 1}{2}\) total such matchings.
+
+    \item One edge is chosen from the \(2m\) middle edges, and two edges are chosen from the outer emission edges.
+    Since there are \(n_1 + n_2\) outer emission edges disjoint from the chosen middle edge,
+    there are \( 2m\binom{n_1 + n_2}{2} \) such matchings.
+
+    \item Two edges are chosen from the \(n_1 + n_2\) inner emission edges, and one edge is chosen from the outer emission edges.
+    Since the only way to chose two disjoint inner emission edges is to choose one from the \(n_1\) edges
+    attached to \(a_1\) and one from the \(n_2\) edges attached to \(a_2\),
+    there are \(n_1 n_2\) such choices.
+    After choosing two inner emission edges, there are \(n_1 + n_2 - 2\) outer emission edges disjoint from the chosen inner emission edges.
+
+
+    \item One edge is chosen from a middle edge, one edge is chosen from an inner emission edge, and one edge is chosen from an outer emission edge.
+    If we pick one of the \(n_1\) top inner emission edges, there are \(m\) middle edges disjoint from it, and \((n_1 + n_2 - 1)\)
+    outer emission edges disjoint from both the chosen inner emission edge and middle edge.
+    Similarly, if we pick one of the \(n_2\) bottom inner emission edges,
+    there are \(m\) middle edges disjoint from it, and \((n_1 + n_2 - 1)\)
+    outer emission edges disjoint from both the chosen inner emission edge and middle edge.
+
+
+    \item Two edges are chosen from the middle edges, and one edge is chosen from the outer emission edges.
+    After choosing one of the top \(m\) middle edges, there are \(m - 1\) disjoint middle edges remaining.
+    This accounts for all ways to choose to disjoint pairs of middle edges.
+    Since there are \(n_1 + n_2\) outer emission edges disjoint from any middle edge,
+    there are \(m (m - 1) (n_1 + n_2)\) such matchings.
+\end{enumerate}
+
 \end{proof}
 
 \begin{rem}
