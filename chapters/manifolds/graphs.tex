@@ -1,8 +1,8 @@
-\section{Graphs}
+\section{Some Special Graphs}
 Let \(m \ge 1\) and suppose \(\Gamma\) contains an \(m\)-matching i.e. \(\Gamma\) has at least \(m\) disjoint edges.
 
-
 \begin{lem}
+    \label{lem:complete-graph-is-special}
 Let \(n \ge 3\). If \(\Gamma - V(M) \cong K_n\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{2m+n}\).
 \end{lem}
 
@@ -26,68 +26,7 @@ Let \(n \ge 3\). If \(\Gamma - V(M) \cong K_n\) for any \(m\)-matching \(M\), th
 \end{proof}
 
 \begin{lem}
-If \(\Gamma - V(M) \cong C_4\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{m+2, m+2}\).
-\end{lem}
-
-\begin{proof}
-\end{proof}
-
-
-\begin{lem}
-    If \(\Gamma - V(M) \cong K_{1,3}\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{m+1, m+3}\).
-\end{lem}
-
-\begin{proof}
-    Suppose that \(\Gamma - V(M) \cong K_{1,3}\) for any \(m\)-matching \(M\).
-    Notice that \(\abs{V(\Gamma)} = \abs{V(M)} + \abs{V(K_{1,3})} = 2m + 4\).
-    Let \(M_0\) be an \(m\)-matching, \(a_{m+1}, a_{m+2}, a_{m+3}\) be the valence \(1\) vertices in \(\Gamma - V(M_0)\)
-    and \(b_{m+1}\) be the valence \(3\) vertex in \(\Gamma - V(M_0)\).
-
-    Label the \(m\) disjoint edges in \(M_0\) as \(v_1 w_1, v_2 w_2, \cdots, v_m w_m\).
-    Let \(M_i = (M_0 \cup \{a_{m+1}b_{m+1}\}) \setminus \{ v_i w_i \}\) for \(1 \le i \le m\).
-    Then, \(v_i\) and \(w_i\) belong to \(\Gamma - V(M_i)\).
-    Since \(v_i\) and \(w_i\) are adjacent and \(\Gamma - V(M_i) \cong K_{1,3}\),
-    one of these two vertices has valence \(1\) and the other has valence \(3\) in \(\Gamma - V(M_i)\).
-    Let \(a_i\) be the valence \(1\) vertex and \(b_i\) be the valence \(3\) vertex.
-    Note that \(b_i\) must also be adjacent to \(a_{m+2}\) and \(a_{m+3}\).
-    Let \(A = \{a_i\}_{i=1}^{m+3}\) and \(B = \{b_j\}_{j=1}^{m+1}\).
-
-    \textbf{Claim 1:} Every vertex in \(A\) is adjacent to every vertex in \(B\) in \(\Gamma\).
-    To see this, let \(a_i \in A\) and \(b_j \in B\).
-    Define \(M^* = \left(\bigcup_{k=1}^{m+1}\{a_k b_k \} \setminus \{a_ib_i, a_jb_j\}\right)\cup\{a_{m+2}b_i\}\)
-    Notice that \(M^*\) has \(m-1\) disjoint edges for each \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
-    and has an \(m\)th disjoint edge \(a_{m+2}b_i\). Therefore, \(M^*\) is an \(m\)-matching, meaning \(\Gamma - V(M^*) \cong K_{1,3}\).
-    It remains to show that \(a_i\) and \(b_j\) are adjacent in \(\Gamma - V(M^*)\).
-    Since \(\Gamma - V(M^*) \cong K_{1,3}\), if \(a_i\) and \(b_j\) were not adjacent in \(\Gamma - V(M^*)\), 
-    then they would both have valence \(1\) in \(\Gamma - V(M^*)\).
-    However, \(b_j\) is adjacent to both \(a_j\) and \(a_{m+3}\) in \(\Gamma - V(M^*)\) (from our original construction of \(a_j\) and \(b_j\)), meaning \(b_j\) has valence at least \(2\) in \(\Gamma - V(M^*)\).
-    Therefore, \(b_j\) must be the central vertex in \(\Gamma - V(M^*)\), meaning \(a_i\) must be adjacent to \(b_j\).
-
-    \textbf{Claim 2:} No two vertices in \(A\) are adjacent in \(\Gamma\).
-    To see this, suppose \(a_i, a_j \in A\) are adjacent in \(\Gamma\) for some \(i \neq j\).
-    Then, \(\{a_i, a_j, b_i\}\) form a triangle in \(\Gamma\).
-    Let \(a_l \in A\) be distinct from \(a_i\) and \(a_j\). 
-    % TODO: This matching is invalid. We need to just find m edges disjoint from ai aj and bi.
-    Define \(M^{**} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{a_l b_j\}\).
-    Notice that \(M^{**}\) has \(m-1\) edges for each edge \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
-    and \(m\)th edge \(a_l b_j\).
-    Therefore \(M^{**}\) is an \(m\)-matching and  \(\Gamma - V(M^{**}) \cong K_{1,3}\).
-    However, \(\{a_i, a_j, b_i\}\) forms a triangle in \(\Gamma - V(M^{**})\), a contradiction.
-
-    \textbf{Claim 3:} No two vertices in \(B\) are adjacent in \(\Gamma\).
-    Suppose \(b_i, b_j \in B\) are adjacent in \(\Gamma\) for some \(i \neq j\).
-    Then, \(\{b_i, b_j, a_i\}\) form a triangle in \(\Gamma\).
-    Define \(M^{***} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{b_i b_j\}\).
-    Notice that \(M^{***}\) has \(m-1\) edges for each edge \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
-    and \(m\)th edge \(b_i b_j\). Therefore \(M^{***}\) is an \(m\)-matching and \(\Gamma - V(M^{***}) \cong K_{1,3}\).
-    However, \(\{a_i, a_j, a_{m+2}, a_{m+3}\}\) belong to \(\Gamma - V(M^{***})\).
-    Since \(\Gamma - V(M^{***}) \cong K_{1,3}\) is connected, we contradict claim 2.
-
-    So, \(A\) and \(B\) form two partite sets in \(\Gamma\) making \(\Gamma\) bipartite.
-    Since every vertex in \(A\) is adjacent to every vertex in \(B\), it follows that \(\Gamma \cong K_{m+1, m+3}\).
-\end{proof}
-
-\begin{lem}
+    \label{lem:bipartite-graph-is-special}
 Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\) for any \(m\)-matching \(M\), then \(\Gamma \cong K_{m+p, m+q}\).
 \end{lem}
 
@@ -97,7 +36,7 @@ Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\)
     Notice that \(\abs{V(\Gamma)} = \abs{V(M)} + \abs{V(K_{p,q})} = 2m + p + q\).
     Let \(M_0\) be an \(m\)-matching, \(\{a_{m+i}\}_{i=1}^p\) be the vertices in the partite set of size \(p\) in \(\Gamma - V(M_0)\),
     and \(\{b_{m+j}\}_{j=1}^q\) be the vertices in the partite set of size \(q\) in \(\Gamma - V(M_0)\).
-    If \(p = q\), then ensure the the vertices are labeled so that each \(a_{m+i}\) is adjacent to each \(b_{m+j}\).
+    If \(p = q\), then ensure the the vertices are labeled so that each \(a_{m+i}\) is adjacent to every \(b_{m+j}\).
 
     Label the \(m\) disjoint edges in \(M_0\) as \(v_1 w_1, v_2 w_2, \cdots, v_m w_m\).
     We define a new \(m\)-matching for each \(1 \le i \le m\).
@@ -108,32 +47,32 @@ Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\)
     Since \(v_i\) and \(w_i\) are adjacent and \(\Gamma - V(M_i) \cong K_{p,q}\),
     one of these two vertices belongs to the partite set of size \(p\) and belongs to the partite set of size \(q\) in \(\Gamma - V(M_i)\).
     Let \(a_i\) be the vertex in the partite set of size \(p\) and \(b_i\) be the vertex in the partite set of size \(q\).
-    If \(p = q\), then ensure that \(a_i\) is adjacent to each \(b_{m+k}\) for \(1 \le k \le q\)
-    \textbf{and} \(b_i\) is adjacent to each \(a_{m+k}\) for \(1 \le k \le p\).
+    If \(p = q\), then ensure that \(a_i\) is adjacent to every \(b_{m+k}\) for \(1 \le k \le q\)
+    \textbf{and} \(b_i\) is adjacent to every \(a_{m+k}\) for \(1 \le k \le p\).
+    Let \(A = \{a_i\}_{i=1}^{m+p}\) and \(B = \{b_j\}_{j=1}^{m+q}\).
 
     \textbf{Claim 1:} Every vertex in \(A\) is adjacent to every vertex in \(B\) in \(\Gamma\).
     To see this, let \(a_i \in A\) and \(b_j \in B\). 
     Depending on the values of \(i\) and \(j\), we may already know that \(a_i\) and \(b_j\) are adjacent in \(\Gamma\).
     \begin{enumerate}
         \item If \(i = j\), then \(a_i\) and \(b_j\) are adjacent in \(\Gamma\) by construction.
-        \item If \(i \ge m +1\) and \(j \ge m +1\), then \(a_i\) and \(b_j\) are adjacent in \(\Gamma\) since they belong to different partite sets in \(\Gamma - V(M_0)\).
-        \item If \(i \ge m + 2\) and \(j \le m\), then \(a_i\) and \(b_j\) belong to different partite sets in \(\Gamma - V(M_j)\) and hence are connected.
-        \item If \(i \le m\) and \(j \ge m + 2\), then \(a_i\) and \(b_j\) belong to different partite sets in \(\Gamma - V(M_i)\) and hence are connected.
+        \item If \(i > m + 1\), then \(a_i\) and \(b_j\) are adjacent in \(\Gamma - V(M_j)\).
     \end{enumerate}
-    So, suppose \(i\) and \(j\) satisfy none of the above conditions i.e. \(i \neq j\), and \(i \le m + 1\), and \(j \le m + 1\), and either \(i \le m\) or \(j \le m\).
+    So, suppose \(i\) and \(j\) satisfy none of the above conditions i.e. \(i \neq j\) and \(i \le m +1\).
 
     % TODO continue generalizing from here.
     We now construct a new \(m\)-matching as follows.
     \[
-        M' = \left(\bigcup_{k=1}^{m+1}\{a_k b_k \} \setminus \{a_ib_i, a_jb_j\}\right)\cup\{a_j b_i\}
+        M' = (M_0 \cup \{a_{m+1} b_{m+1}, a_j b_i\}) \setminus \{a_i b_i, a_j b_j\}
     \]
-    Notice that \(M'\) has \(m-1\) disjoint edges for each \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
-    and has an \(m\)th disjoint edge \(a_j b_i\). Therefore, \(M'\) is an \(m\)-matching, meaning \(\Gamma - V(M') \cong K_{p,q}\).
+    Notice that \(M'\) has \(m-2\) disjoint edges for each \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
+    but has two additional disjoint edges \(a_{m+1} b_{m+1}\) and \(a_j b_i\).
+    Therefore, \(M'\) is an \(m\)-matching, meaning \(\Gamma - V(M') \cong K_{p,q}\).
     We will show that \(a_i\) and \(b_j\) are adjacent in \(\Gamma - V(M')\).
     Since \(\Gamma - V(M') \cong K_{p,q}\), if \(a_i\) and \(b_j\) were not adjacent in \(\Gamma - V(M')\), 
     then they would belong to the same partite set in \(\Gamma - V(M')\).
-
-    However, \(b_j\) is adjacent to both \(a_j\) and \(a_{m+3}\) in \(\Gamma - V(M')\) (from our original construction of \(a_j\) and \(b_j\)), meaning \(b_j\) has valence at least \(2\) in \(\Gamma - V(M^*)\).
+    Suppose this were so. Since \(b_j\) is adjacent to both \(a_{m+2}\) in \(\Gamma - V(M')\) 
+    (from our original construction of \(a_j\) and \(b_j\)), meaning \(b_j\) has valence at least \(2\) in \(\Gamma - V(M^*)\).
     Therefore, \(b_j\) must be the central vertex in \(\Gamma - V(M')\), meaning \(a_i\) must be adjacent to \(b_j\).
 
     \textbf{Claim 2:} No two vertices in \(A\) are adjacent in \(\Gamma\).
@@ -141,6 +80,11 @@ Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\)
     Then, \(\{a_i, a_j, b_i\}\) form a triangle in \(\Gamma\).
     Let \(a_l \in A\) be distinct from \(a_i\) and \(a_j\). 
     % TODO: This matching is invalid. We need to just find m edges disjoint from ai aj and bi.
+    % Already know that a_i and a_k are not adjacent when k > m + 1.
+    % Take m vertices from A \setmminus \{a_i, a_j\} (which we can do since \abs{A} \ge m + 2)
+    % and m vertices from B\setminus\{b_1\} which we can do since \abs{B} \ge m + 1
+    % AFter erasing the matching, we have a triangle consisting of \{a_i, a_j, b_1\} by claim 1.
+    % Contradiction, no odd cycles in bipartite graphs.
     Define \(M^{**} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{a_l b_j\}\).
     Notice that \(M^{**}\) has \(m-1\) edges for each edge \(a_k b_k\) when \(k \neq i\) and \(k \neq j\)
     and \(m\)th edge \(a_l b_j\).
@@ -148,6 +92,10 @@ Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\)
     However, \(\{a_i, a_j, b_i\}\) forms a triangle in \(\Gamma - V(M^{**})\), a contradiction.
 
     \textbf{Claim 3:} No two vertices in \(B\) are adjacent in \(\Gamma\).
+    % Two cases q = 1 and q > 1. In q > 1 it's easy cause if b_j and b_k are adjacent then we can just form a
+    % matching that when erased leaves a triangle.
+    % If q = 1 then take the matching to be (M_0 \cup \{b_j b_k\}) \setminus \{a_i b_i, a_j b_j\}.
+    % Then, after deleting this matching, we have K_{p,1} consisting of only vertices in A, contradicting claim 2.
     Suppose \(b_i, b_j \in B\) are adjacent in \(\Gamma\) for some \(i \neq j\).
     Then, \(\{b_i, b_j, a_i\}\) form a triangle in \(\Gamma\).
     Define \(M^{***} = \left(\bigcup_{k=1}^{m+1}\{a_k b_k\}\setminus\{a_i b_i, a_j b_j\}\right)\cup\{b_i b_j\}\).
@@ -159,3 +107,15 @@ Let \(p,q \ge 1\) such that \(p + q \ge 4\). If \(\Gamma - V(M) \cong K_{p, q}\)
     So, \(A\) and \(B\) form two partite sets in \(\Gamma\) making \(\Gamma\) bipartite.
     Since every vertex in \(A\) is adjacent to every vertex in \(B\), it follows that \(\Gamma \cong K_{m+1, m+3}\).
 \end{proof}
+
+\begin{rem}
+If \(m > 2\) and \(r > 4\), then there is no such graph \(\Gamma\) where \(\Gamma - V(M) \cong C_r\) for any \(m\)-matching \(M\).
+\end{rem}
+
+\begin{proof}
+% TODO
+\end{proof}
+
+\begin{question}
+    What other graphs \(\Gamma\) and subgraphs \(\Lambda\) satisfy the property that \(\Gamma - V(M) \cong \Lambda\) for any \(m\)-matching \(M\)?
+\end{question}
