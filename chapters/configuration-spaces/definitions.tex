@@ -1,23 +1,17 @@
 \section{Definitions and preliminary results}
-% These definitions are presented in Abrams on page 10.
 Given a topological space \(X\), the \(n\) point (topological) configuration space of \(X\) is
 \(\Conf_n(X) = X^n - \Delta\) where \(\Delta\) is the diagonal in \(X^n\).
 
-Treating a graph \(\Gamma\) as a topological space we can construct the
-\(n\) point discretized or combinatorial configuration space \(\DConf_n(\Gamma)\) by 
-% this diagonal needs elaboration.
+Treating a graph \(\Gamma\) as a one dimensional CW complex we can construct the
+\(n\) point discretized configuration space \(\DConf_n(\Gamma)\) by 
 removing a larger diagonal \(\Delta^{\square} = \{(e_1, \ldots, e_n) \mid x_i \cap x_j \neq \emptyset \text{ for some } i \neq j\}\)
 from \(\Gamma^n\). Here \((e_1, \cdots, e_n)\) is any \(n\)-tuple of cells in \(\Gamma\).
 
-Abrams showed in \cite{abrams2000configurationspaces} that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\) and
-that \(\DConf_n(\Gamma)\) is a cubical complex.
-He also notes that any point in the
-\(n\)-point configuration space is in one-to-one correspondence with a
-collection of ``tokens'' placed on the graph. In this project, we will use a slightly different terminology and
-and say ``particles'' instead of ``tokens.''
+Abrams showed in \cite{abrams2000configurationspaces} that \(\Conf_n(\Gamma)\) deformation retracts onto \(\DConf_n(\Gamma)\) 
+when \(\Gamma\) is sufficiently subdivided. In this project we will focus strictly on the combinatorial configuration space
+and not elaborate on this subdivision. For the interested reader, in \cite{PRUE2014136} Abram's original subdivision
+was improved upon. Furthermore, Abrams showed that \(\DConf_n(\Gamma)\) is a cubical complex.
 
-% TODO what is a cubical complex?
-% make sure to define n-cubes and the gluing map
 
 \begin{figure}[h!]
 \centering
@@ -275,7 +269,7 @@ Each particle can simultaneously move to \(u_2\), \(v_2\), and \(w_2\) resulting
 \end{figure}
 
 Visually \(n\)-cubes are ``clearly'' not surfaces when \(n > 2\).
-However, we can show this formally with an argument using the fundamental group.
+
 \begin{thm}
 \(n\)-cubes are not surfaces when \(n > 2\).
 \end{thm}
@@ -283,11 +277,19 @@ However, we can show this formally with an argument using the fundamental group.
     Suppose an \(n\)-cube \(C\) is a surface for some \(n > 2\).
     % imbed C in R^n
     Pick some point \(p\) in the interior of \(C\).
-    Since \(C\) is a surface there exists some open ball \(B^n(p, \epsilon)\) in the interior of \(C\) such that 
+    Since \(C\) is a surface there exists some open ball \(B\) centered at \(p\) in the interior of \(C\) such that 
     it is centered at \(p\) and is homeomorphic to some open neighborhood \(V\) of \(\mathbb{R}^2\).
     Let \(q\) be the point in \(V\) corresponding to \(p\).
-    
-    % TODO just use the fact that local simple connectedness fails after removing a point in D^2 but doesn't after removing a point in S^2.
+
+    Let \(V' = V \setminus \{q\}\) and \(B' = B \setminus \{p\}\).
+    Locally, \(V'\) is a punctured plane 
+    which retracts to a circle surrounding the point \(q\).
+    Theorem 54.5 in \cite{Munkres2000} shows that this circle is simply connected.
+
+    However, \(B'\) locally is a punctured \(n\)-dimensional ball which retracts to an \((n-1)\) sphere
+    surrounding the point \(p\). Since \(n - 1 \ge 2\), Theorem 59.3 in \cite{Munkres2000} it is shown that
+    this sphere is simply connected.
+    Since local simple connectedness is a topological property, we have reached a contradiction.
 \end{proof}
 
 Books and cubes are the meat and potatos of the coming proofs.

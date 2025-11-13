@@ -1,0 +1,133 @@
+\section{A Long List of Lemmas}
+From this point forward in the section we assume that \(\DConf_n(\Gamma)\) is an \(m\)-manifold without boundary
+and \(M\) is an \((m-1)\)-matching in \(\Gamma\).
+
+\subsection{Minimum Graph Size and Key Lemma}
+
+\begin{lem}
+\label{lem:graph-size}
+    \(\Gamma\) has at least \(m + n\) vertices.
+\end{lem}
+
+
+\begin{lem}
+    \label{lem:special-edges}
+    For any collection of \(n - (m - 1)\) vertices in \(\Gamma - V(M)\), there exists exactly two
+    edges \(e_1\) and \(e_2\) such that
+    ...
+\end{lem}
+
+\subsection{\(m = 1\) or No Cycles}
+
+\begin{lem}
+    Every vertex in \(\Gamma - V(M)\) has degree at most \(3\).
+\end{lem}
+
+\begin{lem}
+    If \(\Gamma - V(M)\) contains a degree \(3\) vertex,
+    then \(\Gamma - V(M) \cong K_{1,3}\) and \(n = m + 1\).
+\end{lem}
+
+\begin{lem}
+    If \(m = 1\), then \(\Gamma \cong K_{1,3}\) and \(n = 2\),
+    or \(\Gamma\) is one or more cycles and \(n \in \{1, \abs{V(\Gamma)} - 1\}\) 
+\end{lem}
+
+\begin{proof}
+    It is sufficient to show that the degree of every vertex in \(\Gamma\) is exactly \(2\).
+    Let \(v\) be some vertex in \(\Gamma\). By Lemma \ref{lem:graph-size}, there exists \(n\) other vertices in \(\Gamma\).
+    The edges \(e_1\) and \(e_2\) guaranteed by Lemma \ref{lem:special-edges} must then both be incident to \(v\)
+    and there can be no other edges incident to \(v\) and these \(n\) vertices.
+    If there were another edge incident to \(v\), then \(v\) would have degree at least \(3\)
+    meaning \(\Gamma\) would have to be \(K_{1,3}\).
+    So, then \(n = 2\) and \(\Gamma\) is just \(K_{1,3}\).
+
+    Otherwise, \(v\) has degree exactly \(2\).
+    Since \(v\) was arbitrary, every vertex in \(\Gamma\) has degree exactly \(2\)
+    meaning, \(\Gamma\) is one or more cycles.
+    If \(1 < n < \abs{V(\Gamma)} - 1\), then there are too many ways for particles to move.
+\end{proof}
+
+Now that the \(m = 1\) case is completely determined, we only consider when \(m \ge 2\) from this point onward.
+
+\begin{lem}
+    \(\Gamma - V(M)\) must be \(K_{1,3}\) or contains a cycle.
+\end{lem}
+
+\begin{proof}
+    Suppose that \(\Gamma - V(M)\) contains no vertices of degree 3 nor any cycles.
+    Then \(\Gamma - V(M)\) is a forest whose trees are paths.
+    Since \(\Gamma - V(M)\) has at least \(m + n - 2(m - 1) = n - m + 2\) vertices by Lemma \ref{lem:graph-size},
+    we can place \(n - (m - 1)\) particles filling up the paths.
+    Then there is only one edge contradicting Lemma \ref{lem:special-edges}.
+\end{proof}
+
+\subsection{\(m > 1\) and Cycles}
+Since we know what happens when \(m = 1\) or \(\Gamma - V(M)\) contains no cycles.
+Continue to assume that \(m > 1\) but now also suppose \(\Gamma - V(M)\) contains a cycle \(C\).
+
+\begin{lem}
+    \label{lem:cycle-length-1}
+    If \(n > m\), then \(C\) has length at most \(n - m + 2\).
+\end{lem}
+
+\begin{proof}
+    By Lemma \ref{lem:graph-size} \(\Gamma - V(M)\) has at least \(n + m - 2(m - 1) = n - m + 2\) vertices.
+    So, after picking any \(n - (m - 1) = n - m + 1\) vertices, there must be at least one other vertex in \(\Gamma - V(M)\).
+
+    Suppose \(C\) had more than \(n - m + 2\) vertices.
+    Since \(n > m\), it follows that \(n - m + 2 \ge 3\) and that \(C\) has at least \(4\) vertices.
+    So, after picking \(n - m + 1\) vertices in a path on \(C\), there are still at least \(2\) vertices left on \(C\)
+    contradicting Lemma \ref{lem:special-edges}.
+\end{proof}
+
+\begin{lem}
+    If \(n > m\) and \(C\) has length \(n - m + 2\),
+    then \(\Gamma - V(M) = C\).
+\end{lem}
+
+\begin{proof}
+    Suppose there was another vertex \(v\) in \(\Gamma - V(M) - V(C)\).
+    Then, after picking this vertex and \(n - m\) vertices on \(C\),
+    there are two vertices left on \(C\) contradicting Lemma \ref{lem:special-edges}.
+\end{proof}
+
+\begin{lem}
+    If \(n > m\), then \(n = \abs{V(M)}/2 + \abs{V(C)} - 1\)
+\end{lem}
+
+\begin{lem}
+    If \(n > m\), then \(\Gamma - V(M)\) has at most \(4\) vertices.
+\end{lem}
+
+\begin{proof}
+We proceed by cases on the length of \(C\).
+
+\textbf{Case 1:} \(C\) has length \(3\)
+
+\textbf{Case 2:} \(C\) has length \(4\)
+
+\textbf{Case 3:} \(C\) has length greater than \(5\)
+\end{proof}
+
+\begin{lem}
+If \(n > m\) and \(C\) has length \(3\), then \(\Gamma - V(M) \cong K_3\) or \(\Gamma - V(M) \cong K_3 \cup K_1\).
+\end{lem}
+
+\begin{lem}
+If \(n > m\) and \(C\) has length \(4\), then \(\Gamma - V(M) \cong K_{2,2}\)
+\end{lem}
+
+\begin{lem}
+If \(n = m\), then \(C\) has length at most \(4\).
+\end{lem}
+
+\begin{lem}
+If \(n = m\) and \(C\) has length \(3\), then \(\Gamma - V(M) \cong K_3\).
+\end{lem}
+
+\begin{lem}
+If \(n = m\) and \(C\) has length \(4\), then \(\Gamma - V(M) \cong K_{2,2}\).
+\end{lem}
+
+
