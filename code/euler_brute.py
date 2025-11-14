@@ -126,5 +126,9 @@ def create_complete_bipartite_graph(m, n):
 print(f"Euler characteristic of UConf_2(K5): {euler(create_complete_graph(5), 2)}")
 print(f"Euler characteristic of UConf_2(K3,3): {euler(create_complete_bipartite_graph(3, 3), 2)}")
 print(f"Euler characteristic of UConf_3(K5): {euler(create_complete_graph(5), 3)}")
-print(f"Euler characteristic of UConf_3(Theta_4): {euler(create_pulsar_graph(0, 4, 0), 3)}")
+print(f"Euler characteristic of UConf_3(K2,4): {euler(create_complete_bipartite_graph(2, 4), 3)}")
 print(f"Euler characteristic of UConf_4(K3,3): {euler(create_complete_bipartite_graph(3, 3), 4)}")
+
+K5cupK1 = create_complete_graph(5)
+K5cupK1.add_node(5)
+print(f"Euler characteristic of UConf_3(K5 \cup K1): {euler(K5cupK1, 3)}")

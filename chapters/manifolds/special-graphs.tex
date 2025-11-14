@@ -114,7 +114,8 @@ If \(\Gamma - V(M) \cong K_3 \cup K_1\) for any \(m\)-matching \(M\), then \(\Ga
 \end{lem}
 
 \begin{proof}
-% TODO
+    The proof is exactly the same as Lemma \ref{lem:complete-graph-is-special} except 
+    this isolated vertex sticks around when we switch which matching we choose.
 \end{proof}
 
 \begin{rem}
@@ -122,9 +123,14 @@ If \(m > 2\) and \(r > 4\), then there is no such graph \(\Gamma\) where \(\Gamm
 \end{rem}
 
 \begin{proof}
-% TODO
+    % TODO
+    Very similar argument to when we showed that there cannot be more than \(4\) vertices in \(\Gamma - V(M)\) in
+    earlier sections.
 \end{proof}
 
 \begin{question}
     What other graphs \(\Gamma\) and subgraphs \(\Lambda\) satisfy the property that \(\Gamma - N(M) \cong \Lambda\) for any \(m\)-matching \(M\)?
 \end{question}
+
+Similar to Lemma \ref{lem:K_3cupK_1-is-special}, we can do essentially the same argument when \(\Gamma - V(M) \cong K_{p,q}\cup K_1\)
+to get that \(\Gamma \cong K_{m+p, m+q} \cup K_1\).

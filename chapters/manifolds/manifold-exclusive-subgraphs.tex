@@ -7,6 +7,22 @@ then \(\Gamma - V(M) \cong \Lambda\) for any \((m-1)\)-matching \(M\).
 \begin{thm}
     Suppose \(\Conf_n(\Gamma)\) is an \(m\)-manifold without boundary for \(m \ge 2\),
     then there exists a subgraph \(\Lambda\) in \(\Gamma\)
-    such that \(\Lambda \in \{K_3, K_4, K_3 \cup K_1, K{1,3}\}\)
+    such that \(\Lambda \in \{K_3, K_{2,2}, K_3 \cup K_1, K_{1,3}\}\)
     and \(\Gamma - V(M) \cong \Lambda\) for any \((m-1)\)-matching \(M\) in \(\Gamma\).
 \end{thm}
+
+\begin{proof}
+If \(\Lambda\) is \(K_{2,2}\) then \(n\) can be \(m\) or \(m + 2\).
+In either case we cannot have that \(\Gamma - V(M) \cong K_{1,3}\) or \(\Gamma - V(M) \cong K_3 \cup K_1\)
+since \(n\) must be \(m + 1\) there.
+Furthermore, we cannot have that \(\Gamma - V(M) \cong K_3\) while \(\Lambda \cong K_{2,2}\)
+since that would imply the number of vertices in \(\Gamma\) is different in each case.
+So, \(K_{2,2}\) cannot occur simultaneously with any of the other subgraphs.
+
+Similarly, \(K_3\) cannot occur simultaneously with \(K_{1,3}\) or \(K_3 \cup K_1\)
+since the number of vertices in \(\Gamma\) would total up to different amounts.
+
+So, we just need to show that \(K_{1,3}\) and \(K_3 \cup K_1\) cannot occur simultaneously.
+% TODO Is this even true?
+
+\end{proof}

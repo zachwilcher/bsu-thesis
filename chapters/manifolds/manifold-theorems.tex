@@ -1,5 +1,17 @@
 \section{Theorems}
 
+In an earlier section, we determined what \(\Gamma\) and \(n\) would have to be if \(\Conf_n(\Gamma)\) is a \(1\)-manifold without boundary.
+We restate that result here.
+
+\begin{thm}
+  Let \(V\) be the number of vertices in \(\Gamma\).
+  If \(\DConf_n(\Gamma)\) is a \(1\)-manifold without boundary, then \(\DConf_n(\Gamma)\) is one of the following.
+\begin{enumerate}
+  \item \(\DConf_1(\sqcup C_k) \cong \DConf_{V - 1}(\sqcup C_k)\) where \(C_k\) is a cycle graph.
+  \item \(\DConf_2(K_{1,3})\)
+\end{enumerate}
+\end{thm}
+
 \begin{thm}
   Let \(m \ge 2\). If \(\DConf_n(\Gamma)\) is an \(m\)-manifold without boundary, 
   then \(\DConf_n(\Gamma)\) is one of the following.
@@ -14,29 +26,8 @@
 \begin{proof}
   Let \(M\) be an \((m-2)\) matching in \(\Gamma\).
   As shown in the previous section, \(\Gamma - N(M)\) is a unique subgraph of \(\Gamma\).
-  So, as shown in the previous section there are \(5\) possible \((n - (m-2), \Gamma - N(M))\) pairs.
-  \begin{enumerate}
-    \item If \((n - (m - 2), \Gamma - N(M)) = (2, K_5)\), 
-    then \(n\) must be \(m\) and 
-    by Lemma \ref{lem:complete-graph-is-special}, \(\Gamma\) must be \(K_{2m+1}\).
 
-    \item If \((n - (m - 2), \Gamma - N(M)) = (3, K_5)\), 
-    then \(n\) must be \(m + 1\) and
-    by Lemma \ref{lem:complete-graph-is-special}, \(\Gamma\) must be \(K_{2m+1}\).
-
-    \item If \((n - (m - 2), \Gamma - N(M)) = (2, K_{3,3})\), 
-    then \(n\) must be \(m\) and
-    by Lemma \ref{lem:bipartite-graph-is-special}, \(\Gamma\) must be \(K_{m+1, m+1}\).
-
-    \item If \((n - (m - 2), \Gamma - N(M)) = (4, K_{3,3})\), 
-    then \(n\) must be \(m + 2\) and
-    by Lemma \ref{lem:bipartite-graph-is-special}, \(\Gamma\) must be \(K_{m+1, m+1}\).
-
-    \item If \((n - (m - 2), \Gamma - N(M)) = (3, K_{2,4})\), 
-    then \(n\) must be \(m + 1\) and
-    by Lemma \ref{lem:bipartite-graph-is-special}, \(\Gamma\) must be \(K_{m, m+2}\).
-
-  \end{enumerate}
+  % TODO
 \end{proof}
 
 In \cite{abrams2000configurationspaces}, Abrams showed the following.
@@ -46,3 +37,37 @@ If \(m > 2\) then \(\DConf_m(K_{(m+1), (m+1)})\) and \(\DConf_{m}(K_{(2m+1)})\) 
 Applying his duality theorem, it follows that
 \(\DConf_{m+1}(K_{m+1, m+1})\) and \(\DConf_{m+1}(K_{2m+1})\)
 are not \(m\) manifolds either.
+
+
+\begin{prop}
+Same problem happens with \(\Gamma = K_{m, m+2}\) or \(\Gamma = K_{2m+1}\cup K_1\) when \(m > 2\).
+\end{prop}
+
+\begin{cor}
+\(\DConf_n(\Gamma)\) is an \(m\)-manifold without boundary if and only if it is one of the following.
+\begin{enumerate}
+  \item \(\DConf_1(\sqcup C_k) \cong \DConf_{V - 1}(\sqcup C_k)\) where \(C_k\) is a cycle graph.
+  \item \(\DConf_2(K_{1,3})\)
+  \item \(\DConf_2(K_{5}) \cong \DConf_3(K_5)\)
+  \item \(\DConf_2(K_{3,3}) \cong \DConf_4(K_{3,3})\)
+  \item \(\DConf_3(K_{2,4})\)
+  \item \(\DConf_3(K_3 \cup K_1)\)
+\end{enumerate}
+\end{cor}
+\begin{proof}
+  It remains to show that these spaces are actually manifolds.
+  % TODO
+\end{proof}
+
+\begin{question}
+  What about manifolds with boundary?
+\end{question}
+
+One approach to this question is to try and extend the technique of Lemma \ref{lem:special-edges}
+to account for boundary points.
+A boundary point would have to correspond to a configuration in \(\Gamma - V(M)\)
+where only one particle can move. This gives a third possibility for the edges
+guaranteed by this lemma.
+
+Alternatively, one may be able to think about the known manifolds and see what happens
+when boundary is introduced by cutting out parts of the space.
