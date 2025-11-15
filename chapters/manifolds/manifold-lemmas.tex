@@ -23,6 +23,10 @@ and \(M\) is an \((m-1)\)-matching in \(\Gamma\).
     for an \(m\)-cube to exist in \(\DConf_n(\Gamma)\). So, \(n \ge m\). 
 \end{proof}
 
+\begin{rem}
+\(\Gamma - V(M)\) then has at least \(m + n - 2(m - 1) = n - m + 2 = n - (m - 1) + 1\) vertices.
+\end{rem}
+
 This next lemma is the key to all following proofs.
 The idea is that if we have an \((m-1)\)-cube in the configuration space,
 then there needs to be exactly two \(m\)-cubes that border it for the points
@@ -101,7 +105,7 @@ in that \((m-1)\)-cube to look locally like \(\mathbb{R}^m\).
     that it is an \(m\)-manifold.
 \end{proof}
 
-\subsection{\(m = 1\) or No Cycles}
+This lemma is extremely powerful as the next lemma illustrates.
 
 \begin{lem}
     \label{lem:manifold-max-degree}
@@ -131,6 +135,8 @@ in that \((m-1)\)-cube to look locally like \(\mathbb{R}^m\).
     Then, again there are now too many edges with one endpoint in \(\mathcal{V}'\)
     and another outside of \(\mathcal{V}'\) to for Lemma \ref{lem:special-edges} to hold.
 \end{proof}
+
+\subsection{\(m = 1\) or No Cycles}
 
 \begin{lem}
     \label{lem:manifold-is-claw}
@@ -168,7 +174,7 @@ in that \((m-1)\)-cube to look locally like \(\mathbb{R}^m\).
 
     Suppose there was another edge \(e\) in \(\Gamma - V(M)\) not incident to \(v\) and
     let \(a\) and \(b\) be the vertices incident to \(e\) and \(c\) be the other vertex adjacent to \(v\)
-    (see Figure \ref{fig:lem:manifold-is-claw-1}).
+    (see Figure \ref{fig:lem:manifold-is-claw:1}).
 
     \begin{figure}
         \centering
@@ -184,7 +190,7 @@ in that \((m-1)\)-cube to look locally like \(\mathbb{R}^m\).
             \draw (a) -- (b) node[midway, below] {\(e\)};
         \end{tikzpicture}
         \caption{\(\Gamma - V(M)\) with an extra edge \(e\)}
-        \label{fig:lem:manifold-is-claw-1}
+        \label{fig:lem:manifold-is-claw:1}
     \end{figure}
 
     Let \(\mathcal{V} = \{a, c\}\).
@@ -217,11 +223,11 @@ in that \((m-1)\)-cube to look locally like \(\mathbb{R}^m\).
 Now that the \(m = 1\) case is completely determined, we only consider when \(m \ge 2\) from this point onward.
 
 \begin{lem}
-    \(\Gamma - V(M)\) must be \(K_{1,3}\) or contains a cycle.
+    \(\Gamma - V(M)\) must be \(K_{1,3}\) or contain a cycle.
 \end{lem}
 
 \begin{proof}
-    % TODO rephrase as to no use particle placement language
+    % TODO rephrase as to not use particle placement language
     Suppose that \(\Gamma - V(M)\) contains no vertices of degree 3 nor any cycles.
     Then \(\Gamma - V(M)\) is a forest whose trees are paths.
     Since \(\Gamma - V(M)\) has at least \(m + n - 2(m - 1) = n - m + 2\) vertices by Lemma \ref{lem:graph-size},
@@ -234,213 +240,270 @@ Since we know what happens when \(m = 1\) or \(\Gamma - V(M)\) contains no cycle
 Continue to assume that \(m > 1\) but now also suppose \(\Gamma - V(M)\) contains a cycle \(C\).
 
 \begin{lem}
-    \label{lem:cycle-length-1}
-    If \(n > m\), then \(C\) has length at most \(n - m + 2\).
+\label{lem:manifold-one-cycle}
+    \(\Gamma - V(M)\) contains at most one cycle.
 \end{lem}
 
 \begin{proof}
-    By Lemma \ref{lem:graph-size} \(\Gamma - V(M)\) has at least \(n + m - 2(m - 1) = n - m + 2\) vertices.
-    So, after picking any \(n - (m - 1) = n - m + 1\) vertices, there must be at least one other vertex in \(\Gamma - V(M)\).
+    Suppose \(\Gamma - V(M)\) contains another cycle \(D\) distinct from \(C\).
+    Since \(m > 1\), \(M\) contains at least one edge \(e\).
+    Let \(v_1\) be some vertex on \(C\) and \(w_1\) be adjacent to \(v_1\) on \(C\).
+    Also, let \(v_2\) be some vertex on \(D\) and \(w_2\) be adjacent to \(v_2\) on \(D\).
 
-    Suppose \(C\) had more than \(n - m + 2\) vertices.
-    Since \(n > m\), it follows that \(n - m + 2 \ge 3\) and that \(C\) has at least \(4\) vertices.
-    So, after picking \(n - m + 1\) vertices in a path on \(C\), there are still at least \(2\) vertices left on \(C\)
-    contradicting Lemma \ref{lem:special-edges}.
+    Define \(M' = (M \setminus \{e\}) \cup \{v_1 w_1\}\) and \(M'' = (M \setminus \{e\}) \cup \{v_2 w_2\}\).
+    Initially we showed that \(\Gamma - V(M)\) is a disjoint union of cycles.
+    This fact does not depend on which matching we chose.
+    Therefore \(\Gamma - V(M')\) is also a disjoint union of cycles.
+    So, \(e\) must belong to a cycle in \(\Gamma - V(M')\).
+    The only way for this to happen is if \(e\) belongs to the ``broken cycle'' \(C - V(\{v_1 w_1\})\)
+    in \(\Gamma - V(M')\).
+    But then, \(v_1\) has degree \(3\) in \(\Gamma - V(M'')\) if \(C\) has length greater than \(3\)
+    or degree \(4\) if \(C\) has length equal to \(3\).
+    Lemma \ref{lem:manifold-max-degree} forces \(C\) to have length greater than \(3\)
+    and Lemma \ref{lem:manifold-is-claw} requires that \(\Gamma - V(M'')\) is just \(v_1\) and its neighbors.
+    However, \(V - V(M'')\) has at least \(6\) vertices:
+    the vertices incident to \(e\), the vertices on \(C\), and the vertices on \(D - V(\{v_2 w_2\})\).
 \end{proof}
 
 \begin{lem}
-    If \(n > m\) and \(C\) has length \(n - m + 2\),
-    then \(\Gamma - V(M) = C\).
+    \label{lem:manifold-cycle-equality}
+    If \(n = m\) or \(\Gamma - V(M)\) has \(n - (m - 1) + 1\) vertices, then \(\Gamma - V(M) \cong C\).
 \end{lem}
 
 \begin{proof}
-    Suppose there was another vertex \(v\) in \(\Gamma - V(M) - V(C)\).
-    Then, after picking this vertex and \(n - m\) vertices on \(C\),
-    there are two vertices left on \(C\) contradicting Lemma \ref{lem:special-edges}.
+    First, suppose \(n = m\) and let \(v\) be some vertex in \(\Gamma - V(M)\).
+    Since \(m = n\), any collection of \(n - (m - 1)\) vertices in \(\Gamma - V(M)\)
+    is just a single vertex. Define \(\mathcal{V} = \{v\}\) 
+    Then, Lemma \ref{lem:special-edges} guarantees that there are exactly two edges
+    incident to \(v\). Since \(v\) was arbitrary, every vertex in \(\Gamma - V(M)\)
+    has degree \(2\).
+
+    Similarly, if \(\Gamma - V(M)\) has \(n - (m - 1) + 1\) vertices,
+    then any collection of \(n - (m - 1)\) vertices in \(\Gamma - V(M)\)
+    will be missing exactly one vertex in \(\Gamma - V(M)\).
+    So, if \(v\) is any vertex in \(\Gamma - V(M)\),
+    define \(\mathcal{V}\) to just be all of \(\Gamma - V(M)\) except for \(v\).
+    Then, Lemma \ref{lem:special-edges} guarantees that there are exactly two edges
+    incident to \(v\) and since \(v\) was arbitrary, every vertex in \(\Gamma - V(M)\)
+    has degree \(2\).
+
+    Therefore, in either case every vertex in \(\Gamma - V(M)\) has degree \(2\)
+    meaning \(\Gamma - V(M)\) is a collection of cycles.
+    However, Lemma \ref{lem:manifold-one-cycle} guarantees that this cycle is just \(C\).
 \end{proof}
 
 \begin{lem}
-    If \(n > m\), then \(n = (m-1) + \abs{V(C)} - 1\)
+    \label{lem:manifold-cycle-length-1}
+    \(C\) has length at most \(4\).
 \end{lem}
 
 \begin{proof}
-    Notice that 
-    Lemma \ref{lem:cycle-length-1} guarantees \(\abs{V(C)} \le n - m + 2\).
-    So, \((m - 1) + \abs{V(C)} - 1 \le n\).
-    Suppose \((m - 1) + \abs{V(C)} - 1 < n\).
-    We proceed by cases on the number of vertices in \(\Gamma - V(M)\).
-    Lemma \ref{lem:graph-size} guarantees that \(\Gamma - V(M)\) has at least
-    \(n + m - 2(m - 1) = n - m + 2\) vertices.
+    Suppose \(C\) has length greater than \(4\) and let \(v_1, \cdots, v_5\) be \(5\) consecutive vertices on \(C\).
+    First we show that there cannot be more than \(n - (m - 1) + 1\) vertices in \(\Gamma - V(M)\).
+    Suppose this were so and let \(\mathcal{V}\) be any collection of \(n - (m - 1)\) vertices in \(\Gamma - V(M)\)
+    containing \(v_1\) and \(v_4\) but not \(v_2\) and \(v_3\).
+    Then, the edges \(v_1 v_2\) and \(v_3 v_4\) are incident to one vertex in \(\mathcal{V}\)
+    and one vertex outside of \(\mathcal{V}\) but
+    do not share a common vertex contradicting Lemma \ref{lem:special-edges}.
+    Hence \(\Gamma - V(M)\) contains at most \(n - (m - 1) + 1\) vertices.
+    Moreover, Lemma \ref{lem:graph-size} guarantees that \(\Gamma - V(M)\) has at
+    least \(n + m - 2(m - 1) = n - (m - 1) + 1\) vertices. 
+    So, \(\Gamma - V(M)\) must have exactly \(n - (m - 1) + 1\) vertices.
 
+    % The above argument only relies on the fact that C has more than 3 vertices.
 
-    % 1 free vertex case
-    \textbf{Case 1:} \(\Gamma - V(M)\) has exactly \(n - m + 2\) vertices.
-    % Should get that \Gamma - V(M) is a bunch of cycles
+    Lemma \ref{lem:manifold-cycle-equality} then guarantees that every vertex in \(\Gamma - V(M)\) has degree \(2\).
+    Since \(m > 1\), \(M\) contains at least one edge \(e\). Let \(w_1\) and \(w_2\) be the vertices incident to \(e\).
+    Define \(M' = (M \setminus \{e\}) \cup \{v_2 v_3\}\).
+    The fact that every vertex in \(\Gamma - V(M)\) has degree \(2\)
+    does not depend on which matching we choose. So, every vertex in \(\Gamma - V(M')\) also must have degree \(2\).
+    So, \(w_1\) and \(w_2\) must be adjacent to \(v_1\) or \(v_4\) in \(\Gamma - V(M')\) since those vertices
+    are the only vertices in \(\Gamma - V(M')\) that could have degree less than \(2\).
 
-    % > 1 free vertices
-    \textbf{Case 2:} \(\Gamma - V(M)\) has more than \(n - m + 2\) vertices.
-    % This should be an easy contradiction as we can just move two particles off of C
-    % onto 2 free vertices
+    Without a loss of generality suppose \(w_1\) is adjacent to \(v_4\) in \(\Gamma - V(M')\) (see Figure \ref{fig:lem:manifold-cycle-length-1:1})
 
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \foreach \i in {1,...,5} \node (v\i) at ({90-72*\i}:1.2) [circle, draw] {\(v_{\i}\)};
+            \draw (v1) -- (v2) -- (v3) -- (v4) -- (v5);
 
+            \draw[dotted] (v5) -- (v1);
+
+            \node (w1) at (-3,.7) [circle, draw] {\(w_1\)};
+            \node (w2) at (-3,-.7) [circle, draw] {\(w_2\)};
+            \draw (w1) -- (w2);
+
+            \draw (w1) -- (v4);
+        \end{tikzpicture}
+        \caption{\(w_1\) is adjacent to \(v_4\) in \(\Gamma - V(M')\)}
+        \label{fig:lem:manifold-cycle-length-1:1}
+    \end{figure}
+
+    Now, define \(M'' = (M \setminus \{e\}) \cup \{v_1 v_2\}\).
+    Then, \(v_4\) has degree \(3\) in \(\Gamma - V(M'')\).
+    Lemma \ref{lem:manifold-is-claw} then requires that \(\Gamma - V(M'')\) is just \(v_4\) and its neighbors.
+    However, \(\Gamma - V(M'')\) has at least \(5\) vertices.
 \end{proof}
 
 \begin{lem}
-    If \(n > m\), then \(\Gamma - V(M)\) has at most \(4\) vertices.
+    \label{lem:manifold-cycle-length-2}
+    \(\Gamma - V(M)\) has at most \(4\) vertices.
 \end{lem}
 
 \begin{proof}
-    Suppose \(\Gamma - V(M)\) has more than \(4\) vertices.
+    It follows from Lemma \ref{lem:manifold-cycle-equality} and 
+    Lemma \ref{lem:manifold-cycle-length-1}
+    that if \(n = m\) or \(\Gamma - V(M)\) has \(n - (m - 1) + 1\), then \(\Gamma - V(M)\) has at most \(4\) vertices.
+    So, suppose \(n > m\) and that \(\Gamma - V(M)\) has more than \(\max\{4, n - (m - 1) + 1\}\) vertices.
+    % Taking the max here is fine since graph size lemma guarantees \Gamma - V(M) has at least n - (m - 1) + 1 vertices.
     We proceed by cases on the length of \(C\).
 
-    \textbf{Case 1:} \(C\) has length \(3\)
-
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0,0) [circle, draw] {};
-            \node (v2) at (1.155,0) [circle, draw] {};
-            \node (v3) at (0.577,1) [circle, draw] {};
-            \draw (v1) -- (v2) -- (v3) -- (v1);
-
-            \node (v4) at (2.5, 0) [circle, draw] {};
-            \node (v5) at (2.5, 1) [circle, draw] {};
-        \end{tikzpicture}
-    \caption{\(C\) and two other vertices}
-    \end{figure}
-
-    Two subcases.
-
-    First subcase.
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0,0) [circle, draw] {};
-            \node (v2) at (1.155,0) [circle, draw] {};
-            \node (v3) at (0.577,1) [circle, draw] {};
-            \draw (v1) -- (v2) -- (v3) -- (v1);
-
-            \node (v4) at (2.5, 0) [circle, draw] {};
-            \node (v5) at (2.5, 1) [circle, draw] {};
-            \node (v6) at (3.366, 0.5) [circle, draw] {};
-            \draw (v4) -- (v6) -- (v5);
-        \end{tikzpicture}
-    \end{figure}
-
-    Second subcase.
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0,0) [circle, draw] {};
-            \node (v2) at (1.155,0) [circle, draw] {};
-            \node (v3) at (0.577,1) [circle, draw] {};
-            \draw (v1) -- (v2) -- (v3) -- (v1);
-
-            \node (v4) at (2.5, 0) [circle, draw] {};
-            \node (v5) at (2.5, 1) [circle, draw] {};
-            \node (v6) at (3.366, 0.5) [circle, draw] {};
-            \node (v7) at (3.366, 1.5) [circle, draw] {};
-            \draw (v6) -- (v5) -- (v7);
-
-        \end{tikzpicture}
-    \end{figure}
-
-    \textbf{Case 2:} \(C\) has length \(4\)
-
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-            \node (v1) at (0, 0) [circle, draw] {};
-            \node (v2) at (1, 0) [circle, draw] {};
-            \node (v3) at (1, 1) [circle, draw] {};
-            \node (v4) at (0, 1) [circle, draw] {};
-            \draw (v1) -- (v2) -- (v3) -- (v4) -- (v1);
-
-            \node (v5) at (2.5, 0.5) [circle, draw] {};
-
-        \end{tikzpicture}
-    \end{figure}
-
-    \textbf{Case 3:} \(C\) has length greater than \(5\) --
-    Cleverly change which matching we choose and we can get a degree \(3\) vertex.
-
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-        \foreach \i in {1,...,5} \node (v\i) at ({162-72*\i}:1.2) [circle, draw] {\(v_{\i}\)};
-        \draw (v1) -- (v2) -- (v3) -- (v4) -- (v5);
-
-        \draw[dotted] (v5) -- (v1);
-
-        \node (u1) at (-3,.7) [circle, draw] {\(u_1\)};
-        \node (u2) at (-3,-.7) [circle, draw] {\(u_2\)};
-        \draw (u1) -- (u2);
-        \end{tikzpicture}
-    \end{figure}
-
-    \begin{figure}[h!]
-        \centering
-        \begin{tikzpicture}
-        \foreach \i in {1,...,5} \node (v\i) at ({162-72*\i}:1.2) [circle, draw] {\(v_{\i}\)};
-        \draw (v1) -- (v2) -- (v3) -- (v4) -- (v5);
-
-        \draw[dotted] (v5) -- (v1);
-
-        \node (u1) at (-3,.7) [circle, draw] {\(u_1\)};
-        \node (u2) at (-3,-.7) [circle, draw] {\(u_2\)};
-        \draw (u1) -- (u2);
-
-        \draw (u1) -- (v5);
-        \end{tikzpicture}
-    \end{figure}
-
-\end{proof}
-
-\begin{lem}
-If \(n > m\) and \(C\) has length \(3\), then \(\Gamma - V(M) \cong K_3\) or \(\Gamma - V(M) \cong K_3 \cup K_1\).
-\end{lem}
-
-\begin{proof}
-    Since \(\Gamma - V(M)\) cannot have more than \(4\) vertices and also contains \(C\),
-    then either \(\Gamma - V(M)\) is just \(C\) or \(C\) and another isolated vertex.
-
-    In the later case, this isolated vertex cannot be connected to \(C\) otherwise
-    we would have a degree \(3\) vertex.
-\end{proof}
-
-\begin{lem}
-If \(n > m\) and \(C\) has length \(4\), then \(\Gamma - V(M) \cong K_{2,2}\)
-\end{lem}
-
-\begin{proof}
-Since \(\Gamma - V(M)\) contains \(C\) and has at most \(4\) vertices,
-\(\Gamma - V(M)\) is just \(C\) which isomorphic to \(K_{2,2}\).
-\end{proof}
-
-
-Abrams already studied the case when \(n = m\) in detail but we analyze it here for completeness.
-\begin{lem}
-If \(n = m\), then \(\Gamma - V(M)\) has at most \(4\) vertices.
-\end{lem}
-
-\begin{proof}
-    Suppose \(\Gamma - V(M)\) has more than \(4\) vertices.
-    This argument is similar to the \(n > m\) case where we proceed by cases on the length of \(C\).
-
     \textbf{Case 1:} \(C\) has length \(3\).
+    In this case there must be at least two other vertices in \(\Gamma - V(M)\)
+    other than the three vertices on \(C\).
+    Let \(v_1, v_2, v_3\) be the vertices on \(C\) and \(\mathcal{V}\)
+    be a collection of \(n - (m - 1)\) vertices containing \(v_1\), \(v_2\), and \(v_3\).
+
+    Lemma \ref{lem:special-edges} then guarantees that there are exactly two edges: \(e_1\) and \(e_2\)
+    with one endpoint in \(\mathcal{V}\) and another outside of \(\mathcal{V}\)
+    which share a common vertex.
+
+    Notice that neither \(e_1\) nor \(e_2\) can be incident vertices on \(C\)
+    otherwise we would have a degree \(4\) or \(3\) vertex contradicting 
+    Lemma \ref{lem:manifold-max-degree} or Lemma \ref{lem:manifold-is-claw} respectively.
+    Hence we have one of two cases: \(e_1\) and \(e_2\) share a common vertex in \(\mathcal{V}\)
+    or \(e_1\) and \(e_2\) share a common vertex outside of \(\mathcal{V}\).
+
+    \textbf{Subcase 1:} \(e_1\) and \(e_2\) share a common vertex in \(\mathcal{V}\).
+    Let \(v_4\) be this common vertex and \(w_1\) and \(w_2\) be the other endpoints of \(e_1\) and \(e_2\) respectively (see Figure \ref{fig:lem:manifold-cycle-length-2:1}).
+
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \node (v1) at (0,0) [circle, draw] {\(v_1\)};
+            \node (v2) at (1.155,0) [circle, draw] {\(v_2\)};
+            \node (v3) at (0.577,1) [circle, draw] {\(v_3\)};
+            \draw (v1) -- (v2) -- (v3) -- (v1);
+
+            \node (v4) at (2.5, .5) [circle, draw] {\(v_4\)};
+            \node (w1) at (3.366, 0) [circle, draw] {\(w_1\)};
+            \node (w2) at (3.366, 1) [circle, draw] {\(w_2\)};
+            \draw (w2) -- (v4) -- (w1);
+        \end{tikzpicture}
+        \caption{\(e_1\) and \(e_2\) share a common vertex in \(\mathcal{V}\)}
+        \label{fig:lem:manifold-cycle-length-2:1}
+    \end{figure}
+
+    Let \(\mathcal{V}' = (\mathcal{V} \setminus \{v_1\}) \cup \{w_1\}\).
+    Then, there are now three edges with one endpoint in \(\mathcal{V}'\)
+    and another outside of \(\mathcal{V}'\) contradicting Lemma \ref{lem:special-edges}.
+    Namely, the edges \(e_2 = v_4 w_2\), \(v_1 v_2\), and \(v_1 v_3\).
+
+
+    \textbf{Subcase 2:} \(e_1\) and \(e_2\) share common vertex outside of \(\mathcal{V}\).
+    Let \(w_1\) be this common vertex and \(v_4\) and \(v_5\) be the other endpoints of \(e_1\) and \(e_2\) respectively (see Figure \ref{fig:lem:manifold-cycle-length-2:2}).
+
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \node (v1) at (0,0) [circle, draw] {\(v_1\)};
+            \node (v2) at (1.155,0) [circle, draw] {\(v_2\)};
+            \node (v3) at (0.577,1) [circle, draw] {\(v_3\)};
+            \draw (v1) -- (v2) -- (v3) -- (v1);
+
+            \node (v4) at (2.5, 0) [circle, draw] {\(v_4\)};
+            \node (v5) at (2.5, 1) [circle, draw] {\(v_5\)};
+            \node (w1) at (3.366, 0.5) [circle, draw] {\(w_1\)};
+            \draw (v4) -- (w1) -- (v5);
+
+            \node (w2) at (4.7, 0.5) [circle, draw] {\(w_2\)};
+        \end{tikzpicture}
+        \caption{\(e_1\) and \(e_2\) share a common vertex outside of \(\mathcal{V}\)}
+        \label{fig:lem:manifold-cycle-length-2:2}
+    \end{figure}
+
+    Since \(\Gamma - V(M)\) has more than \(n - (m - 1) + 1\) vertices, there must be at least one other vertex \(w_2\)
+    outside of \(\mathcal{V}\) besides \(w_1\). 
+    Let \(\mathcal{V}'' = (\mathcal{V} \setminus \{v_1\}) \cup \{w_2\}\).
+    The edges \(e_1 = v_4 w_1\), \(e_2 = v_5 w_1\), \(v_1 v_2\), and \(v_1 v_3\)
+    all have one endpoint in \(\mathcal{V}''\) and another outside of \(\mathcal{V}''\)
+    contradicting Lemma \ref{lem:special-edges}.
+
 
     \textbf{Case 2:} \(C\) has length \(4\).
+    Let \(v_1\), \(v_2\), \(v_3\), and \(v_4\) be the vertices on \(C\) (see Figure \ref{fig:lem:manifold-cycle-length-2:3}).
+    Since \(\Gamma - V(M)\) has more than \(\max\{4, n - (m - 1) + 1\}\) vertices,
+    for any collection of \(n - (m - 1)\) vertices in \(\Gamma - V(M)\),
+    there will have at least two other vertices in \(\Gamma - V(M)\).
+
+    Let \(\mathcal{V}\) consist of \(n - (m - 1)\) vertices other than \(v_1\) and \(v_3\).
+    Then, the edges \(v_1 v_2\), \(v_1, v_4\), \(v_3 v_2\), and \(v_3 v_4\)
+    all have one endpoint in \(\mathcal{V}\) and another outside of \(\mathcal{V}\)
+    contradicting Lemma \ref{lem:special-edges}
+
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \node (v1) at (0, 0) [circle, draw] {\(v_1\)};
+            \node (v2) at (1, 0) [circle, draw] {\(v_2\)};
+            \node (v3) at (1, 1) [circle, draw] {\(v_3\)};
+            \node (v4) at (0, 1) [circle, draw] {\(v_4\)};
+            \draw (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+        \end{tikzpicture}
+        \caption{Cycle \(C\) of length \(4\)}
+        \label{fig:lem:manifold-cycle-length-2:3}
+    \end{figure}
+
 
     \textbf{Case 3:} \(C\) has length greater than \(4\).
+    This case is handled by Lemma \ref{lem:manifold-cycle-length-1}.
+\end{proof}
+
+\begin{lem}
+    If \(C\) has length \(3\), then exactly one of the following hold.
+    \begin{enumerate}[label=(\roman*)]
+        \item \(\Gamma - V(M) \cong K_3\) and \(n = m\) or \(n = m + 1\)
+        \item \(\Gamma - V(M) \cong K_3 \cup K_1\) and \(n = m + 1\)
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Suppose \(C\) has length \(3\). Then, \(C \cong K_3\).
+    Lemma \ref{lem:manifold-cycle-length-2} then guarantees that \(\Gamma - V(M)\) is \(K_3\)
+    or has \(K_3 \cup K_1\) as a subgraph.
+
+    \textbf{Case 1:} \(\Gamma - V(M) \cong K_3\).
+    Notice that \(\Gamma\) must have \(2m + 1\) vertices.
+    Lemma \ref{lem:graph-size} then guarantees that \(m \le n \le m + 1\).
+
+    \textbf{Case 2:} \(\Gamma - V(M)\) has \(K_3 \cup K_1\) as a subgraph.
+    The isolated vertex in \(\Gamma - V(M)\) cannot connect to any other vertices otherwise
+    we would have a degree \(3\) vertex in \(\Gamma - V(M)\).
+    However, Lemma \ref{lem:manifold-is-claw} would imply that \(\Gamma - V(M)\) is just this vertex and its neighbors
+    contradicting that \(\Gamma - V(M)\) contains \(K_3\) as a subgraph.
+    So, \(\Gamma - V(M) \cong K_3 \cup K_1\).
+
+    Similar to before, since \(\Gamma - V(M)\) has exactly \(4\) vertices,
+    \(\Gamma\) must have exactly \(2m + 2\) vertices.
+    Lemma \ref{lem:graph-size} then guarantees that \(m \le n \le m + 2\).
+    Lemma \ref{lem:manifold-cycle-equality} prevents \(n = m\).
+    Also, since \(\Gamma - V(M)\) has \(4\) vertices, if \(n = m + 2\)   
+    then \(4 = n - (m - 1) + 1\) contradicting Lemma \ref{lem:manifold-cycle-equality}.
 
 \end{proof}
 
 \begin{lem}
-If \(n = m\) and \(C\) has length \(3\), then \(\Gamma - V(M) \cong K_3\).
+    If \(C\) does not have length \(3\), then \(\Gamma - V(M) \cong K_{2,2}\) and \(n = m\) or \(n = m + 2\).
 \end{lem}
 
-\begin{lem}
-If \(n = m\) and \(C\) has length \(4\), then \(\Gamma - V(M) \cong K_{2,2}\).
-\end{lem}
+\begin{proof}
+    If \(C\) does not have length \(3\), then Lemma \ref{lem:manifold-cycle-length-1} guarantees that \(C\) has length \(4\).
+    Lemma \ref{lem:manifold-cycle-length-2} then guarantees that \(\Gamma - V(M)\) is just \(C\).
+    Since \(4\)-cycles are isomorphic to \(K_{2,2}\), it follows that \(\Gamma - V(M) \cong K_{2,2}\).
 
-
+    Since \(\Gamma - V(M)\) has exactly \(4\) vertices, \(\Gamma\) itself has exactly \(2m + 2\) vertices.
+    Lemma \ref{lem:graph-size} then guarantees that \(m \le n \le m + 2\).
+    Suppose \(n = m + 1\) and let \(\mathcal{V}\) consist of two non-adjacent vertices on \(C\).
+    Then, there are too many edges with one endpoint in \(\mathcal{V}\)
+    and another outside of \(\mathcal{V}\) for Lemma \ref{lem:special-edges} to hold.
+\end{proof}
